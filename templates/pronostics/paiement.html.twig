@@ -1,0 +1,139 @@
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body %}
+
+    <section style="margin-top: 3rem">
+        <div class="row">
+
+            <div class="article">
+                <article class="home__article">
+
+                    <section class="om-payement js--om--payement" id="sign">
+                        <div class="row">
+                            <h2 class="secondary_heading">Procédure de paiement  </h2>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <ul class="om-payement__list">
+                                    <li class="om-payement__item"><i class="fa fa-check"></i> Accédez à la page <a href="/inscription" class="premium-best-tip__teams">inscription</a> et inscrivez-vous ou <a href="/connexion" class="premium-best-tip__teams">connectez-vous</a> si vous avez déjà un compte</li>
+                                    <li class="om-payement__item"><i class="fa fa-check"></i> Contacter l'administrateur du site pour procéder au paiement</li>
+                                    <li class="om-payement__item"><i class="fa ">1-</i>par whatsapp : <a href="" class="premium-best-tip__teams"> cliqué ici</a> </li>
+                                    <li class="om-payement__item"><i class="fa ">2-</i>par email: <a href="mailto:parieurdumonde@gmail.com" type="mailto" class="premium-best-tip__teams"> cliqué ici</a> </li>
+                                    <li class="om-payement__item"><i class="fa ">3-</i>autre moyen : <span>appelé le 0022991797518</span> </li>
+                                    <li class="om-payement__item"><i class="fa fa-check"></i> Commniquer à l'administrateur votre pseudo ou email après paiement et votre compte VIP sera activé dans les 5 min qui suivront. </li>
+                                    <li class="om-payement__item"><i class="fa fa-check"></i> L'administrateur vous communiquera le lien direct vers la page VIP. </li>
+                                    <li class="om-payement__item"><i class="fa fa-check"></i>En cas de difficulté veillez-nous <a href="/contact" class="premium-best-tip__teams"> contacté</a> </li>
+
+                                </ul>
+                            </div>
+                            <div class="row"><br><br>
+                                <h1 style="text-align: center;font-size: medium"> Nous dévelopons actuellement un moyen de paiement automatique</h1>
+                            </div>
+                            {# <div class="col-1-of-4 ">
+                                 <div class="om-payement__container">
+
+                                     <div class="om-payement__prix">
+                                         <h3 class="tertiary_heading">MTN Mobile money</h3>
+
+                                         <p>$399 <span>/ month</span></p>
+                                         <p>That's only 13.30$ per meal</p>
+                                     </div>
+                                     <div>
+                                         <ul class="om-payement__list">
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i> Accès à l'espace VIP</li>
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i>1 pronostics cote 3-5/jour</li>
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i>1 pronostics cote 20-30/semaine</li>
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i>Gestion de mise</li>
+                                         </ul>
+                                     </div>
+                                     <div class="om-payement__btn">
+                                         <a href="#" class="btn ">sign up now</a>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-1-of-4 ">
+                                 <div class="om-payement__container">
+
+                                     <div class="om-payement__prix">
+                                         <h3 class="tertiary_heading">FLOOZ</h3>
+
+                                         <p>$149 <span>/ month</span></p>
+                                         <p>That's only 14.90$ per meal</p>
+                                     </div>
+                                     <div >
+                                         <ul class="om-payement__list">
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i> 1 meal 10 days/month</li>
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i>Order 24/7</li>
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i>Access to newest creations</li>
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i>Free delivery</li>
+                                         </ul>
+                                     </div>
+                                     <div class="om-payement__btn">
+                                         <a href="#" class="btn btn_not-default">sign up now</a>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-1-of-4 ">
+                                 <div class="om-payement__container">
+                                     <div class="om-payement__prix">
+                                         <h3 class="tertiary_heading">PAYPAL</h3>
+
+                                         <p>19$ <span>/ meal</span></p>
+                                         <p>&nbsp;</p>
+                                     </div>
+                                     <div >
+                                         <ul class="om-payement__list">
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i> 1 meal </li>
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i>Order from 8 am to 12 pm</li>
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i></li>
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i>Free delivery</li>
+                                         </ul>
+                                     </div>
+                                     <div class="om-payement__btn">
+                                         <a href="#" class="btn btn_not-default">sign up now</a>
+                                     </div>
+                                 </div>
+                             </div>    <div class="col-1-of-4 ">
+                                 <div class="om-payement__container">
+                                     <div class="om-payement__prix">
+                                         <h3 class="tertiary_heading">PERFECTMONEY</h3>
+
+                                         <p>19$ <span>/ meal</span></p>
+                                         <p>&nbsp;</p>
+                                     </div>
+                                     <div >
+                                         <ul class="om-payement__list">
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i> 1 meal </li>
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i>Order from 8 am to 12 pm</li>
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i></li>
+                                             <li class="om-payement__item"><i class="ion-ios-checkmark-empty"></i>Free delivery</li>
+                                         </ul>
+                                     </div>
+                                     <div class="om-payement__btn">
+                                         <a href="#" class="btn btn_not-default">sign up now</a>
+                                     </div>
+                                 </div>
+                             </div>#}
+                        </div>
+                    </section>
+
+
+
+                </article>
+            </div>
+
+
+
+        </div>
+
+
+
+    </section>
+{% endblock %}
+
+
+

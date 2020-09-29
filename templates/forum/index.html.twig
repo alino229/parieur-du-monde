@@ -1,0 +1,342 @@
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body %}
+
+    <section>
+        <div class="row">
+            <div class="col-3-of-4">
+                <article class="article">
+
+                    <div class="conseils_header">
+                        <h2 class="s-h2">Forum
+                        </h2>
+                        <p class="s-p"> Bienvenue sur notre forum de paris .
+                            Nous sommes une communauté amicale de personnes qui
+                            aiment parier et discuter de tout ce qui a trait au pari sportif.
+                        </p>
+                    </div>
+                    <div class="forum_content">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY')  %}
+
+                        {% else %}
+                            <div class="forum_sign box-shadow mt-1">
+                                <div class="row">
+                                    <div class="col-2-of-3">
+                                        <div class="block-left">
+                                            <h2>Vous voulez répondre à un  sujet? Inscrivez-vous gratuitement.</h2>
+
+                                            <p class="mb-1">
+                                                Accédez à notre forum et faire partie de la plus grande communauté de paris sportifs en Afrique.</p>
+                                            <p>recevez chaque jour de nouveaux pronostics sur les paris.</p>
+                                            <p>
+                                                Discutez et partagez vos conseils de paris avec d'autres
+                                                parieurs fanatiques et profitez des avantages et des
+                                                fonctions offerts aux utilisateurs enregistrés.
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-1-of-3">
+                                        <div class="block-right">
+                                            <div class="btn">
+                                                <a href="{{ path('app_register') }}">Inscrivez vous gratuitement</a>
+                                            </div><br/>
+                                            <span>Vous avez déjà un compte?</span>
+                                            <span><a href="{{ path('app_use_login') }}" class="more_link"> connectez-vous </a> </span>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endif %}
+
+                        <div class="forum_suject-begin">
+                            <div class="begin_btn">
+                                    <span>
+                                        <a href="{{ path('forum_sujet') }}">Publier un nouveau sujet</a>
+                                    </span>
+                            </div>
+
+                        </div>
+
+                        <div class="forum_content">
+
+
+                            {% for forumcategorie in forumcategories %}
+                                <div class="forum_marg">
+                                    <div class="stat_header">
+                                        <i class="ion"></i>
+                                        <span>{{ forumcategorie.nom|upper}}</span>
+                                        {% set id=forumcategorie.id %}
+
+                                    </div>
+                                    <div class="stat_body">
+                                        <div class="forum_data">
+                                           {% set myText = forum.findForum(id) %}
+                                                  {% for users in myText %}
+                                                {% set topic= users.id %}
+
+
+
+
+
+                                                <div class="for" style="position:relative;">
+                                            <span class="forum_icon icone{{ topic }}">
+
+                                        </span>
+                                                    <div class="forum_text">
+                                                        <h3 class="forum_titre"><a href="{{ path('forum_show',{id:users.id,slug: managers.slugify(users.nom)}) }}">{{ users.nom|e}}
+                                                            </a></h3>
+                                                        <div class="forum_text-content">
+                                                            <dl>
+                                                               <dt>Sujets</dt>
+
+                                                                <dd>{{ Discution.countDiscution(topic)|length }}</dd>
+                                                            </dl>
+                                                            <dl>
+                                                                <dt>Messages</dt>
+                                                                <dd>{{ Message.countMessage(topic)|length }}</dd>
+                                                            </dl>
+
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="forum_right">
+                                                                                 <span class="forum_right-titre">
+
+                                                                                        <span>Dernier sujet:</span>
+                                                                                        <a href="">
+                                                                                            {% if  (Discution.lastSubject(topic) is not empty ) %}
+
+                                                                                            {{ Discution.lastSubject(topic)[0].subject}}
+                                                                                                {% else %}
+                                                                                                aucun sujet
+                                                                                            {% endif %}
+                                                                                        </a>
+                                                                                    </span>
+                                                        <span class="forum_right-meta">
+                                                                                        <span class="meta-user">
+                                                                                             {% if  (Discution.lastSubject(topic) is not empty ) %}
+
+                                                                                                 par {{ Discution.lastSubject(topic)[0].user.pseudo }}
+                                                                                             {% else %}
+                                                                                                 aucun sujet
+                                                                                             {% endif %}
+
+                                                                                        </span>
+                                                                                        <span class="Datetime">
+                                                                                             {% if  (Discution.lastSubject(topic) is not empty ) %}
+
+                                                                                                 le {{ Discution.lastSubject(topic)[0].createdAt|date('d/m/Y à H:i') }}
+                                                                                             {% else %}
+                                                                                                 aucun sujet
+                                                                                             {% endif %}
+{#                                                                                      le {{ last.createdAt|date('d/m/Y à H:i') }}#}
+                                                                                        </span>
+
+                                                                                    </span>
+
+
+
+                                                    </div>
+                                                    <div class="forum_right-display">
+                                                    </div>
+                                                </div>
+
+
+
+                                            {% endfor %}
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                {#   <div class="form_mb">
+                                       <div class="foot-content ">
+                                           <div class="limiter">
+                                               <div class="container-table100">
+                                                   <div class="wrap-table100">
+                                                       <div class="table100">
+
+                                                         <table>
+                                                               <thead>
+                                                               <tr class="table100-head">
+                                                                   <th class="column">
+                                                                       {{ user.name|upper}}
+                                                                       {% set id=user.id %}
+                                                                       <div class="nbr_sujet">
+
+                                                                       </div>
+                                                                   </th>
+
+
+                                                               </tr>
+
+
+
+                                                               </thead>
+                                                               <tbody>
+                                                               {% set myText = manager.forum(id) %}
+                                                               {% for users in myText %}
+                                                                   {% set topic= users.id %}
+
+
+                                                                   <tr>
+
+
+                                                                       <td class="column1">
+                                                   <span class="forum_icon icone{{ topic }}">
+
+                                                   </span>
+                                                                           <div class="forum_text">
+                                                                               <h3 class="forum_titre"><a href="/forum/liste-sujet?id={{ topic }}">{{ users.name|e}}
+                                                                                   </a></h3>
+                                                                               <div class="forum_text-content">
+                                                                                   <dl>
+                                                                                       <dt>Sujets</dt>
+                                                                                       <dd>{{ manager.countDiscution(topic) }}</dd>
+                                                                                   </dl>
+                                                                                   <dl>
+                                                                                       <dt>Messages</dt>
+                                                                                       <dd>{{ manager.countMessage(topic) }}</dd>
+                                                                                   </dl>
+
+                                                                               </div>
+
+
+                                                                           </div>
+                                                                           <div class="forum_right">
+                                                                                               <span class="forum_right-titre">
+                                                                                                   {%  set last=manager.lastSubject(topic) %}
+                                                                                                   <span>Dernier sujet:</span>
+                                                                                                   <a href="/forum/discution?id={%  set topicid= manager.topicId(topic) %}{{ topicid.id }}">{{ last.subject}}</a>
+                                                                                               </span>
+                                                                               <span class="forum_right-meta">
+                                                                                                   <span class="meta-user">
+                                                                                                      par {{ last.pseudo }}
+                                                                                                   </span>
+                                                                                                   <span class="Datetime">
+                                                                                                 le {{ last.date|date('d/m/Y à H:m') }}
+                                                                                                   </span>
+
+                                                                                               </span>
+
+                                                                           </div>
+                                                                       </td>
+                                                                   </tr>
+
+                                                               {% endfor %}
+
+
+
+                                                               </tbody>
+                                                           </table>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+
+                                       </div>
+
+                                   </div>#}
+                            {% endfor %}
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="forum_stat">
+                        <div class="stat_header">
+                            <i class="ion"></i>
+                            <span>Forum statistiques</span>
+
+                        </div>
+                        <div class="stat_body">
+                            <div class="forum_data">
+                                <div class="stat_item">
+                                    <i class="fa fa-comments"></i>
+                                    <span class="stat_value">8</span>
+                                    <span class="stat_label">Forum</span>
+
+                                </div>
+                                <div class="stat_item">
+                                    <i class="fa fa-file"></i>
+                                    <span class="stat_value">{{ Discution.findAll|length }}</span>
+                                    <span class="stat_label">sujets</span>
+
+                                </div>
+                                <div class="stat_item">
+                                    <i class="fa fa-envelope"></i>
+                                    <span class="stat_value">{{ forummessage.findAll|length }}</span>
+                                    <span class="stat_label">messages</span>
+
+                                </div>
+                                <div class="stat_item">
+                                    <i class="fa fa-users"></i>
+                                    <span class="stat_value">{{ user.findAll|length }}</span>
+                                    <span class="stat_label">membres</span>
+
+                                </div>
+                                <div class="stat_item">
+                                  <i class="ion-person"></i>
+                                    <i class="fa fa-user"></i>
+{#                                    <span class="stat_value">{{ manager.online(stat.chemin) }}</span><br/>#}
+                                    <span class="stat_label">En ligne</span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </article>
+
+
+
+            </div>
+            <div class="col-1-of-4">
+                <aside>
+                    <div class="aside_right">
+                        <div class="aside_popu">
+                            <div class="aside_header">
+                                <h2 class="h2_heading">Sujets populaires</h2>
+                            </div>
+                            <div class="content">
+
+
+                                <ul>
+                                    <li>
+                                      {#  <span></span> <a href="forum/discution?id={{ most1.id }}">{{ most1.subject }}</a>
+                                        <span></span> <a href="forum/discution?id={{ most2.id }}">{{ most2.subject }}</a>
+                                        <span></span> <a href="forum/discution?id={{ most3.id }}">{{ most3.subject }}</a>
+                                   #} </li>
+
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+
+
+
+{% endblock %}
+

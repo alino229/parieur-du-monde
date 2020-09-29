@@ -1,0 +1,796 @@
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body %}
+    <section class="section_prono premium" style="margin-top: 3rem;">
+        <div class="row">
+
+            <div class="col-2-of-3" style="">
+                <div class="pro_cote" style="text-align: center">
+
+                   {# {% if nb_jour<=5 %}
+                        <span class="erreur" style="clear: both">
+                        votre abonnement expire dans {{ nb_jour }} jours
+
+                    </span>
+                    {% elseif nb_jour==2 %}
+                        <span class="erreur" style="clear: both">
+                        votre abonnement expire demain
+
+                    </span>
+                    {% elseif  nb_jour==1 %}
+                        <span class="erreur" style="clear: both">
+                        votre abonnement expire aujourd'hui
+
+                    </span>
+
+                    {% else %}
+                        <a class="pdm_cote-link" href=""  >
+                            <span class="value-cote" style="text-align: center;display: block;float:none!important;">VOUS AVEZ UN ABONNEMENT VIP QUI EXPIRE LE {{ vip_end_date }}</span>
+
+                        </a>
+                    {% endif %}
+#}
+
+
+                </div>
+                <div class="article">
+                    <article class="home__article">
+
+
+
+                        <div class="conseiles_content">
+                            <div class="row" style="margin-bottom: 0!important;">
+                                <div class="conseils_header">
+                                    <h2 class="s-h2">Combo VIP
+                                    </h2>
+                                    <h2 class="s-h2">total cote:
+                                    </h2>
+                                    <h2 class="s-h2">code 1xbet:
+                                    </h2>
+
+                                </div>
+                                {% for newsc in combo %}
+
+
+                                    <div class="col-1-of-2" >
+                                        <div class="forum_stat">
+                                            <div class="stat_header">
+
+                                                <span>{{ newsc.pays }}</span>
+                                                <span style="float: right">{{ newsc.competition }}</span>
+
+                                            </div>
+                                            <div class="stat_body">
+                                                <div class="forum_data">
+                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="../../resources/images/pro_image/{{ newsc.homeFlag }}" alt="{{ newsc.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ newsc.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center wt_inneritem">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ newsc.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ newsc.time|date('H:i') }}</time>
+                                            </span>
+                                            <span class="pdm_team_right wt_inneritem">
+                                                <img src="../../resources/images/pro_image/{{ newsc.awayFlag }}" alt="{{ newsc.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ newsc.away }}</span>
+                                            </span>
+                                        </span>
+                                                    <div class="our-bet-content">
+                                                        <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                        <span class="pdm_our-prono">{{ newsc.pronostics }}</span>
+
+                                                    </div>
+                                                    <div class="pro_cote">
+                                                        <a class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Cote: {{  newsc.cote}}</span>
+
+                                                        </a>
+                                                        <a style="float: right;" class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Pariez maintenant</span>
+
+                                                        </a>
+
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                            <div class="row" style="margin-bottom: 20px!important;margin-top: 10px">
+                                <a href="awayFlag">
+                                    <img src="../../resources/images/1xbet.jpg" style="margin: 0 auto;display: block;" alt="parier et gagner grace à 1XBET">
+                                </a>
+                            </div>
+
+
+                            <div class="row" style="margin-bottom: 0!important;">
+                                <div class="conseils_header">
+                                    <h2 class="s-h2">Spécial VIP
+                                    </h2>
+                                    <h2 class="s-h2">total cote:
+                                    </h2>
+                                    <h2 class="s-h2">code 1xbet:
+                                    </h2>
+
+
+                                </div>
+                                {% for news in special %}
+
+
+                                    <div class="col-1-of-2" >
+                                        <div class="forum_stat">
+                                            <div class="stat_header">
+
+                                                <span>{{ news.pays }}</span>
+                                                <span style="float: right">{{ news.competition }}</span>
+
+                                            </div>
+                                            <div class="stat_body">
+                                                <div class="forum_data">
+                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="../../resources/images/pro_image/{{ news.homeFlag }}" alt="{{ news.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center wt_inneritem">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news.time|date('H:i') }}</time>
+                                            </span>
+                                            <span class="pdm_team_right wt_inneritem">
+                                                <img src="../../resources/images/pro_image/{{ news.awayFlag }}" alt="{{ news.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news.away }}</span>
+                                            </span>
+                                        </span>
+                                                    <div class="our-bet-content">
+                                                        <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                        <span class="pdm_our-prono">{{ news.pronostics }}</span>
+
+                                                    </div>
+                                                    <div class="pro_cote">
+                                                        <a class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Cote: {{  news.cote}}</span>
+
+                                                        </a>
+                                                        <a style="float: right;" class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Pariez maintenant</span>
+
+                                                        </a>
+
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                            <div class="row" style="margin-bottom: 0!important;">
+                                {% for news1 in special %}
+
+
+                                    <div class="col-1-of-2" >
+                                        <div class="forum_stat">
+                                            <div class="stat_header">
+
+                                                <span>{{ news1.pays }}</span>
+                                                <span style="float: right">{{ news1.competition }}</span>
+
+                                            </div>
+                                            <div class="stat_body">
+                                                <div class="forum_data">
+                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="../../resources/images/pro_image/{{ news1.homeFlag }}" alt="{{ news1.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news1.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center ">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news1.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news1.time|date('H:i') }}</time>
+                                            </span>
+                                            <span class="pdm_team_right ">
+                                                <img src="../../resources/images/pro_image/{{ news1.awayFlag }}" alt="{{ news1.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news1.away }}</span>
+                                            </span>
+                                        </span>
+                                                    <div class="our-bet-content">
+                                                        <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                        <span class="pdm_our-prono">{{ news1.pronostics }}</span>
+
+                                                    </div>
+                                                    <div class="pro_cote">
+                                                        <a class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Cote: {{  news1.cote}}</span>
+
+                                                        </a>
+                                                        <a style="float: right;" class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Pariez maintenant</span>
+
+                                                        </a>
+
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                            <div class="row" style="margin-bottom: 0!important;">
+                                {% for news2 in special %}
+
+
+                                    <div class="col-1-of-2" >
+                                        <div class="forum_stat">
+                                            <div class="stat_header">
+
+                                                <span>{{ news2.pays }}</span>
+                                                <span style="float: right">{{ news2.competition }}</span>
+
+                                            </div>
+                                            <div class="stat_body">
+                                                <div class="forum_data">
+                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="../../resources/images/pro_image/{{ news2.homeFlag }}" alt="{{ news2.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news1.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center ">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news2.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news2.time|date('H:i') }}</time>
+                                            </span>
+                                            <span class="pdm_team_right ">
+                                                <img src="../../resources/images/pro_image/{{ news2.awayFlag }}" alt="{{ news2.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news2.away }}</span>
+                                            </span>
+                                        </span>
+                                                    <div class="our-bet-content">
+                                                        <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                        <span class="pdm_our-prono">{{ news2.pronostics }}</span>
+
+                                                    </div>
+                                                    <div class="pro_cote">
+                                                        <a class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Cote: {{  news2.cote}}</span>
+
+                                                        </a>
+                                                        <a style="float: right;" class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Pariez maintenant</span>
+
+                                                        </a>
+
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+
+
+                            <div class="clr"></div>
+                            <!-- Awesome Testimonials -->
+                            <section id="aw-testimonials" class="aw-section" style="margin-bottom: 2rem">
+                                <h3 class="h2-heading heading_testimonial">Ce que nos abonnés disent de nous</h3>
+
+                                <div class="aw-testimonials">
+
+                                    <ul>
+                                        <li>
+                                            <div class="aw-user-data">
+                                                <img src="../../resources/images/user-1.jpg" alt="" />
+                                                <span class="aw-user-name">Serge</span>
+                                            </div>
+                                            <p>" Un site vraiment bien fait par des personnes respectables et compétentes qui font du pari un passe-temps idéal avec des revenus vraiment étonnants ... Je vous suis depuis un mois et j'ai déjà fait d'importants gains. Merci encore. "</p>
+                                        </li>
+                                        <li>
+                                            <div class="aw-user-data">
+                                                <img src="../../resources/images/user-2.jpg" alt="" />
+                                                <span class="aw-user-name">kevin</span>
+                                            </div>
+                                            <p>" Je tiens à vous remercier pour ce que vous faites, tous les matins .Je n'attends que votre pronostic pour pouvoir faire mes paris.Sachez que je vous soutien et que je suis à fonds avec vous.. "</p>
+                                        </li>
+                                        <li>
+                                            <div class="aw-user-data">
+                                                <img src="../../resources/images/user-3.jpg" alt="" />
+                                                <span class="aw-user-name">Ariel</span>
+                                            </div>
+                                            <p>" Je ne suis pas déçu d'avoir connu votre site.Pronostics très fiable et cotes interessantes avec beaucoup d'article pour aider les débutants ainsi que les pro. "</p>
+                                        </li>
+                                    </ul>
+
+                                    <i id="aw-testimonials-prev" class="aw-arrow aw-arrow-left"></i>
+                                    <i id="aw-testimonials-next" class="aw-arrow aw-arrow-right"></i>
+                                </div>
+
+
+                            </section>
+                            <div class="conseils_header">
+                                <h2 class="s-h2">combiné de la semaine
+                                </h2>
+                                <h2 class="s-h2">total cote:
+                                </h2>
+                                <h2 class="s-h2">code 1xbet:
+                                </h2>
+
+
+                            </div>
+                            <div class="row" style="margin-bottom: 0!important;">
+                                {% for news2 in week %}
+
+
+                                    <div class="col-1-of-2" >
+                                        <div class="forum_stat">
+                                            <div class="stat_header">
+
+                                                <span>{{ news2.pays }}</span>
+                                                <span style="float: right">{{ news2.competition }}</span>
+
+                                            </div>
+                                            <div class="stat_body">
+                                                <div class="forum_data">
+                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="../../resources/images/pro_image/{{ news2.homeFlag }}" alt="{{ news2.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news2.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center ">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news2.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news2.time|date('H:i') }}</time>
+                                                {#<span class="wt_liganame">HNL</span>#}
+                                            </span>
+                                            <span class="pdm_team_right ">
+                                                <img src="../../resources/images/pro_image/{{ news2.awayFlag }}" alt="{{ news2.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news2.away }}</span>
+                                            </span>
+                                        </span>
+                                                    <div class="our-bet-content">
+                                                        <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                        <span class="pdm_our-prono">{{ news2.pronostics }}</span>
+
+                                                    </div>
+                                                    <div class="pro_cote">
+                                                        <a class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Cote: {{  news2.cote}}</span>
+
+                                                        </a>
+                                                        <a style="float: right;" class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Pariez maintenant</span>
+
+                                                        </a>
+
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                            <div class="row" style="margin-bottom: 0!important;">
+                                {% for news3 in week %}
+
+
+                                    <div class="col-1-of-2" >
+                                        <div class="forum_stat">
+                                            <div class="stat_header">
+
+                                                <span>{{ news3.pays }}</span>
+                                                <span style="float: right">{{ news3.competition }}</span>
+
+                                            </div>
+                                            <div class="stat_body">
+                                                <div class="forum_data">
+                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="../../resources/images/pro_image/{{ news3.homeFlag }}" alt="{{ news3.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news3.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center ">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news3.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news3.time|date('H:i') }}</time>
+                                                {#<span class="wt_liganame">HNL</span>#}
+                                            </span>
+                                            <span class="pdm_team_right ">
+                                                <img src="../../resources/images/pro_image/{{ news3.awayFlag }}" alt="{{ news3.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news3.away }}</span>
+                                            </span>
+                                        </span>
+                                                    <div class="our-bet-content">
+                                                        <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                        <span class="pdm_our-prono">{{ news3.pronostics }}</span>
+
+                                                    </div>
+                                                    <div class="pro_cote">
+                                                        <a class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Cote: {{  news3.cote}}</span>
+
+                                                        </a>
+                                                        <a style="float: right;" class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Pariez maintenant</span>
+
+                                                        </a>
+
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                            <div class="row" style="margin-bottom: 0!important;margin-top: 10px">
+                                <a href="awayFlag">
+                                    <img src="../../resources/images/1xbet.jpg" style="margin: 0 auto;display: block;" alt="parier et gagner grace à 1XBET">
+                                </a>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 0!important;">
+                                {% for news4 in week %}
+
+
+                                    <div class="col-1-of-2" >
+                                        <div class="forum_stat">
+                                            <div class="stat_header">
+
+                                                <span>{{ news4.pays }}</span>
+                                                <span style="float: right">{{ news4.competition }}</span>
+
+                                            </div>
+                                            <div class="stat_body">
+                                                <div class="forum_data">
+                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="../../resources/images/pro_image/{{ news4.homeFlag }}" alt="{{ news4.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news4.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center wt_inneritem">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news4.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news4.time|date('H:i') }}</time>
+
+                                            </span>
+                                            <span class="pdm_team_right wt_inneritem">
+                                                <img src="../../resources/images/pro_image/{{ news4.awayFlag }}" alt="{{ news4.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news4.away }}</span>
+                                            </span>
+                                        </span>
+                                                    <div class="our-bet-content">
+                                                        <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                        <span class="pdm_our-prono">{{ news4.pronostics }}</span>
+
+                                                    </div>
+                                                    <div class="pro_cote">
+                                                        <a class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Cote: {{  news4.cote}}</span>
+
+                                                        </a>
+                                                        <a style="float: right;" class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Pariez maintenant</span>
+
+                                                        </a>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                            <div class="row" style="margin-bottom: 0!important;">
+                                {% for news5 in week %}
+
+
+                                    <div class="col-1-of-2" >
+                                        <div class="forum_stat">
+                                            <div class="stat_header">
+
+                                                <span>{{ news4.pays }}</span>
+                                                <span style="float: right">{{ news4.competition }}</span>
+
+                                            </div>
+                                            <div class="stat_body">
+                                                <div class="forum_data">
+                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="../../resources/images/pro_image/{{ news4.homeFlag }}" alt="{{ news4.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news4.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center wt_inneritem">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news4.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news4.time|date('H:i') }}</time>
+
+                                            </span>
+                                            <span class="pdm_team_right wt_inneritem">
+                                                <img src="../../resources/images/pro_image/{{ news4.awayFlag }}" alt="{{ news4.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news4.away }}</span>
+                                            </span>
+                                        </span>
+                                                    <div class="our-bet-content">
+                                                        <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                        <span class="pdm_our-prono">{{ news4.pronostics }}</span>
+
+                                                    </div>
+                                                    <div class="pro_cote">
+                                                        <a class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Cote: {{  news4.cote}}</span>
+
+                                                        </a>
+                                                        <a style="float: right;" class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Pariez maintenant</span>
+
+                                                        </a>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+
+                            <div class="row" style="margin-bottom: 0!important;">
+                                {% for news6 in week %}
+
+
+                                    <div class="col-1-of-2" >
+                                        <div class="forum_stat">
+                                            <div class="stat_header">
+
+                                                <span>{{ news4.pays }}</span>
+                                                <span style="float: right">{{ news4.competition }}</span>
+
+                                            </div>
+                                            <div class="stat_body">
+                                                <div class="forum_data">
+                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="../../resources/images/pro_image/{{ news4.homeFlag }}" alt="{{ news4.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news4.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center wt_inneritem">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news4.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news4.time|date('H:i') }}</time>
+
+                                            </span>
+                                            <span class="pdm_team_right wt_inneritem">
+                                                <img src="../../resources/images/pro_image/{{ news4.awayFlag }}" alt="{{ news4.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news4.away }}</span>
+                                            </span>
+                                        </span>
+                                                    <div class="our-bet-content">
+                                                        <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                        <span class="pdm_our-prono">{{ news4.pronostics }}</span>
+
+                                                    </div>
+                                                    <div class="pro_cote">
+                                                        <a class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Cote: {{  news4.cote}}</span>
+
+                                                        </a>
+                                                        <a style="float: right;" class="pdm_cote-link" href="awayFlag" target="_blank">
+                                                            <span class="value-cote">Pariez maintenant</span>
+
+                                                        </a>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+                    </article>
+                </div>
+
+
+            </div>
+            <div class="col-1-of-3 media">
+                <aside class="aside_right">
+                    <div class="aside_right-content">
+
+                        <div class="aside_popu">
+                            <div class="aside_header loto-header">
+                                <h3 class="h2_heading" style="font-size:16px; "> BILAN DES 30 DERNIERS JOURS</h3>
+                            </div>
+                            <div class="content">
+                                <div class="loto-resultat">
+                                    <div class="vi">
+                                        <div class="loto-titre">
+                                            <h2 style="text-align: center">
+                                                COMBO VIP
+
+
+                                            </h2><br>
+                                        </div>
+                                        <div class="loto-titre">
+{#                                            Nombre de paris: {{ pro_stat }}#}
+                                            <p style="text-align:justify ">
+
+                                            </p><br>
+                                        </div>
+                                        <div class="loto-titre">
+{#                                            Paris gagnant: {{ gagner }}#}
+                                            <p style="text-align: justify">
+
+                                            </p><br>
+                                        </div>
+                                        <div class="loto-titre">
+{#                                            Taux de réussite: {{ taux }}%#}
+                                            <p style="text-align: justify">
+
+                                            </p><br>
+                                        </div>
+                                    </div>
+                                    <div class="vi">
+                                        <div class="loto-titre">
+                                            <h2 style="text-align: center">
+                                                SPÉCIAL VIP
+
+
+                                            </h2><br>
+                                        </div>
+                                        <div class="loto-titre">
+{#                                            Nombre de paris: {{ pro_stat }}#}
+                                            <p style="text-align:justify ">
+
+                                            </p><br>
+                                        </div>
+                                        <div class="loto-titre">
+{#                                            Paris gagnant: {{ gagner }}#}
+                                            <p style="text-align: justify">
+
+                                            </p><br>
+                                        </div>
+                                        <div class="loto-titre">
+{#                                            Taux de réussite: {{ taux }}%#}
+                                            <p style="text-align: justify">
+
+                                            </p><br>
+                                        </div>
+                                    </div>
+                                    <div class="vi">
+                                        <div class="loto-titre">
+                                            <h2 style="text-align: center">
+                                                COMBINÉ DE LA SEMAINE
+
+
+                                            </h2><br>
+                                        </div>
+                                        <div class="loto-titre">
+{#                                            Nombre de paris: {{ pro_stat }}#}
+                                            <p style="text-align:justify ">
+
+                                            </p><br>
+                                        </div>
+                                        <div class="loto-titre">
+{#                                            Paris gagnant: {{ gagner }}#}
+                                            <p style="text-align: justify">
+
+                                            </p><br>
+                                        </div>
+                                        <div class="loto-titre">
+{#                                            Taux de réussite: {{ taux }}%#}
+                                            <p style="text-align: justify">
+
+                                            </p><br>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                        <div class="aside_popu">
+
+                            <div class="content">
+
+                                <a href="awayFlag">
+                                    <img src="../../resources/images/1xbet.jpg">
+                                </a>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+
+    </section>
+{% endblock%}
+
+

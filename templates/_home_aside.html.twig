@@ -1,0 +1,109 @@
+<aside class="aside_right">
+    <div class="aside_right-content">
+        <div class="aside_popu">
+            <div class="aside_header">
+                <h3 class="h2_heading">Articles  populaires</h3>
+            </div>
+            <div class="content">
+                <ul>
+                    {% for tab in QueryGenerator.articleMost %}
+                    {% for articleId in tab %}
+
+                    <li>
+                        <span></span> <a href="{{ path('article_show',{id:articleId,slug: managers.slugify(QueryGenerator.articles.find(articleId ).slug)}) }}">{{QueryGenerator.articles.find(articleId ).titre }}</a>
+                    </li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+
+
+
+            </div>
+
+        </div>
+        <div class="aside_popu">
+            <div class="aside_header">
+                <h3 class="h2_heading">Mes vidéos</h3>
+            </div>
+            <div class="content" style="position: relative">
+
+                <div class="video-li" style="display: flex;flex-direction: row;justify-content: flex-start;">
+                    <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;min-height:120px;
+    line-height: 1.5em;"> <span></span> <a href="https://www.youtube.com/watch?v=sDFSCwWtLXY&t=405s">Comment gagner au paris sportif grâce au football virtuel en cette période de coronavirus</a>
+                        <span style="display: block">Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
+                    </div>
+                    <div class="video-rig" style="background: #0b95de;width: 40%;margin-top:  13px; "><iframe width="140" height="180" src="https://www.youtube.com/embed/sDFSCwWtLXY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </div>
+                </div>
+
+
+
+
+
+            </div>
+
+
+        </div>
+        <div class="aside_popu" style="clear: both">
+            <div class="aside_header">
+                <h3 class="h2_heading">Ne manquez pas nos offres</h3>
+            </div>
+            <div class="content">
+                <div class="emailcapture ">
+                    <div class="newsletter-container">
+                        <div class="copy" style="font-size:1.6rem;">Recevez des informations exclusives sur les paris et les  meilleurs pronostics VIP directement dans votre boîte de réception chaque semaine.</div>
+                        <form class="subscribe-form" action="/" method="post">
+                            <div class="input-group">
+                                <input class="form-control subscribe-field" title="Bulletin" placeholder="Email" id="fieldEmail" name="vipEmail" type="email" required="">
+                                <span class="input-group-btn">
+                                                  <button class="btn btn-default btn-subscribe" type="submit">Souscrire</button>
+                                                 </span>
+                            </div>
+                            {#                                            {%  if message_vi is not null %}<span class="erreur"> {{ message_vi }}</span>{% endif %}#}
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="aside_popu" style="clear: both">
+
+            <div class="content" >
+                <div class="emailcapture ">
+                    <div class="newsletter-container">
+                        <div class="bookmaker-header" style="background-color: #192e48;">
+                            <a href="ihttp://refpamgdcenm.top/L?tag=d_434133m_1573c_Promo&site=434133&ad=1573&r=fr/bonus/rules/1st/">
+                                <div class="field-img">
+                                    <img src="resources/images/Media.png" alt="">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="contente" style="position: relative;">
+                            <ul class="check green-check" style="margin-bottom: 2.5rem">
+                                <li>Bonus d'inscription allant jusqu'a 66000FCFA </li>
+                                <li>Beaucoup d'option de paris sportif</li>
+                                <li>Excellentes options de paris en direct</li>
+                                <li>Grande communauté de pronostiqueurs</li>
+                                <li>Streaming en direct</li>
+                            </ul>
+                            <div class="bookmark-footer" style="position: absolute;left: 0;bottom: 9px;width: 100%;height: 3rem;">
+                                <div class="row botton " >
+                                    <a  href="http://refpamgdcenm.top/L?tag=d_434133m_1573c_Promo&site=434133&ad=1573&r=fr/bonus/rules/1st/" id="sign-validate"  class="btn signin-btn btn-comment">je m'inscris</a>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</aside>

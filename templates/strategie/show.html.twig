@@ -1,0 +1,259 @@
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body %}
+
+    <section style="margin-top: 3rem">
+        <div class="row">
+            <div class="col-2-of-3 ">
+                <div class="article">
+                    <article class="home__article">
+
+                        <h1>
+                            <span class="titre article-titre">{{ news.titre }}</span>
+                        </h1>
+                        <div class="post_comment-box">
+                                    <span class="infopost">Publier  <span class="date">le </span> par <a
+                                                href="#">{{ news.auteur }}</a></span>
+                            <span class="comment">&nbsp;</span>
+
+                        </div>
+                        <div class="clr"></div>
+                        <div class="home__article--text">
+                            {% set article=news.contenu %}
+
+
+                            {% autoescape %}
+                                {{ article|raw }}
+                            {% endautoescape %}
+                        </div>
+                        <div class="share-social">
+                            <ul class="social-link">
+                                <li class="social-item">
+                                    <span style="display: inline-block;padding-top: 10px">partager</span>
+                                </li>
+                                <li class="social-item">
+                                    <a title="partager sur facebook" class="facebook share_facebook" href="" data-url="https:\\parieurdumonde.com?{{ news.titre }}">
+                                        <span class="ion"><i class="fa fa-facebook"></i> </span>
+                                        {#<span class="text">facebook</span>#}
+                                    </a>
+                                </li>
+                                <li class="social-item">
+                                    <a title="partager sur twitter" class="twitter share_twitter" href="" data-url="http:\\parieurdumonde.com?{{ news.titre }}">
+                                        <span class="ion"><i class="fa fa-twitter"></i> </span>
+                                        {#<span class="text">facebook</span>#}
+                                    </a>
+                                </li>
+                                <li class="social-item">
+                                    <a title="partager sur instagram" class="instagram share_instagram" href="" data-url="http:\\parieurdumonde.com?{{ news.titre }}">
+                                        <span class="ion"><i class="fa fa-instagram"></i> </span>
+                                        {#<span class="text">facebook</span>#}
+                                    </a>
+                                </li>
+                                <div class="right-block" style="float: right">
+                                    <li>
+                                        <span style="display: inline-block;padding-top: 10px"> Vues <i class="fa fa-eye">&nbsp;&nbsp;{{ findPage.NbVisite }}&nbsp;</i></span>
+
+                                    </li>
+                                </div>
+
+                            </ul>
+
+                        </div>
+                        {#<div class="social-link">#}
+                        {#<ul>#}
+                        {#<li class="facebook share_facebook" data-url="http://djangobet.localhost/stractegies/article?{{ get.titre }}&id={{ get.id }}">#}
+                        {#<a href="">#}
+                        {#<span class="ion"><i class="fa fa-facebook"></i> </span>#}
+                        {#<span class="text">facebook</span>#}
+                        {#</a>#}
+                        {#</li>#}
+                        {#<li class="twitter share_twitter" title="partager sur twitter" data-url="http://djangobet.localhost/stractegies/article?{{ get.titre }}&id={{ get.id }}">#}
+                        {#<a  href="" >#}
+                        {#<span class="ion"><i class="fa fa-twitter"></i> </span>#}
+                        {#<span class="text">twitter</span>#}
+                        {#</a>#}
+                        {#</li>#}
+                        {#<li class="instagram" title="partager sur instagram">#}
+                        {#<a href="">#}
+                        {#<span class="ion"><i class="fa fa-instagram"></i> </span>#}
+                        {#<span class="text">instagram</span>#}
+                        {#</a>#}
+                        {#</li>#}
+                        {#<li class="youtube" title="partager sur youtube">#}
+                        {#<a href="">#}
+                        {#<span class="ion"><i class="fa fa-youtube"></i> </span>#}
+                        {#<span class="text">youtube</span>#}
+                        {#</a>#}
+                        {#</li>#}
+                        {#</ul>#}
+                        {#</div>#}
+                        <section class="article-commentaire">
+                            <div class="article-commentaire_container">
+                                <div class="head">
+                                    {#<div class="title-comment">#}
+                                    {#{% if countComment==0 %}Soyez le premier à poster un commentaire{% else %} {{  countComment }} commentaire{% if countComment>1 %}s{% endif %} poster {% endif %}#}
+                                    {#</div>#}
+
+                                </div>
+                                {#{% for commentaire in comment %}#}
+                                {#{{ include('comment.html.twig') }}#}
+
+                                {#{% endfor %}#}
+
+
+
+
+
+
+                            </div>
+
+
+                        </section>
+
+                        {#<div class="comment-container">#}
+                        {#<header class="comment-header">#}
+                        {#<h3>Ajouter votre commentaire</h3>#}
+                        {#<span style="font-size: 1.3rem;line-height: 1.3">Votre adresse de messagerie ne sera pas publiée.</span>#}
+
+                        {#</header>#}
+
+                        {#<div class="forum_cont signin-container" style="min-height: 1px!important;">#}
+                        {#<div class="comment-body">#}
+
+                        {#<form class="contact-form" method="post" action="/stractegies/article?titre={{ news.titre }}&com={{ news.id }}&id={{ news.id }}" style="padding-top: 3rem">#}
+                        {#<input type="hidden" value="0" name="id_parent" id="id_parent"/>#}
+
+                        {#<div class="form-group">#}
+                        {#<div class="row">#}
+                        {#<div class="form-label-group">#}
+                        {#<input type="text" name="name"  placeholder="votre nom" value="{% if user_row.pseudo %}{{  user_row.pseudo }}{% elseif post.name %}{{ post.name }}{% endif %}"  class="Inputname form-control" required>#}
+                        {#<span class="{% if comment_erreur_email %}erreur{% endif %}">{% if comment_erreur_name %}{{ comment_erreur_name  }}{% endif %}</span>#}
+
+                        {#</div>#}
+
+                        {#</div>#}
+                        {#</div>#}
+                        {#<div class="form-group">#}
+                        {#<div class="row">#}
+                        {#<div class="form-label-group">#}
+                        {#<input type="email" name="email" class="Inputname form-control" placeholder="votre email" value="{% if user_row.email %}{{ user_row.email }}{% elseif post.email %}{{ post.email }}{% endif %}" required >#}
+
+                        {#<span class="{%  if comment_erreur_email%}erreur{% endif %}">{% if comment_erreur_email %}{{ comment_erreur_email  }}{% endif %}</span>#}
+
+
+                        {#</div>#}
+
+                        {#</div>#}
+                        {#</div>#}
+                        {#<div class="form-group">#}
+                        {#<div class="row">#}
+
+                        {#<div class="form-group">#}
+                        {#<textarea name="comment_content" class="form-control" id="message"  placeholder="Votre  message" required></textarea>#}
+                        {#<span class="{% if comment_erreur_content %}erreur{% endif %}">{% if comment_erreur_content %}{{ comment_erreur_content  }}{% endif %}</span>#}
+
+                        {#</div>#}
+                        {#</div>#}
+                        {#</div>#}
+                        {#<div class="form-group">#}
+                        {#<div class="row botton ">#}
+                        {#<input type="submit" name="comment_submit" value="poster votre commentaire" id="sign-validate"  class="btn signin-btn btn-comment">#}
+                        {#</div>#}
+                        {#</div>#}
+                        {#</form>#}
+
+                        {#</div>#}
+                        {#</div>#}
+
+
+                        {#</div>#}
+
+                    </article>
+                </div>
+
+
+
+            </div>
+            <div class="col-1-of-3 media">
+                <aside class="aside_right">
+                    <div class="aside_right-content">
+                        <div class="aside_popu">
+                            <div class="aside_header">
+                                <h3 class="h2_heading">Articles similaires</h3>
+                            </div>
+
+                            <div class="content">
+
+                                <ul class="similaire">
+                                    {% if similarStractegies is iterable %}
+                                    {% for similair in similarStractegies %}
+
+
+                                        <li>
+                                            <span> <a href="{{ path('app_strategie_show',{id:similair.id,slug: managers.slugify(similair.slug)}) }}">{{ similair.titre }}</a></span>
+                                        </li>
+                                    {% endfor %}
+                                    {% endif %}
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="aside_popu">
+                            <div class="aside_header">
+                                <h3 class="h2_heading">Mes vidéos</h3>
+                            </div>
+                            <div class="content">
+                                <ul>
+                                   <li class="video-li">
+                                        <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;
+    line-height: 1.5em;"> <span></span> <a href=""></a>
+                                            <span>Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
+                                        </div>
+                                        <div class="video-rig" style="background: #0b95de;height:100%;min-height:120px;position:relative;float: right;width: 40%;margin-top: 13px ">hhh</div>
+                                    </li>
+                                    <li class="video-li">
+                                        <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;
+    line-height: 1.5em;"> <span></span> <a href=""></a>
+                                            <span>Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
+                                        </div>
+                                        <div class="video-rig" style="background: #0b95de;height:100%;min-height:120px;position:relative;float: right;width: 40%;margin-top: 13px ">hhh</div>
+                                    </li>
+                                    <li class="video-li">
+                                        <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;
+    line-height: 1.5em;"> <span></span> <a href=""></a>
+                                            <span>Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
+                                        </div>
+                                        <div class="video-rig" style="background: #0b95de;height:100%;min-height:120px;position:relative;float: right;width: 40%;margin-top: 13px ">hhh</div>
+                                    </li>
+
+                                    <li class="video-li" >
+                                        <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;
+    line-height: 1.5em;"> <span></span> <a href=""></a>
+                                            <span>Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
+                                        </div>
+                                        <div class="video-rig" style="background: #0b95de;height:100%;min-height:120px;position:relative;float: right;width: 40%;margin-top: 13px ;margin-bottom: 2rem">hhh</div>
+                                    </li>
+
+
+
+                                </ul>
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+
+
+    </section>
+{% endblock %}

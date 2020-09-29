@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+    <section class="contact connect">
+        <div class="" style="margin: 0 auto;">
+
+
+            <div class="forum_cont signin-container sign-container">
+    <div class="sigin-body">
+    <div class="forum_cont signin-container">
+    <div class="row">
+
+
+    <div class=''>
+    <div class="card signin-card">
+    <div class="card-block">
+    <div class="connexion_header" style="text-align: center">
+        <div class="connxion_title" >
+            <h2>Récupérer votre mot de passe</h2>
+        </div>
+
+    </div>
+    {% for flashError in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+
+    {{ form_start(requestForm) }}
+    <div class="form-group ">
+        {{ form_row(requestForm.email,{
+            label: ' ','attr':{'class':'form-control','placeholder':'Entrer votre adresse email'} }) }}
+        </div>
+        <div >
+            <small>
+                Enter your email address and we we will send you a
+                link to reset your password.
+            </small>
+        </div>
+
+    <div class="botton" style='margin-top: .5rem;display: inline-block'>
+        <input type="submit" class="btn signin-btn btn-lg" name="password_submit" value="récupérer">
+
+    </div>
+    {{ form_end(requestForm) }}
+    </div>
+    </div>
+    </div>
+
+
+    </div>
+
+    </div>
+    </div>
+            </div>
+        </div>
+
+
+    </section>
+{% endblock %}

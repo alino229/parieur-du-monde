@@ -1,0 +1,167 @@
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body %}
+    <section style="margin-top: 3rem">
+        <div class="row">
+            <div class="col-2-of-3 ">
+                <div class="article">
+                    <div class="stractegie_header mb-2">
+                        <h2 class="s-h2">STRATEGIES DE PARI</h2>
+                        <p class="s-p">
+                            Chaque parieur a sa propre stratégie ou ses systèmes de paris sportifs sur lesquels ils comptent.
+                            C’est la manière personnelle dont dispose le parieur pour gérer les comptes de pari afin
+                            d’obtenir des bénéfices  .
+                        </p>
+                        <p class="s-p">
+                            Dans cette section, nous présentons les meilleures et les plus prometteuses stratégies  en
+                            matière de paris sportifs.
+                        </p>
+                    </div>
+                    <div class="stractegie_content">
+                        {% for key in allCategorie %}
+                            <div class="strategie_content-foot">
+
+
+                                <div class="foot-content mb-4">
+                                    <div class="limiter">
+                                        <div class="container-table100">
+                                            <div class="wrap-table100">
+                                                <div class="table100">
+                                                    <div id="premium" class="tips-section">
+                                                        <div class="tips-section__header">
+
+                                                            <div class="tips-section__header-texts">
+                                                                <h2 class="tips-section__header-text">{{ key.categorie|lower }} </h2>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tips-section__content">
+                                                            <div class="premium-best-tip">
+                                                                {% set id=key.id %}
+                                                                {% set myText = allStractegie.findStrategieByCategorie(id) %}
+
+                                                              {% for value in myText %}
+
+                                                                    <div class="premium-best-tip__match-info">
+                                                                        <a href="{{ path('app_strategie_show',{id:value.id,slug: managers.slugify(value.slug)}) }}" class="premium-best-tip__teams">
+                                                                        <span class="premium-best-tip__host-name">
+                                                                                {{ value.titre }}
+                                                                        </span>
+
+                                                                        </a>
+
+                                                                    </div>
+                                                                {% endfor %}
+
+                                                            </div>
+
+                                                        </div>
+                                                        <button  class="tips-section__load-more" style="display: none">
+                                                            Lire plus
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>    {% endfor %}
+
+
+                    </div>
+
+                    <div class="stractegie_footer s-p " style="background-color: white!important">
+                        Vous êtes tous chaleureusement invités à <a href="contact">nous parler</a> de votre stratégie de paris sur le football
+                        , de la façon dont vous gagnez vos paris de football (ou de paris sur d'autres sports), et nous
+                        les publierons ici (si vous le souhaitez) pour les partager avec d'autres parieurs.
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-1-of-3 media " >
+                <aside class="aside_right">
+                    <div class="aside_right-content">
+                        <div class="aside_popu">
+                            <div class="aside_header">
+                                <h3 class="h2_heading">Articles  récents</h3>
+                            </div>
+                            <div class="content">
+
+
+                                <ul>
+                                    {% for resent in allStractegieresent %}
+                                        <li>
+                                            <span></span> <a href="{{ path('app_strategie_show',{id:resent.id,slug: managers.slugify(resent.slug)}) }}">{{ (resent.titre) }}</a>
+                                        </li>
+
+                                    {% endfor %}
+
+
+
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="aside_popu">
+                            <div class="aside_header">
+                                <h3 class="h2_heading">Mes vidéos</h3>
+                            </div>
+                            <div class="content">
+                                <ul>
+                                    {#<li class="video-li">
+                                        <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;
+    line-height: 1.5em;"> <span></span> <a href="/?titre={% set titre1=most1.titre %}{%   set stripsl=manager.stripslashes(titre1) %}{{ manager.urlEncode(stripsl) }}&id={{ id_parent1 }}">{{ manager.stripslashes(most1.titre) }}</a>
+                                            <span>Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
+                                        </div>
+                                        <div class="video-rig" style="background: #0b95de;height:100%;min-height:120px;position:relative;float: right;width: 40%;margin-top: 13px ">hhh</div>
+                                    </li>
+                                    <li class="video-li">
+                                        <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;
+    line-height: 1.5em;"> <span></span> <a href="/?titre={% set titre1=most1.titre %}{%   set stripsl=manager.stripslashes(titre1) %}{{ manager.urlEncode(stripsl) }}&id={{ id_parent1 }}">{{ manager.stripslashes(most1.titre) }}</a>
+                                            <span>Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
+                                        </div>
+                                        <div class="video-rig" style="background: #0b95de;height:100%;min-height:120px;position:relative;float: right;width: 40%;margin-top: 13px ">hhh</div>
+                                    </li>
+                                    <li class="video-li">
+                                        <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;
+    line-height: 1.5em;"> <span></span> <a href="/?titre={% set titre1=most1.titre %}{%   set stripsl=manager.stripslashes(titre1) %}{{ manager.urlEncode(stripsl) }}&id={{ id_parent1 }}">{{ manager.stripslashes(most1.titre) }}</a>
+                                            <span>Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
+                                        </div>
+                                        <div class="video-rig" style="background: #0b95de;height:100%;min-height:120px;position:relative;float: right;width: 40%;margin-top: 13px ">hhh</div>
+                                    </li>#}
+
+                                  {#  <li class="video-li" >
+                                        <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;
+    line-height: 1.5em;"> <span></span> <a href="/?titre={% set titre1=most1.titre %}{%   set stripsl=manager.stripslashes(titre1) %}{{ manager.urlEncode(stripsl) }}&id={{ id_parent1 }}">{{ manager.stripslashes(most1.titre) }}</a>
+                                            <span>Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
+                                        </div>
+                                        <div class="video-rig" style="background: #0b95de;height:100%;min-height:120px;position:relative;float: right;width: 40%;margin-top: 13px ;margin-bottom: 2rem">hhh</div>
+                                    </li>#}
+
+
+
+                                </ul>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+
+
+
+
+    </section>
+
+{% endblock %}

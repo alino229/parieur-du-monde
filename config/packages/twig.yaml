@@ -1,2 +1,11 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    globals:
+        # the value is the service's id
+
+        managers: '@App\Service\Managers'
+        QueryGenerator: '@App\Service\QueryGenerator'
+        Stat: '@App\Service\Statistique'
+    form_themes:
+      - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+

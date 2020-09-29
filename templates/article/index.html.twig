@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+<section style="margin-top: 3rem">
+        <div class="row">
+            <div class="col-2-of-3 ">
+                <div class="article">
+                    <article class="home__article">
+
+
+                            <div id="all-content">
+                                {% for article in article %}
+
+
+                                    <h1>
+                                        <a href="{{ path('article_show',{id:article.id,slug: managers.slugify(article.slug)}) }}" class="titre">
+                                            {{ article.titre}}
+                                        </a>
+                                    </h1>
+
+                                    <div class="clr"></div>
+                                    <div class="article__img mb1-mt1"><img
+                                                src="{{ asset('images/article') }}/{{ article.images }}"
+                                              alt="{{ article.imageAlt }}" title="{{ article.imageTitre }}"
+                                                width="990" height="557"  class="fl"/></div>
+                                    <div class="home__article--text" id="all-text">
+                                        {% autoescape %}
+                                        {{managers.LimitContenu(article.contenu,400)|raw}}
+                                        {% endautoescape %}
+                                        </br>
+
+                                        <p class="spec"><a href="{{ path('article_show',{id:article.id,slug: managers.slugify(article.slug)}) }}" class="btn_text">lire
+                                                plus</a></p>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="pagination-wrapper">
+
+                              {% include '_pagination.html.twig' %}
+
+                            </div>
+
+
+
+
+
+
+
+
+                    </article>
+                </div>
+
+
+
+            </div>
+            <div class="col-1-of-3 media">
+               {{ include('_home_aside.html.twig') }}
+            </div>
+        </div>
+
+
+    </section>
+{% endblock %}
+
+
+

@@ -1,0 +1,146 @@
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body %}
+    <section class="post_sujet">
+        <div class="row new-poste">
+            {% if delect is defined%}
+                <div class="delect" style="text-align: center;font-size: 1.7rem;line-height: 150%;padding: 4rem">
+                    <p>Votre sujet a été supprimé avec succès</p>
+                    <p>Poster un nouveau sujet</p>
+                </div>
+            {% endif %}
+
+            <article class="article botton" style="min-height: 20rem">
+
+
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                    <h2>vous devez vous connecter pour poster un sujet dans ce forum</h2><br/>
+                    <a class='left btn' href="{{ path('app_use_login') }}">connecter</a>
+                    <a class='right btn' href="{{ path('app_register') }}">s'inscrire</a>
+                {% else %}
+                    <div class="sujets">
+                        {{ form_start(Forumform) }}
+
+
+
+                            <fieldset>
+                                <legend>Nouvelle question</legend>
+                                <div class="form-group">
+                                    <div class="box">
+
+
+                                                <div class="form-group">
+                                                    {{ form_row(Forumform.forum, {
+                                                        label: 'choisir un forum','attr':{'class':'input-name form-control'}
+                                                    }) }}
+                                                </div>
+                                    </div>
+
+                                </div>
+
+                                                <div class="form-group">
+                                                    {{ form_row(Forumform.subject, {
+                                                        label: 'titre du sujet',placeholder:'titre du sujet','attr':{'class':'input-name form-control'}
+                                                    }) }}
+
+                                                </div>
+                                <hr class="spacer" style="margin-bottom: 2rem!important;">
+
+                                                <div class="form-group">
+                                                    {{ form_row(Forumform.body, {
+                                                        label: 'votre sujet ',placeholder:'votre sujet','attr':{'class':'input-name form-control','style':'min-height: 100px!important;'}
+                                                    }) }}
+
+                                                </div>
+                                <div class="form-group botton">
+                                    {% if modifier is  defined %}
+                                        <input type="submit" class="btn signin-btn btn-gb_color btn-discution" value="modifier un sujet" name="forum_mod_sujet">
+                                    {% else %}
+
+                                        <input type="submit" class="btn signin-btn btn-gb_color btn-discution" value="soumettre un sujet" name="forum_sujet">
+                                    {% endif %}
+
+                                    <input type="reset" class="btn signin-btn btn-re_color btn-discution" name="forum_reset" value="annuler" style="margin-left: 1.5rem">
+                                </div>
+
+                            </fieldset>
+
+
+
+
+                                        {{ form_end(Forumform) }}
+                                     {#   <label for="select"></label>
+                                        <select name="cat" id="select" required>
+                                            <option selected value=""> choisir un forum</option>
+                                            {% for cat in forum_categorie %}
+
+                                                <optgroup label="{{ cat.name|upper}}" style="color: black">
+
+                                                    {% set id=cat.id %}
+                                                    {% set myoption = manager.forum(id) %}
+                                                    {% for option in myoption %}
+
+                                                        <option  {% if  (result is defined) and (result.forum_id==option.id ) %} selected{% endif %} value="{{ option.id }}">{{ option.name|upper }}</option>
+                                                    {% endfor %}
+                                                </optgroup>
+                                            {% endfor %}
+
+
+
+
+                                        </select>
+                                    </div>
+                                    {% if erreur_cat is defined %}
+                                        <h1>{{ erreur_cat }}</h1>
+                                    {% endif %}
+                                </div>
+                                <p></p>
+                                <div class="form-group">
+                                    <input type="text" name="titre" placeholder="titre du sujet"   value="{% if  result is defined %}{{ result.subject }}{% endif %}" required><br/>
+                                    {% if erreur_titre  %}
+                                        {% for titre in erreur_titre %}
+                                            <span class="erreur" ><em>{{ titre}}</em></span>
+                                        {% endfor %}
+
+                                    {% endif %}
+                                </div>
+                                <hr class="spacer" style="margin-bottom: 2rem!important;">
+                                <div class="form-group">
+                                          <textarea name="editor" id="editeur" cols="30"  rows="10" class="form-control"
+                                                    placeholder="votre sujet" style="height: 30rem!important;"
+                                                    required>
+                                    {% if  result is defined %}{{ result.body }}{% endif %}
+
+                                </textarea>
+                                    {% if erreur_contenu  %}
+                                        {% for contenu in erreur_contenu %}
+                                            <span class="erreur" style="margin-left: 1rem;padding-top: 1rem"><em>{{ contenu|e}}</em></span>
+                                        {% endfor %}
+
+                                    {% endif %}
+                                </div>#}
+
+
+
+                    </div>
+
+                {% endif %}
+
+
+
+
+            </article>
+
+
+
+        </div>
+    </section>
+{% endblock %}
+
+
+

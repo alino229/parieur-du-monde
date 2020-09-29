@@ -1,0 +1,457 @@
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body %}
+    <section style="margin-top: 3rem">
+        <div class="row">
+            <div class="col-2-of-3">
+                <div class="article">
+                    <article class="home__article" id="pro_results">
+
+                        <div class="conseils_header ">
+                            <h2 class="s-h2">Conseils de paris
+                            </h2>
+                            <p class="s-p">Conseils de paris pour tous les sports. Nous sélectionnons le meilleur
+                                pari de la journée parmi les prédictions de nos experts, le pari qui, selon nous,
+                                a la meilleure chance de gagner. </p>
+                        </div>
+                        <div class="conseiles_content" >
+
+                            <div class="row" style="margin-bottom: 0!important;">
+                                {% for news in showResult1 %}
+
+
+
+                                    <div class="col-1-of-2" >
+                                        <div class="forum_stat">
+                                            <div class="stat_header">
+
+                                                <span style="float: left">{{ news.pays }}</span>
+                                                <span style="float: right">{{ news.competition }}</span>
+
+                                            </div>
+                                            <div class="stat_body">
+                                                <div class="forum_data">
+
+                                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="{{ asset('/images/pronostics/') }}{{ news.homeFlag }}" alt="{{ news.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center ">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news.time|date('H:i') }}</time>
+                                            </span>
+                                            <span class="pdm_team_right ">
+                                                <img src="{{ asset('/images/pronostics/') }}{{ news.awayFlag }}" alt="{{ news.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news.away }}</span>
+                                            </span>
+                                        </span>
+                                                    <div class="our-bet-content">
+                                                        <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                        <span class="pdm_our-prono">{{ news.pronostics }}</span>
+
+                                                    </div>
+                                                    <div class="pro_cote">
+                                                        <a class="pdm_cote-link" href="http://refpawbdfd.top/L?tag=d_434133m_1573c_&site=434133&ad=1573" target="_blank">
+                                                            <span class="value-cote">Cote: {{  news.cote}}</span>
+
+                                                        </a>
+                                                        <a style="float: right;text-align: center;" class="pdm_cote-link {% if news.resultValue==1 %}success {% else %}  wrong  {% endif %}" href="http://refpawbdfd.top/L?tag=d_434133m_1573c_&site=434133&ad=1573" target="_blank" >
+                                                            <span class="value-cote" style="font-size: 1.2rem;padding-left: 30%">{{ news.resultat }}</span>
+
+                                                        </a>
+
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+
+
+
+                            <div class="row" style="margin-bottom: 0!important;">
+                                {% for news2 in showResult2 %}
+
+
+
+
+                                    <div class="col-1-of-2" >
+                                        <div class="forum_stat">
+                                            <div class="stat_header">
+
+                                                <span>{{ news2.pays }}</span>
+                                                <span style="float: right">{{ news2.competition }}</span>
+
+                                            </div>
+                                            <div class="stat_body">
+                                                <div class="forum_data">
+                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="{{ asset('/images/pronostics/') }}{{ news2.homeFlag }}" alt="{{ news2.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news2.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center wt_inneritem">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news2.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news2.time|date('H:i') }}</time>
+                                            </span>
+                                            <span class="pdm_team_right wt_inneritem">
+                                                <img src="{{ asset('/images/pronostics/') }}{{ news2.awayFlag }}" alt="{{ news2.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news2.away }}</span>
+                                            </span>
+                                        </span>
+                                                    <div class="our-bet-content">
+                                                        <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                        <span class="pdm_our-prono">{{ news2.pronostics }}</span>
+
+                                                    </div>
+                                                    <div class="pro_cote">
+                                                        <a class="pdm_cote-link" href="http://refpawbdfd.top/L?tag=d_434133m_1573c_&site=434133&ad=1573" target="_blank">
+                                                            <span class="value-cote">Cote: {{  news2.cote}}</span>
+
+                                                        </a>
+                                                        <a style="float: right;text-align: center;" class="pdm_cote-link {% if news2.resultValue==1 %}success {% else %}  wrong  {% endif %}" href="http://refpawbdfd.top/L?tag=d_434133m_1573c_&site=434133&ad=1573" target="_blank" >
+                                                            <span class="value-cote" style="font-size: 1.2rem;padding-left: 30%">{{ news2.resultat }}</span>
+
+                                                        </a>
+
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="clr"></div>
+                        <!-- Awesome Testimonials -->
+                        <section id="aw-testimonials" class="aw-section">
+                            <h3 class="h2-heading heading_testimonial">Ce qu'ils disent de nous</h3>
+
+                            <div class="aw-testimonials">
+
+                                <ul>
+                                    <li>
+                                        <div class="aw-user-data">
+                                            <img src="../resources/images/user-1.jpg" alt="" />
+                                            <span class="aw-user-name">Serge</span>
+                                        </div>
+                                        <p>" Un site vraiment bien fait par des personnes respectables et compétentes qui font du pari un passe-temps idéal avec des revenus vraiment étonnants ... Je vous suis depuis un mois et j'ai déjà fait d'importants gains. Merci encore. "</p>
+                                    </li>
+                                    <li>
+                                        <div class="aw-user-data">
+                                            <img src="../resources/images/user-2.jpg" alt="" />
+                                            <span class="aw-user-name">kevin</span>
+                                        </div>
+                                        <p>" Un site vraiment bien fait par des personnes respectables et compétentes qui font du pari un passe-temps idéal avec des revenus vraiment étonnants ... Je vous suis depuis un mois et j'ai déjà fait d'importants gains. Merci encore. "</p>
+                                    </li>
+                                    <li>
+                                        <div class="aw-user-data">
+                                            <img src="../resources/images/user-3.jpg" alt="" />
+                                            <span class="aw-user-name">Ariel</span>
+                                        </div>
+                                        <p>" Un site vraiment bien fait par des personnes respectables et compétentes qui font du pari un passe-temps idéal avec des revenus vraiment étonnants ... Je vous suis depuis un mois et j'ai déjà fait d'importants gains. Merci encore. "</p>
+                                    </li>
+                                </ul>
+
+                                <i id="aw-testimonials-prev" class="aw-arrow aw-arrow-left"></i>
+                                <i id="aw-testimonials-next" class="aw-arrow aw-arrow-right"></i>
+                            </div>
+
+                        </section>
+                        <div class="row" style="margin-bottom: 0!important;">
+                            {% for news3 in showResult3 %}
+
+
+
+                                <div class="col-1-of-2" >
+                                    <div class="forum_stat">
+                                        <div class="stat_header">
+
+                                            <span style="float: left">{{ news3.pays }}</span>
+                                            <span style="float: right">{{ news3.competition }}</span>
+
+                                        </div>
+                                        <div class="stat_body">
+                                            <div class="forum_data">
+
+                                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="{{ asset('/images/pronostics/') }}{{ news3.homeFlag }}" alt="{{ news3.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news3.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center ">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news3.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news3.time|date('H:i') }}</time>
+
+                                            </span>
+                                            <span class="pdm_team_right ">
+                                                <img src="{{ asset('/images/pronostics/') }}{{ news3.awayFlag }}" alt="{{ news3.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news3.away }}</span>
+                                            </span>
+                                        </span>
+                                                <div class="our-bet-content">
+                                                    <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                    <span class="pdm_our-prono">{{ news3.pronostics }}</span>
+
+                                                </div>
+                                                <div class="pro_cote">
+                                                    <a class="pdm_cote-link" href="http://refpawbdfd.top/L?tag=d_434133m_1573c_&site=434133&ad=1573" target="_blank">
+                                                        <span class="value-cote">Cote: {{  news3.cote}}</span>
+
+                                                    </a>
+                                                    <a style="float: right;text-align: center;" class="pdm_cote-link {% if news3.resultValue==1 %}success {% else %}  wrong  {% endif %}" href="http://refpawbdfd.top/L?tag=d_434133m_1573c_&site=434133&ad=1573" target="_blank" >
+                                                        <span class="value-cote" style="font-size: 1.2rem;padding-left: 30%">{{ news3.resultat }}</span>
+
+                                                    </a>
+
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                        <div class="row" style="margin-bottom: 0!important;">
+                            {% for news4 in showResult4 %}
+
+
+
+                                <div class="col-1-of-2" >
+                                    <div class="forum_stat">
+                                        <div class="stat_header">
+
+                                            <span style="float: left">{{ news4.pays }}</span>
+                                            <span style="float: right">{{ news4.competition }}</span>
+
+                                        </div>
+                                        <div class="stat_body">
+                                            <div class="forum_data">
+
+                                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="{{ asset('/images/pronostics/') }}{{ news4.homeFlag }}" alt="{{ news4.homeFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news4.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center ">
+                                                <span class="wt_liganame">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news4.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news4.time|date('H:i') }}</time>
+                                                {#<span class="wt_liganame">HNL</span>#}
+                                            </span>
+                                            <span class="pdm_team_right ">
+                                                <img src="{{ asset('/images/pronostics/') }}{{ news4.awayFlag }}" alt="{{ news4.awayFlag }}">
+                                                <br>
+                                                <span style="font-size:14px">{{ news4.away }}</span>
+                                            </span>
+                                        </span>
+                                                <div class="our-bet-content">
+                                                    <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                    <span class="pdm_our-prono">{{ news4.pronostics }}</span>
+
+                                                </div>
+                                                <div class="pro_cote">
+                                                    <a class="pdm_cote-link" href="http://refpawbdfd.top/L?tag=d_434133m_1573c_&site=434133&ad=1573" target="_blank">
+                                                        <span class="value-cote">Cote: {{  news4.cote}}</span>
+
+                                                    </a>
+                                                    <a style="float: right;text-align: center;" class="pdm_cote-link {% if news4.resultValue==1 %}success {% else %}  wrong  {% endif %}" href="http://refpawbdfd.top/L?tag=d_434133m_1573c_&site=434133&ad=1573" target="_blank" >
+                                                        <span class="value-cote" style="font-size: 1.2rem;padding-left: 30%">{{ news4.resultat }}</span>
+
+                                                    </a>
+
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                        <div class="row" style="margin-bottom: 0!important;margin-top: 10px">
+                            <a href="homeFlag">
+                                <img src="../resources/images/1xbet.jpg" style="margin: 0 auto;display: block;" alt="parier et gagner grace à 1XBET">
+                            </a>
+                        </div>
+                        <div class="row" style="margin-bottom: 0!important;">
+                            {% for news5 in showResult5 %}
+
+
+
+                                <div class="col-1-of-2" >
+                                    <div class="forum_stat">
+                                        <div class="stat_header">
+
+                                            <span style="float: left">{{ news5.pays }}</span>
+                                            <span style="float: right">{{ news5.competition }}</span>
+
+                                        </div>
+                                        <div class="stat_body">
+                                            <div class="forum_data">
+
+                                                        <span class="pro_body">
+                                            <span class="pdm_team_left ">
+                                                <img src="{{ asset('/images/pronostics/') }}{{ news5.homeFlag }}" alt="{{ news5.home }} logo">
+                                                <br>
+                                                <span style="font-size:14px">{{ news5.home }}</span>
+                                            </span>
+                                            <span class="pdm_team_center ">
+                                                <span class="">VS</span>   <br><br>
+                                                <time class="wt_date date" datetime="2020-02-01T18:00:00+00:00">{{ news5.day|date('d/m/Y') }}</time> à
+                                                <time class="wt_time time" datetime="2020-02-01T18:00:00+00:00">{{ news5.time|date('H:i') }}</time>
+
+                                            </span>
+                                            <span class="pdm_team_right ">
+                                                <img src="{{ asset('/images/pronostics/') }}{{ news5.awayFlag }}" alt="{{ news5.away }} logo">
+                                                <br>
+                                                <span style="font-size:14px">{{ news5.away }}</span>
+                                            </span>
+                                        </span>
+                                                <div class="our-bet-content">
+                                                    <span class="pdm_prono-title">Notre prédiction:</span>
+
+
+                                                    <span class="pdm_our-prono">{{ news5.pronostics }}</span>
+
+                                                </div>
+                                                <div class="pro_cote">
+                                                    <a class="pdm_cote-link" href="http://refpawbdfd.top/L?tag=d_434133m_1573c_&site=434133&ad=1573" target="_blank">
+                                                        <span class="value-cote">Cote: {{  news5.cote}}</span>
+
+                                                    </a>
+                                                    <a style="float: right;text-align: center;" class="pdm_cote-link {% if news5.resultValue==1 %}success {% else %}  wrong  {% endif %}" href="http://refpawbdfd.top/L?tag=d_434133m_1573c_&site=434133&ad=1573" target="_blank" >
+                                                        <span class="value-cote" style="font-size: 1.2rem;padding-left: 30%">{{ news5.resultat }}</span>
+
+                                                    </a>
+
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+
+
+
+
+
+                    </article>
+                </div>
+
+
+            </div>
+            <div class="col-1-of-3 media">
+                <aside class="aside_right">
+                    <div class="aside_right-content">
+                        <div class="aside_popu">
+                            <div class="aside_header loto-header">
+                                <h3 class="h2_heading" style="font-size:16px; "> BILAN DES 30 DERNIERS JOURS</h3>
+                            </div>
+                            <div class="content">
+                                <div class="loto-resultat">
+                                    <div class="loto-titre">
+                                        Nombre de paris: 
+                                        <p style="text-align: justify">
+
+                                        </p><br>
+                                    </div>
+                                    <div class="loto-titre">
+                                        Paris gagnant: 
+                                        <p style="text-align: justify">
+
+                                        </p><br>
+                                    </div>
+                                    <div class="loto-titre">
+                                        Taux de réussite: 
+                                        <p style="text-align: justify">
+
+                                        </p><br>
+                                    </div>
+                                    {#  <div class="loto-bottom clearfix" style="font-size:14px ">
+                                          &nbsp;Bénéfice pour une mise individel de 1000FCFA
+                                      </div>
+                                      <div class="loto-block" style="text-align: center">
+
+                                          <span class="loto-num" style=" width:auto!important;height:auto!important;border-radius:0!important;display: inline-block">7000FCFA</span>
+
+                                      </div>#}
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                        <div class="aside_popu">
+
+                            <div class="content">
+
+                                <a href="homeFlag">
+                                    <img src="../resources/images/1xbet.jpg" alt="parier et gagner grace à 1XBET">
+                                </a>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+
+
+    </section>
+
+{% endblock %}

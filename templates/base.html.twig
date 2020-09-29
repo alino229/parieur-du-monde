@@ -3,10 +3,316 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
     </head>
     <body>
+    <div class="ligne">
+        <div class="page_container">
+            <header>
+                <div class="container_menu-desktop">
+                    <div class="topbar">
+                        <div class="content_topbar">
+                            <div class="left_topbar" style="position: relative">
+                                <a href="{{ path('contact') }}" class="left_topbar-item">contact</a>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY')  or is_granted('IS_AUTHENTICATED_REMEMBERED')%}
+
+                                    <a class="left_topbar-item" id="js-profil" href="#">{{ app.user.pseudo }}</a>
+                                    <div class="profil_user profil_acceuil" style="display: none">
+                                        <nav class="profil_nav">
+                                            <div class="row" style="margin-bottom: 0!important;">
+                                                <div class="col-1-of-3" style="margin-right: 0!important;">
+                                                    <div class="profil_avatar">
+                                                        <img src="../resources/images/avatar/{{ app.user.avatar }}" alt="avatar">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3-of-4" style="margin-right: 0!important;">
+                                                    <div class="profil_data">
+                                                        <ul>
+                                                        <li style="">{{ app.user.pseudo }}</li>
+                                                            <li>Date inscription:{{ app.user.createdAt|date('d/m/Y à H:i')}}</li>
+                                                            {#{%  set user= manager.userData(user_row.id) %}
+                                                            <li>Sujet poster:
+                                                                {{ manager.nombre_sujet }}
+                                                            </li>
+
+                                                            {% set user_topic_id=manager.topic_id %}
+                                                            <li>Dernier sujet:{% if user_topic_id !=0 %}<a href="/forum/discution?id={{ user_topic_id}}" style="color: #2b6dad" >{% set titre=manager.subject %}{{ manager.LimitContenu(titre,60) }}{% else %}0{% endif %}</a></li>
+                                                            <li>Dernière réponse reçue:{% if manager.lastReponse !=0 %}<span>le {{ manager.lastReponse|date("d/m/Y à H:i") }}</span>{% else %}0{% endif %}
+                                                            </li>#}
+
+
+
+
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="profil_btn">
+                                                <a class="deconnect" href="{{ path('app_logout') }}">Déconnexion</a>
+                                            </div>
+
+                                        </nav>
+                                    </div>
+                                {% else %}
+                                    <a class="left_topbar-item "  href="{{ path('app_use_login') }}">connecter</a>
+                                    <a class="left_topbar-item" href="{{ path('app_use_login') }}">s'inscrire</a>
+                                {%endif  %}
+
+
+
+
+
+
+                            </div>
+                            <div class="right_topbar">
+                                <a href="https://www.facebook.com/Pronostics.pour.Paris.sportif.en.ligne/" class="facebook" titre="suivez nous sur facebook"><i class="fa fa-facebook"></i> </a>
+                                <a href="https://twitter.com/MondeParieur" class="twitter" titre="suivez nous sur twitter"><i class="fa fa-twitter"></i> </a>
+                                <a href="https://www.instagram.com/parieurdumonde/" class="instagram" titre="suivez nous sur instagram"><i class="fa fa-instagram"></i> </a>
+                                <a href="https://m.youtube.com/channel/UCh_lXkkwejV4M1sa3NX2NyA" class="youtube" titre="suivez nous sur youtube"><i class="fa fa-youtube"></i> </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!--                 Mobile header-->
+                    <div class="wrapp_mobile-header header" style="display: none">
+                        <div class="logo_mobile">
+                            <div class="logo">
+                                <a href="#">
+                                    <img src="../resources/images/logo-parieur-du-monde-mob.png" alt="logo parieur du monde ">
+                                </a>
+                            </div>
+
+                        </div>
+                        <!--                     botton show menu-->
+
+                        <div id="js-mobile_nav mobile-navigation">
+                            <div class="humberger-nav" style="display:none;">
+                                <a href="#" class="menu-button mobile-nav " id="menuButton" >
+                                    <span class="burger-icon"></span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mobile_menu" style="display: none">
+                        <div id="js-mobile" style="display: none" >
+                            <ul class="topbar_mobile" >
+                                <li class="left_topbar">
+                                    <a class="left_topbar-item" href="{{ path('contact') }}">contact</a>
+
+                                    {% if is_granted('IS_AUTHENTICATED_FULLY')  or is_granted('IS_AUTHENTICATED_REMEMBERED')%}
+
+                                        <a class="left_topbar-item" id="js-profil" href="#">{{ app.user.pseudo }}</a>
+                                        <div class="profil_user profil_acceuil" style="display: none" id="mobile-profil_user">
+                                            <nav class="profil_nav">
+                                                <div class="row" style="margin-bottom: 0!important;">
+                                                    <div class="col-1-of-3" style="margin-right: 0!important;margin-bottom: 0!important;">
+                                                        <div class="profil_avatar">
+                                                            <img src="../resources/images/avatar/{{ app.user.avatar }}" alt="avatar">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3-of-4" style="margin-right: 0!important;">
+                                                        <div class="profil_data">
+                                                            <ul>
+                                                              {#  <li style="">{{ user_row.pseudo }}</li>
+                                                                <li>Date inscription:{{ user_row.joining_date|date('d/m/Y à H:i')}}</li>
+                                                                {%  set user= manager.userData(user_row.id) %}
+                                                                <li>Sujet poster:
+                                                                    {{ manager.nombre_sujet }}
+                                                                </li>
+
+                                                                {% set user_topic_id=manager.topic_id %}
+                                                                <li>Dernier sujet:{% if user_topic_id !=0 %}<a href="/forum/discution?id={{ user_topic_id}}" style="color: #2b6dad" >{% set titre=manager.subject %}{{ manager.LimitContenu(titre,60) }}{% else %}0{% endif %}</a></li>
+                                                                <li>Dernière réponse reçue:{% if manager.lastReponse !=0 %}<span>le {{ manager.lastReponse|date("d/m/Y à H:i") }}</span>{% else %}0{% endif %}
+                                                                </li>#}
+
+
+
+
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="profil_btn">
+                                                    <a class="deconnect" href="{{ path('app_logout') }}">Déconnexion</a>
+                                                </div>
+
+                                            </nav>
+                                        </div>
+                                    {% else %}
+                                        <a class="left_topbar-item "  href="{{ path('app_use_login') }}">connecter</a>
+                                        <a class="left_topbar-item" href="{{ path('app_use_login') }}">s'inscrire</a>
+                                    {%endif  %}
+
+
+
+                                </li>
+                                <li class="right_topbar">
+                                    <a href="https://www.facebook.com/Pronostics.pour.Paris.sportif.en.ligne/"   class="facebook" titre="suivez nous sur facebook"><i class="fa fa-facebook"></i> </a>
+                                    <a href="https://twitter.com/MondeParieur" class="twitter" titre="suivez nous sur twitter"><i class="fa fa-twitter"></i> </a>
+                                    <a href="https://www.instagram.com/parieurdumonde/" class="instagram" titre="suivez nous sur instagram"><i class="fa fa-instagram"></i> </a>
+                                    <a href="https://m.youtube.com/channel/UCh_lXkkwejV4M1sa3NX2NyA" class="youtube" titre="Voir nos vidéos"><i class="fa fa-youtube"></i> </a>
+                                </li>
+
+                            </ul>
+                            <ul class="main_menu-mobile">
+                                <li class="header__item-m"><a href="{{ path('home') }}">Acceuil</a> </li>
+                                <li class="header__item-m"><a href="{{ path('pronostics') }}">Pronostics</a> </li>
+                                <li class="header__item-m"><a href="{{ path('strategie') }}">Stractégies</a> </li>
+                                <li class="header__item-m"><a href="{{ path('home') }}">Forum</a></li>
+                                <li class="header__item-m"><a href="{{ path('about') }}">à propos</a> </li>
+                            </ul>
+                        </div>
+                        <div class="wrapp_logo-container">
+                            <div class="banner_head">
+                                <a href="http://refpakjtns.top/L?tag=d_434133m_1573c_Promo&site=434133&ad=1573&r=fr/bonus/rules/1st/"><img src="../resources/images/h.gif" alt="parier et gagner grace à 1XBET"></a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!--                 End mobile header -->
+
+                    <div class="header desktop_logo">
+                        <div class="wrapp_logo-container">
+                            <div class="logo">
+                                <a href="#">
+                                    <img src="../resources/images/logo-parieur-du-monde.png" alt="logo parieur du monde ">
+                                </a>
+                            </div>
+                            <div class="banner_header">
+                                <a href="http://refpakjtns.top/L?tag=d_434133m_1573c_Promo&site=434133&ad=1573&r=fr/bonus/rules/1st/">
+                                    <img src="../resources/images/h.gif" alt="parier et gagner grace à 1XBET">
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="wrap_main-nav">
+                        <div class="ligne">
+                            <div class="nav">
+                                <nav class="header__navigation">
+                                    <ul class="header__list  " >
+                                        <li class="header__item"><a href=" {{ path('home') }}">Acceuil</a> </li>
+                                        <li class="header__item"><a href="{{ path('pronostics') }}">Pronostics</a> </li>
+                                        <li class="header__item"><a href="{{ path('strategie') }}">Stractégies</a> </li>
+                                        <li class="header__item">
+                                            <a href="{{ path('forum') }}">Forum
+
+                                            </a>
+
+
+                                        </li>
+                                        <li class="header__item"><a href="{{ path('about') }}">à propos</a> </li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+
+                        <!--<hr class="spacer">-->
+                    </div>
+                    <div class="ligne">
+                        <div class="search_bar">
+                            <div class="headline">
+                                <div class="col-1">
+                                    <div class="headline_left">
+
+                                      {#  <a href="{{ lien }}">{{ currentPage1 }}</a>
+
+                                        <span>{{ currentPage2 }}</span>#}
+
+
+                                    </div>
+                                </div>
+
+                                <div class="col-1">
+                                    {% if search is defined %}
+                                        {#<div class="headline_right">#}
+                                        {#<form method="GET" action="/search">#}
+                                        {#<input type="search" placeholder="Recherche" maxlength="45" pattern="[A-z0-9_ \-]{2,45}" name="kw"  required/>#}
+                                        {#<button>#}
+                                        {#<i class="fa fa-search"></i>#}
+                                        {#<i class="fa fa-search"></i>#}
+
+                                        {#</button>#}
+                                        {#</form>#}
+
+                                        {#</div>#}
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main style="margin-top: 3rem">
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+            </main>
+        </div>
+
+        <footer class="footer">
+            <div class="row">
+                <div class="col-lg-12 banner-footer">
+
+                </div>
+            </div>
+            <div class="row align-center">
+                <ul>
+                    <li><a href="{{ path('publicite') }}">publicité</a> </li>
+                    <li><a href="{{ path('plan') }}">Plan du site</a> </li>
+                    <li><a href="{{ path('about') }}">A propos du site</a> </li>
+                    <li><a href="{{ path('confidentialite') }}">Confidentialité</a> </li>
+                    <li><a href="{{ path('contact') }}">Nous contacter</a> </li>
+
+                </ul>
+            </div>
+            <div class="row align-center">
+                <div class="majeur">
+                    <span><strong>+18</strong></span>
+                </div>
+                <div class="majeur-text">
+                    <p>Les jeux d'argent en ligne sont strictement
+                        interdits aux moins de 18 ans. S'il vous plaît pariez
+                        de manière responsable. </p>
+                </div>
+            </div>
+            <div class="row align-center">
+                <span class="copyright">Copyright &copy; &nbsp;2019 Tout droit réservé</span>
+            </div>
+            <div class="row align-center">
+                <span class="copyright"><a href="https://api.whatsapp.com/send?phone=+22966476642"> propulsé par webgram</a></span>
+            </div>
+
+        </footer>
+    </div>
+
+
+
+
+
+
+
+
+        {% block javascripts %}
+{#            {{ encore_entry_script_tags('app') }}#}
+            <script src="{{ preload(asset('bundles/jquery-3.3.1.min.js')) }}"></script>
+            <script src="{{ preload(asset('bundles/comment.js')) }}"></script>
+            <script src="{{ preload(asset('bundles/discution.js')) }}"></script>
+            <script src="{{ preload(asset('bundles/publish.js')) }}"></script>
+            <script src="{{ preload(asset('bundles/social.js')) }}"></script>
+            <script src="{{ preload(asset('bundles/testimonial.js')) }}"></script>
+            <script src="{{ preload(asset('bundles/validateur.js')) }}"></script>
+        {% endblock %}
     </body>
 </html>

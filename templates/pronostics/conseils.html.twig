@@ -1,0 +1,323 @@
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body %}
+
+    <section style="margin-top: 3rem" class="table-td">
+        <div class="row">
+            <div class="article" style="background-color: #f6f6f6;!important;">
+                <article class="home__article mobile-pronostics">
+                    <div class="detail_box">
+                        {% set id=get.id %}
+
+
+
+
+                        <div class="competition">{{ prono.competition }}</div>
+                        <div class="row">
+                            <div class="co-1_3">
+                                <div class="box">
+                                    <div class="team_flag">
+                                        <img src="../resources/images/{{prono.home_flag  }}">
+                                    </div>
+                                    <div class="team_label">
+                                        <span>{{ prono.home }}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="co-1_3">
+                                <div class="box">
+                                    <div class="team_stadium">
+                                        Stade {{ prono.stadium }}
+
+                                    </div>
+                                    <div class="match_time">
+                                        <span>{{ manager.explodeDate(prono.day) }} à {{ prono.time }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="co-1_3">
+                                <div class="box">
+                                    <div class="team_flag">
+                                        <img src="../resources/images/{{ prono.away_flag }}">
+                                    </div>
+                                    <div class="team_label">
+                                        <span>{{ prono.away }}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" align " style="margin: 0 auto;max-width: 80rem">
+                            <h1>Les statistiques des deux équipes</h1>
+                            <div class="limiter">
+                                <div class="container-table100">
+                                    <div class="wrap-table100">
+                                        <div class="table100">
+                                            <table class="detail_table">
+                                                <thead>
+                                                <tr class="table100-head">
+                                                    <th class="column th_team-name">{{ prono.home }}</th>
+
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td class="column1">
+                                                        <li> {{ manager.listConseilhome(id).home_data1 }}
+                                                        </li>
+                                                    </td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="column1">
+                                                        <li>{{ manager.listConseilhome(id).home_data2 }}
+                                                        </li>
+                                                    </td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="column1">
+                                                        <li> {{ manager.listConseilhome(id).home_data3 }}
+                                                        </li>
+                                                    </td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="column1">
+                                                        <li> {{ manager.listConseilhome(id).home_data4 }}
+                                                        </li>
+                                                    </td>
+
+
+                                                </tr>
+                                                {% if manager.listConseilhome(id).home_data5|length>10 %}
+                                                    <tr>
+                                                        <td class="column1">
+                                                            <li> {{ manager.listConseilhome(id).home_data5 }}
+                                                            </li>
+                                                        </td>
+
+
+                                                    </tr>
+                                                {% endif %}
+                                                {% if manager.listConseilhome(id).home_data6|length>10 %}
+
+                                                    <tr>
+                                                        <td class="column1">
+                                                            <li> {{ manager.listConseilhome(id).home_data6 }}
+                                                            </li>
+                                                        </td>
+
+
+                                                    </tr>
+                                                {% endif %}
+                                                {% if manager.listConseilhome(id).home_data7|length>10 %}
+
+                                                    <tr>
+                                                        <td class="column1">
+                                                            <li> {{ manager.listConseilhome(id).home_data7 }}
+                                                            </li>
+                                                        </td>
+
+
+                                                    </tr>
+                                                {% endif %}
+                                                {% if manager.listConseilhome(id).home_data8|length>10 %}
+
+                                                    <tr>
+                                                        <td class="column1">
+                                                            <li> {{ manager.listConseilhome(id).home_data8 }}
+                                                            </li>
+                                                        </td>
+
+
+                                                    </tr>
+                                                {% endif %}
+                                                {% if manager.listConseilhome(id).home_data9|length>10 %}
+
+                                                    <tr>
+                                                        <td class="column1">
+                                                            <li>{{ manager.listConseilhome(id).home_data9 }}
+                                                            </li>
+                                                        </td>
+
+
+                                                    </tr>
+                                                {% endif %}
+                                                {% if manager.listConseilhome(id).home_data10|length>10 %}
+
+                                                    <tr>
+                                                        <td class="column1">
+                                                            <li>{{ manager.listConseilhome(id).home_data10 }}
+                                                            </li>
+                                                        </td>
+
+
+                                                    </tr>
+                                                {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" align" style="margin: 0 auto;max-width: 80rem">
+                            <div class="limiter">
+                                <div class="container-table100">
+                                    <div class="wrap-table100">
+                                        <div class="table100">
+                                            <table class="detail_table">
+                                                <thead>
+                                                <tr class="table100-head">
+                                                    <th class="column th_team-name">{{ prono.away }}</th>
+
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td class="column1">
+                                                        <li>{{ manager.listConseilaway(id).away_data1}}
+                                                        </li>
+                                                    </td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="column1">
+                                                        <li>{{ manager.listConseilaway(id).away_data2}}
+                                                        </li>
+                                                    </td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="column1">
+                                                        <li>{{ manager.listConseilaway(id).away_data3}}
+                                                        </li>
+                                                    </td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="column1">
+                                                        <li> {{ manager.listConseilaway(id).away_data4}}
+                                                        </li>
+                                                    </td>
+
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="column1">
+                                                        <li> {{ manager.listConseilaway(id).away_data5}}
+                                                        </li>
+                                                    </td>
+
+
+                                                </tr>
+                                                {% if manager.listConseilaway(id).away_data6|length>10%}
+
+                                                    <tr>
+                                                        <td class="column1">
+                                                            <li> {{ manager.listConseilaway(id).away_data6}}
+                                                            </li>
+                                                        </td>
+
+
+                                                    </tr>
+                                                {% endif %}
+                                                {% if  manager.listConseilaway(id).away_data7|length>10 %}
+
+                                                    <tr>
+                                                        <td class="column1">
+                                                            <li>{{ manager.listConseilaway(id).away_data7}}
+                                                            </li>
+                                                        </td>
+
+
+                                                    </tr>
+                                                {% endif %}
+                                                {% if  manager.listConseilaway(id).away_data8|length>10 %}
+
+                                                    <tr>
+                                                        <td class="column1">
+                                                            <li> {{ manager.listConseilaway(id).away_data8}}
+                                                            </li>
+                                                        </td>
+
+
+                                                    </tr>
+                                                {% endif %}
+                                                {% if  manager.listConseilaway(id).away_data9|length>10 %}
+                                                    <tr>
+                                                        <td class="column1">
+                                                            <li> {{ manager.listConseilaway(id).away_data9}}
+                                                            </li>
+                                                        </td>
+
+
+                                                    </tr>
+                                                {% endif %}
+                                                {% if  manager.listConseilaway(id).away_data10|length>10 %}
+                                                    <tr>
+                                                        <td class="column1">
+                                                            <li> {{ manager.listConseilaway(id).away_data10}}
+                                                            </li>
+                                                        </td>
+
+
+                                                    </tr>
+                                                {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="analyse" style="margin: 0 15% 0 15%;text-align: justify;font-size: 1.4rem;line-height: 150%">
+                            <p>
+                                {{ prono.pronostics_desc }}
+                            </p>
+                        </div>
+                        <div class="col-3-of-4 align">
+                            <h1>NOTRE PRONOSTIC GRATUIT {{  prono.home}}-{{ prono.away }}</h1>
+                            <p style="text-align: center">
+                                <strong class="prono" style="color: #4ED583"> {{ prono.titre_prono1 }} et {{ prono.titre_prono2 }}</strong>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+
+
+
+        </div>
+
+
+    </section>
+{% endblock %}
+

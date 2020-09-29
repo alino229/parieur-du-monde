@@ -1,0 +1,321 @@
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body %}
+    <section class="forum_list">
+        <div class="row">
+            <div class="page-content">
+                <div class="page_nav">
+
+                    <h2>{{ forum.nom }}</h2>
+                     <div class="page_nav-text">
+                         {{ forum.description|raw }}
+                     </div>
+                </div>
+
+                <div class="list-marg">
+
+                    <table class="detail_table forummain">
+
+                        <thead class="stat_header">
+                        <tr class="table100-head forumhead" style="background-color: #555555!important;">
+                            <th class="column th_team-name" ><p class="display-none">Titre/Auteur</p></th>
+                            <th class="column th_team-name"  style="width: 280px!important;"><p class="display-none">Réponses</p></th>
+                            <th class="column th_team-name" style="width: 134px!important;"><p class="display-none">Vues</p></th>
+                            <th class="column th_team-name" ><p class="display-none">Dernier message par</p></th>
+
+
+
+                        </tr>
+                        </thead>
+
+
+
+                        <div class="forum_data">
+
+
+
+
+
+                            <tbody>
+                         
+
+
+                            {% if topics|length ==0 %}
+                                <tr class="forumpost" style="vertical-align: top;">
+                                    <td class="column1" colspan="4">
+                                        <p>Aucun sujet poster dans ce forum.</p>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                {% set topics= topics[0]%}
+                                {% for topic in topics %}
+                                    {% set topicId= topic.id %}
+
+
+                                    <tr class="forumpost" style="vertical-align: top;">
+                                        <td class="column1">
+                                            <div class="list_block">
+                                                        <span class="poster_avatar">
+                                                            <img src="../resources/images/avatar/{{ topic.user.avatar|e}}" alt="avatar"/>
+
+                                                        </span>
+
+
+
+
+                                                <span class="poster_titre">
+                                                                {% set identifiant=topic.topic %}
+                                                        <a  href="../forum/discution?id=">
+                                                                        {{ topic.subject|e}}
+
+                                                                    </a>
+
+                                                                </span><br>
+                                                <span class="poster_auteur">
+                                                                &nbsp;&nbsp;par:&nbsp;{{ topic.user.pseudo|e}}
+
+                                                            </span>
+                                                <span class="poster_date">
+
+                                                                le {{ topic.date|date("d/m/Y")}}
+                                                            </span>
+                                            </div>
+
+
+
+                                            <div class="last_post display-block" style="padding-top: 2rem">
+                                                {% set most=forumreponse.lastMessage(identifiant) %}
+                                                <div class="last_post-auteur">
+                                                    Dernier message par: {{ dump(most) }}
+                                                </div>
+                                                <div class="last_post-date" style="margin-bottom: 0.5rem">
+                                                   {# le,{%  set day=most.maxdate|date('d/m/Y à H:i') %}
+
+                                                    {{ day }}#}
+                                                </div>
+{#                                                {% set id=getId %}#}
+                                             {#   <span>Réponse :</span> {{ manager.countUniqMessage(identifiant) }}<br>
+                                                <span>Vues :</span>   {% if user_manager.uniqueVisitedTopic(id) is defined  %}
+                                                    {{ user_manager.uniqueVisitedTopic(topicId) }}#}
+                                              {#  {% else %}
+                                                    0
+                                                {% endif %}#}
+
+                                            </div>
+
+                                        </td>
+                                        {#<td class="column2 display-none" >
+                                            {% set id=getId %}
+
+                                            {{ manager.countUniqMessage(identifiant) }}
+
+                                        </td>
+                                        <td class="column2 display-none" >
+                                            {% if user_manager.uniqueVisitedTopic(id) is defined  %}
+                                                {{ user_manager.uniqueVisitedTopic(topicId) }}
+                                            {% else %}
+                                                0
+                                            {% endif %}
+                                        </td>
+                                        <td class="column2 display-none" >
+                                            <div class="last_post">
+                                                {% set most=manager.lastMessage(identifiant) %}
+                                                <div class="last_post-auteur">
+                                                    {{ most.pseudo }}
+                                                </div>
+                                                <div class="last_post-date">
+                                                    {%  set day=most.maxdate|date('d/m/Y à H:m') %}
+                                                    {{ jours }}
+                                                    {% for keys,value in jours %}
+                                                        {% set j=keys %}
+                                                        {{ keys }}
+
+                                                    {% endfor %}
+                                                    {{ j }}
+                                                    le {{ day }}
+                                                </div>
+                                            </div>
+
+                                        </td>
+
+
+                                    </tr>#}
+
+                                {% endfor %}
+
+
+
+                            {% endif %}
+
+
+                            </tbody>
+                    </table>
+
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+        {# <div class="forum_discution forum_list">
+             <div class="limiter">
+                 <div class="container-table100">
+                     <div class="wrap-table100">
+                         <div class="table100">
+                             <div class="pagination-wrapper">
+
+                                 {% include 'pagination.html.twig' %}
+
+                             </div>
+                             <table class="detail_table">
+
+                                 <thead>
+                                 <tr class="table100-head">
+                                     <th class="column th_team-name" ><p class="display-none">Titre/Discution débutant</p></th>
+                                     <th class="column th_team-name" ><p class="display-none">Réponses</p></th>
+                                     <th class="column th_team-name" ><p class="display-none">Vues</p></th>
+                                     <th class="column th_team-name" ><p class="display-none">Dernier message par</p></th>
+
+
+
+                                 </tr>
+                                 </thead>
+                                 <tbody>
+                                 {% if topic_count ==0 %}
+                                     <p>Aucun sujet poster dans ce forum.</p>
+                                     {% else %}
+                                         {% for topic in topic_tab %}
+                                             {% set topicId= topic.topicid%}
+
+
+                                         <tr>
+                                             <td class="column1">
+                                                 <div class="list_block">
+                                                 <span class="poster_avatar">
+                                                     <img src="../resources/images/avatar/{{ topic.avatar|e}}" alt="avatar"/>
+                                                     <span class="poster_auteur">
+                                                         &nbsp;&nbsp;&nbsp;{{ topic.pseudo|e}}
+
+                                                     </span>
+                                                     <span class="poster_date">
+
+                                                         {{ topic.date|date("d/m/Y")}}
+                                                     </span>
+
+
+                                                 </span>
+                                                     <span class="poster_titre">
+                                                         {% set identifiant=topic.topicid %}
+                                                             <a  href="../forum/discution?id={{ identifiant }}">
+                                                                 {{ topic.subject|e}}
+
+                                                             </a>
+
+                                                         </span>
+                                                     <div class="last_post display-block" style="margin-left: 10rem;padding-top: 2rem">
+                                                         {% set most=manager.lastMessage(identifiant) %}
+                                                         <div class="last_post-auteur">
+                                                             Dernier message de {{ most.pseudo }}
+                                                         </div>
+                                                         <div class="last_post-date" style="margin-bottom: 0.5rem">
+                                                             le,{%  set day=most.maxdate|date('d/m/Y à H:m') %}
+                                                             #}{#Lun 01 juil 2019 à 13H20#}{#
+                                                             {{ day }}
+                                                         </div>
+                                                         {% set id=getId %}
+                                                         <span>Réponse :</span> {{ manager.countUniqMessage(identifiant) }}
+                                                     </div>
+
+
+
+                                                 </div>
+
+
+                                             </td>
+                                             <td class="column2 display-none" >
+                                                 #}{#{% set id=getId %}#}{#
+                                                 {{ manager.countUniqMessage(identifiant) }}
+                                                 #}{#{{ identifiant }}#}{#
+
+                                             </td>
+                                             <td class="column2 display-none" >
+                                                 {% if user_manager.uniqueVisitedTopic(id) is defined  %}
+                                                 {{ user_manager.uniqueVisitedTopic(topicId) }}
+                                                 {% else %}
+                                                      0
+                                                 {% endif %}
+                                             </td>
+                                             <td class="column2 display-none" >
+                                                 <div class="last_post">
+                                                     {% set most=manager.lastMessage(identifiant) %}
+                                                     <div class="last_post-auteur">
+                                                         {{ most.pseudo }}
+                                                     </div>
+                                                     <div class="last_post-date">
+                                                         {%  set day=most.maxdate|date('d/m/Y à H:m') %}
+                                                         #}{#{{ jours }}#}{#
+                                                         {% for keys,value in jours %}
+                                                         {% set j=keys %}
+                                                             #}{#{{ keys }}#}{#
+
+                                                         {% endfor %}
+                                                         {{ j }}
+                                                         #}{#Lun 01 juil 2019 à 13H20#}{#
+                                                        le {{ day }}
+                                                     </div>
+                                                 </div>
+
+                                             </td>
+
+
+                                         </tr>
+
+                                         {% endfor %}
+
+
+
+                                 {% endif %}
+
+
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
+
+             </div>
+             {%  if pagination.lastpage>1 %}
+             <div class="block_footer">
+                 <div class="pagination-wrapper">
+                     <span>Naviguer dans les sujets</span>
+
+
+                     {% include 'pagination.html.twig' %}
+
+                 </div>
+             </div>
+             {% endif %}
+         </div>#}
+
+
+        </div>
+
+
+
+        </div>
+
+
+    </section>
+{% endblock %}
+
+
+
+
+

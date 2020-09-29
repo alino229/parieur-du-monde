@@ -1,0 +1,17 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        article_images:
+          uri_prefix: /images/article
+          upload_destination: '%kernel.project_dir%/public/images/article'
+        pronostics_images:
+          uri_prefix: /images/article
+          upload_destination: '%kernel.project_dir%/public/images/pronostics'
+        forum_images:
+          uri_prefix: /images/forum
+          upload_destination: '%kernel.project_dir%/public/images/forum'
+        user_images:
+          uri_prefix: /images/users
+          upload_destination: '%kernel.project_dir%/public/images/users'
+
