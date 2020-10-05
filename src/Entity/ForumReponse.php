@@ -40,7 +40,8 @@ class ForumReponse
     private $forum;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Topics::class)
+     * @ORM\Column(type="integer")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $topic;
 
@@ -97,12 +98,12 @@ class ForumReponse
         return $this;
     }
 
-    public function getTopic(): ?Topics
+    public function getTopic(): ?int
     {
         return $this->topic;
     }
 
-    public function setTopic(?Topics $topic): self
+    public function setTopic(int $topic): self
     {
         $this->topic = $topic;
 

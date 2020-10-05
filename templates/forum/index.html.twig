@@ -20,7 +20,7 @@
                         </p>
                     </div>
                     <div class="forum_content">
-                        {% if is_granted('IS_AUTHENTICATED_FULLY')  %}
+                        {% if is_granted('IS_AUTHENTICATED_FULLY')  or is_granted('IS_AUTHENTICATED_REMEMBERED')%}
 
                         {% else %}
                             <div class="forum_sign box-shadow mt-1">
@@ -112,11 +112,13 @@
                                                     <div class="forum_right">
                                                                                  <span class="forum_right-titre">
 
+
                                                                                         <span>Dernier sujet:</span>
-                                                                                        <a href="">
+{#                                                                                        <a href=" {% if  Discution.lastSubject(topic) is not empty  %}{{ path('forum_discution',{slug:managers.slugify(users.nom),sujet:managers.slugify({{ Discution.lastSubject(topic).subject}}),id:Discution.lastSubject(topic).topic }) }} {% endif %}">#}
+                                                                                        <a href=" {% if  Discution.lastSubject(topic) is not empty  %}{{ path('forum_discution',{slug:managers.slugify(users.nom),sujet:managers.slugify(Discution.lastSubject(topic).subject),id:Discution.lastSubject(topic).id})}} {% endif %}">
                                                                                             {% if  (Discution.lastSubject(topic) is not empty ) %}
 
-                                                                                            {{ Discution.lastSubject(topic)[0].subject}}
+                                                                                            {{ Discution.lastSubject(topic).subject}}
                                                                                                 {% else %}
                                                                                                 aucun sujet
                                                                                             {% endif %}
@@ -126,7 +128,7 @@
                                                                                         <span class="meta-user">
                                                                                              {% if  (Discution.lastSubject(topic) is not empty ) %}
 
-                                                                                                 par {{ Discution.lastSubject(topic)[0].user.pseudo }}
+                                                                                                 par {{ Discution.lastSubject(topic).user.pseudo }}
                                                                                              {% else %}
                                                                                                  aucun sujet
                                                                                              {% endif %}
@@ -135,7 +137,7 @@
                                                                                         <span class="Datetime">
                                                                                              {% if  (Discution.lastSubject(topic) is not empty ) %}
 
-                                                                                                 le {{ Discution.lastSubject(topic)[0].createdAt|date('d/m/Y à H:i') }}
+                                                                                                 le {{ Discution.lastSubject(topic).createdAt|date('d/m/Y à H:i') }}
                                                                                              {% else %}
                                                                                                  aucun sujet
                                                                                              {% endif %}
@@ -309,9 +311,12 @@
             <div class="col-1-of-4">
                 <aside>
                     <div class="aside_right">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY')  or is_granted('IS_AUTHENTICATED_REMEMBERED')%}
+
+
                         <div class="aside_popu">
                             <div class="aside_header">
-                                <h2 class="h2_heading">Sujets populaires</h2>
+                                <h2 class="h2_heading">{{ app.user.pseudo }}</h2>
                             </div>
                             <div class="content">
 
@@ -322,6 +327,27 @@
                                         <span></span> <a href="forum/discution?id={{ most2.id }}">{{ most2.subject }}</a>
                                         <span></span> <a href="forum/discution?id={{ most3.id }}">{{ most3.subject }}</a>
                                    #} </li>
+
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="aside_popu">
+                            <div class="aside_header">
+                                <h2 class="h2_heading">Sujets populaires</h2>
+                            </div>
+                            <div class="content">
+
+
+                                <ul>
+                                    <li>
+                                        {#  <span></span> <a href="forum/discution?id={{ most1.id }}">{{ most1.subject }}</a>
+                                          <span></span> <a href="forum/discution?id={{ most2.id }}">{{ most2.subject }}</a>
+                                          <span></span> <a href="forum/discution?id={{ most3.id }}">{{ most3.subject }}</a>
+                                     #} </li>
 
 
 

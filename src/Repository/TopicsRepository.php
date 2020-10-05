@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Topics;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,8 +22,8 @@ class TopicsRepository extends ServiceEntityRepository
     public function topic(int $id,int $debut=-1,int $limit=-1){
         $entityManager = $this->getEntityManager();
 
-        $query = $entityManager->createQuery("SELECT f,MAX(f.date) AS maxdate,t.id AS topicId,t ,u FROM App\Entity\ForumMessage f,App\Entity\Topics t,App\Entity\User u 
-                        WHERE f.id =t.id AND t.user=u.id AND t.forum=:id GROUP BY f.topic ORDER BY maxdate DESC "
+        $query = $entityManager->createQuery("SELECT f FROM App\Entity\ForumMessage f,App\Entity\Topics t,App\Entity\User u 
+                        WHERE f.id =t.id AND t.user=u.id AND t.forum=:id GROUP BY f.topic ORDER BY MAX(f.date) DESC "
         )->setFirstResult($debut)
             ->setMaxResults($limit)
             ->setParameter('id', $id);
@@ -42,16 +43,23 @@ class TopicsRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
     /**
+     * @param $id
      * @return mixed
+     *
      */
-    public function lastSubject($id){
+    public function lastSubject($id)
+    {
         $entityManager = $this->getEntityManager();
 
-        $query = $entityManager->createQuery("SELECT t ,u FROM App\Entity\Topics t,App\Entity\User u 
+        $query = $entityManager->createQuery("SELECT t  FROM App\Entity\Topics t,App\Entity\User u 
                         WHERE t.forum =:id AND u.id=t.user  ORDER BY t.created_at DESC "
         )  ->setParameter('id', $id);
-        return $query->getResult();
+        if(empty($query->getResult())){
+            return $query->getResult();
+        }
+        return $query->getResult()[0];
 
 
 

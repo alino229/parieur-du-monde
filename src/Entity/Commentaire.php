@@ -38,10 +38,16 @@ class Commentaire
     private $created_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Article::class)
-     * @ORM\JoinColumn(name="id",referencedColumnName="id",nullable=false)
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="commentaires")
      */
     private $article;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $depth;
+
+
     public function __toString()
     {
         // TODO: Implement __toString() method.
@@ -112,4 +118,18 @@ class Commentaire
 
         return $this;
     }
+
+    public function getDepth(): ?int
+    {
+        return $this->depth;
+    }
+
+    public function setDepth(?int $depth): self
+    {
+        $this->depth = $depth;
+
+        return $this;
+    }
+
+
 }

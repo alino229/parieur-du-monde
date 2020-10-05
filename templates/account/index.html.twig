@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}Hello AccountController!{% endblock %}
+ {% block stylesheets %}
+     {{ parent() }}
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+ {% endblock %}
+
+{% block body %}
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ app.user.avatar }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">{{ app.user.pseudo }}</p>
+                    </div>
+                </div>
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="{{path('user_profil')}}">Information personnelle</a>
+                    <a class="nav-link" href="{{path('user_follower')}}">Mes suiveurs  </a>
+                    <a class="nav-link" href="{{path('user_reaction')}}">Réaction </a>
+                    <a class="nav-link" href="{{path('user_favorie')}}">Favorie </a>
+                    <a class="nav-link" href="{{path('user_alert')}}">Alert </a>
+                    <a class="nav-link" href="{{path('user_parrainage')}}">Parrainage </a>
+                    <a class="nav-link" href="{{path('user_payement')}}">Payement</a>
+                    <a class="nav-link " href="{{path('app_logout')}}" tabindex="-1" aria-disabled="true">Déconnexion </a>
+                </nav>
+            </div>
+            <div class="col-8">
+                2 of 3
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script type="javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock %}

@@ -3,13 +3,20 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Cocur\Slugify\Slugify;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  * @Vich\Uploadable
+ * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(fields={"titre"}, message="Vous avez déjà un article avec ce titre")
+ *
  */
 class Article
 {
@@ -82,7 +89,27 @@ class Article
      */
     private $published=0;
 
-    // ...
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="article")
+     */
+    private $commentaires;
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function initializeSlug(): void
+    {
+        $slugify=new Slugify(['regexp' => '/([^A-Za-z0-9]|-)+/']);
+
+        $slugify->activateRuleSet('french');
+       $this->slug= $slugify->slugify($this->getTitre());
+    }
 
     public function setImageFile(File $image = null): void
     {
@@ -230,5 +257,41 @@ class Article
     {
         // TODO: Implement __toString() method.
         return $this->getId().'';
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->contains($commentaire)) {
+            $this->commentaires->removeElement($commentaire);
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getArticle() === $this) {
+                $commentaire->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getComment(): array
+    {
+        return $this->commentaires->toArray();
     }
 }

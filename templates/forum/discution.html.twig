@@ -1,0 +1,236 @@
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body %}
+    <section class="discution" style="padding-bottom: 3rem;padding-right: 1rem">
+
+        <div class="discution-sujet">
+            <div class="discution-sujet_title">
+                <h1>
+                    {{ sujetUsers.subject|raw }}
+
+
+
+
+                </h1>
+            </div>
+
+
+
+
+
+        </div>
+
+
+        <div class="col-3-of-4 mb-2 colone">
+            <div class="discution-reponse_container">
+                <div class="reponse-auteur_data">
+                            <span class="avatar-image" >
+                            <img src="../resources/images/avatar/{{ sujetUsers.user.avatar }}" alt="avatar">
+                            </span>
+                    <div class="forum-info">
+                        <div class="user_name reponse-name" >
+                                <span>
+                                    {{ sujetUsers.user.pseudo }}
+
+                                </span>
+                        </div>
+                        <div class="user_post-date" >
+                                <span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ sujetUsers.date|date('d-m-Y à H:i') }}
+
+                                </span>
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="reponse-auteur_content">
+                    <div class="reponse-text">
+                        {# {% autoescape %}
+                             {{reponse.reponse|raw}}
+                         {% endautoescape %}
+                         #}{#{{ |nl2br }}#}
+
+
+                        {#<div class = "fr-view" >#}
+                        {% autoescape %}
+                            {{ sujetUsers.body |raw }}
+                        {% endautoescape %}
+
+                        {#</div>#}
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+        {#        <div class="row col-right_row">#}
+
+
+
+        {% for reponse in reponses %}
+            <div class="col-3-of-4 mb-2 colone">
+                <div class="discution-reponse_container">
+                    <div class="reponse-auteur_data">
+                            <span class="avatar-image" >
+                            <img src="../resources/images/avatar/{{ reponse.user.avatar }}" alt="avatar">
+                            </span>
+                        <div class="forum-info">
+                            <div class="user_name reponse-name" >
+                                <span>
+                                    {{ reponse.user.pseudo }}
+
+                                </span>
+                            </div>
+                            <div class="user_post-date" >
+                                <span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ reponse.createdAt|date('d-m-Y à H:i') }}
+
+                                </span>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="reponse-auteur_content">
+                        <div class="reponse-text">
+                            {% autoescape %}
+                                {{reponse.reponse|raw}}
+                            {% endautoescape %}
+                            {#                            {{ |nl2br }}#}
+                            {#{% set  text=discution.body %}
+
+                            #}{#<div class = "fr-view" >#}{#
+                            {% autoescape %}
+                                {{ text|raw }}
+                            {% endautoescape %}#}
+
+                            {#</div>#}
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div>
+
+                </div>
+            </div>
+
+        {% endfor %}
+        <div class="pagination-wrapper">
+
+           {% include '_pagination.html.twig' %}
+
+        </div>
+
+
+
+
+
+        {#<div class="col-right">
+            <div class="col-right_head">
+                <span>Auteur: <em>{{ discution.pseudo }}</em></span>
+            </div>
+            <div class="col-right_content">
+                        <span> {{ discution.date|date('d/m/Y') }}
+                      </span><br/>
+                <span>Vues:{{ nb_visite }}</span><br/>
+
+                <span>réponse: {{ manager.countUniqMessage(id) }}</span>
+                {% if discution.pseudo==user_row.pseudo %}
+                    {% if manager.countMessage(id)<3 %}
+
+                <div class="privilege">
+                    <ul class="">
+
+                        <li class="modifier"><a
+                                    href="/forum/sujet?modifier=true&mod={{ id }}">modifier</a>
+                        </li>
+                        <li class="supprimer"><a href="/forum/sujet?supprimer=true&sup={{ id }}" id="js-supprimer">supprimer</a></li>
+
+
+                    </ul>
+                </div>
+                        {% endif %}
+                {% endif %}
+
+
+            </div>
+
+
+            <div>
+
+            </div>
+        </div>#}
+        {#        </div>#}
+        {#{{ topic }}#}
+
+
+        <div class="row" style="position: relative">
+            <div class="col-3-of-4">
+                {% if is_granted('IS_AUTHENTICATED_FULLY')  or is_granted('IS_AUTHENTICATED_REMEMBERED')%}
+                    <div class="form">
+                        {{ form_start(Forumform) }}
+                            <div class="form-group">
+                                {{ form_row(Forumform.reponse, {
+                                    label: 'votre sujet ',placeholder:'Votre  message','attr':{'class':' form-control','style':'min-height:20rem!important;font-size:1.6rem!important;'}
+                                }) }}
+
+
+
+
+                            </div>
+                            <div class="form-group botton">
+                                <input type="submit" value="poster votre répondre" name="discution_reponse" id="js-discution" class="btn signin-btn btn-discution">
+                            </div>
+
+                        {{ form_end(Forumform) }}
+                    </div>
+                    <br/>
+                {% else %}
+
+                    <div class="acces-refu" style="margin-top: 5rem">
+                        <span>Veuillez <a href='{{ path('app_use_login') }}'>vous connecter</a> ou <a href='{{ path('app_register') }}'>créer un compte</a> pour participer à la conversation.</span>
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+
+            <hr class="spacer">
+
+            <div class="forum_stat" style="margin-right: 1rem">
+                <div class="stat_header">
+                    <i class="ion"></i>
+                    <span>QUI EST EN LIGNE</span>
+
+                </div>
+                <div class="stat_body">
+                    <div class="forum_data">
+{#                        Utilisateurs parcourant actuellement ce forum:  {% if manager.connecte((stat.chemin))>0 %} {{ manager.connecte((stat.chemin)) }} {% else %}Aucun utilisateur connecté{% endif %}#}
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </section>
+{% endblock %}

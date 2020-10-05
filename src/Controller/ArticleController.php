@@ -114,7 +114,8 @@ class ArticleController extends AbstractController
 
         $articles = $this->getDoctrine()
             ->getRepository(Article::class);
-        $article=$articles->find($id);
+
+
 
         $pagemostvisited=new HomePageMostVisited();
 
@@ -149,19 +150,29 @@ class ArticleController extends AbstractController
         $entityManager->flush();
 
         $Commentaire = new Commentaire();
-        $articleUnique=new Article();
+
         $form = $this->createForm(CommentaireType::class, $Commentaire);
         $form->handleRequest($request);
+        $articleU =$entityManager->getRepository(Article::class)->find($id);
+
+
         if ($form->isSubmitted() && $form->isValid()) {
+
             $Commentaire->setCreatedAt(new \DateTime('now'));
-            $Commentaire->setArticle($articleUnique);
+            $Commentaire->setArticle($articleU);
+            if($this->getUser()){
+                $Commentaire->setPseudo($this->getUser()->getPseudo());
+                $Commentaire->setEmail($this->getUser()->getEmail());
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($Commentaire);
 
             $entityManager->flush();
-            $this->addFlash('success','Jūsu pieprasījums ir saņemts');
+            $this->addFlash('success','Commentaire poster avec succès ');
         }
-
+        $articles = $this->getDoctrine()
+            ->getRepository(Article::class);
+        $article=$articles->find($id);
         return $this->render('article/show.html.twig', [
             'news' => $article,'CommentaireForm' => $form->createView(),
             'findPage'=>$findPage

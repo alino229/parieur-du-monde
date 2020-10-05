@@ -1,0 +1,44 @@
+<div class="body comment form_comment c-{{ commentaire.depth }}" id="comment-{{ commentaire.id }}">
+    <ul>
+        <li>
+            <div class="row  comment-discution">
+                <div class=" comment-reponse" >
+                    {#<div class="row">#}
+                    <div class="reponse-auteur_data comment-width">
+                            <span class="avatar-image">
+                            <img src="../resources/images/moncommentaire.jpg " alt="commentaire avatar">
+                            </span>
+                    </div>
+
+                    <div class="reponse-auteur_content comment-width1">
+                        <div class="commentaire-info">
+                            <span class="user_name reponse-name">{{ commentaire.pseudo }}</span>
+
+                            <span class="user_post-date"> le {{ commentaire.createdAt|date('d/m/Y') }}</span>
+
+
+                        </div>
+                        <div class="reponse-text">{{ commentaire.contenu|nl2br }} </div>
+                        <div class="repondre">
+                            {% if commentaire.depth<=4 %}
+                            <div class="btn replay comment-footer " data-id="{{ commentaire.id }}" >
+                                <a class="comment_replay-link " ><i class="fa fa-reply"></i> Répondre</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+    </ul>
+
+</div>
+  <div  class="child-comment" >
+      {#{% if commentaire.children %}
+          {% for commentaire in commentaire.children %}
+              {{ include('_comment.html.twig') }}
+
+      {% endfor %}
+      {% endif %}#}
+  </div>

@@ -65,16 +65,17 @@
 
                                 <section class="article-commentaire">
                                     <div class="article-commentaire_container">
-                                       {# <div class="head">
+                                        <div class="head">
                                             <div class="title-comment">
-                                                <h4>{% if countComment==0 %}Soyez le premier à poster un commentaire{% else %} {{  countComment }} commentaire{% if countComment>1 %}s{% endif %} posté{% if countComment>1 %}s{% endif %} {% endif %} </h4>
+                                                {% set comment=news.Comment|length %}
+                                                <h4>{% if comment==0 %}Soyez le premier à poster un commentaire{% else %} {{  comment }} commentaire{% if comment>1 %}s{% endif %} posté{% if comment >1 %}s{% endif %} {% endif %} </h4>
                                             </div>
 
                                         </div>
-                                        {% for commentaire in comment %}
-                                            {{ include('comment.html.twig') }}
+                                        {% for commentaire in news.Comment %}
+                                            {{ include('_comment.html.twig') }}
 
-                                        {% endfor %}#}
+                                        {% endfor %}
 
 
 
@@ -96,7 +97,7 @@
                                         <div class="comment-body">
                                             {{ form_start(CommentaireForm) }}
                                             <div class="row">
-
+                                                            {% if not app.user %}
                                                     <div class="form-group">
                                                         <div class="row">
                                                         <div class="form-label-group">
@@ -118,6 +119,7 @@
                                                     </div>
                                                         </div>
                                                     </div>
+                                                {% endif %}
 
 
                                                     <div class="form-group">

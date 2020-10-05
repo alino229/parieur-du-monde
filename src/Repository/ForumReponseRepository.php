@@ -44,11 +44,42 @@ class ForumReponseRepository extends ServiceEntityRepository
     public function lastMessage(int $id){
         $entityManager = $this->getEntityManager();
 
-        $query = $entityManager->createQuery("SELECT f,MAX(f.created_at) AS maxdate,u.pseudo AS pseudo,f ,u FROM App\Entity\ForumReponse f,App\Entity\User u 
+        $query = $entityManager->createQuery("SELECT f,MAX(f.created_at) AS maxdate,u.pseudo AS pseudo FROM App\Entity\ForumReponse f,App\Entity\User u 
                         WHERE f.topic =:id AND u.id=f.user  ORDER BY maxdate DESC "
         )
             ->setParameter('id', $id);
+        return $query->getOneOrNullResult();
+    }
+
+    /**
+     * @param int $id
+     * @param int $debut
+     * @param int $limit
+     * @return int|mixed|string
+     */
+    public function selectAllreponse(int $id,int $debut,int $limit){
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery("SELECT f  FROM App\Entity\ForumReponse f,App\Entity\User u 
+                        WHERE f.topic =:id AND f.user=u.id ORDER BY f.created_at DESC "
+        )->setFirstResult($debut)
+            ->setMaxResults($limit)
+            ->setParameter('id', $id);
         return $query->getResult();
+
+
+    }
+    public function forumPagination($id)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery("SELECT f  FROM App\Entity\ForumReponse f,App\Entity\User u 
+                        WHERE f.topic =:id AND f.user=u.id ORDER BY f.created_at DESC "
+        )
+            ->setParameter('id', $id);
+        return $query->getResult();
+
+
     }
 
 

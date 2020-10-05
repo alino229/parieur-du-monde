@@ -59,7 +59,7 @@
                                     </div>
                                 {% else %}
                                     <a class="left_topbar-item "  href="{{ path('app_use_login') }}">connecter</a>
-                                    <a class="left_topbar-item" href="{{ path('app_use_login') }}">s'inscrire</a>
+                                    <a class="left_topbar-item" href="{{ path('app_register') }}">s'inscrire</a>
                                 {%endif  %}
 
 
@@ -148,7 +148,7 @@
                                         </div>
                                     {% else %}
                                         <a class="left_topbar-item "  href="{{ path('app_use_login') }}">connecter</a>
-                                        <a class="left_topbar-item" href="{{ path('app_use_login') }}">s'inscrire</a>
+                                        <a class="left_topbar-item" href="{{ path('app_register') }}">s'inscrire</a>
                                     {%endif  %}
 
 
@@ -236,19 +236,9 @@
                                 </div>
 
                                 <div class="col-1">
-                                    {% if search is defined %}
-                                        {#<div class="headline_right">#}
-                                        {#<form method="GET" action="/search">#}
-                                        {#<input type="search" placeholder="Recherche" maxlength="45" pattern="[A-z0-9_ \-]{2,45}" name="kw"  required/>#}
-                                        {#<button>#}
-                                        {#<i class="fa fa-search"></i>#}
-                                        {#<i class="fa fa-search"></i>#}
 
-                                        {#</button>#}
-                                        {#</form>#}
 
-                                        {#</div>#}
-                                    {% endif %}
+
 
                                 </div>
                             </div>

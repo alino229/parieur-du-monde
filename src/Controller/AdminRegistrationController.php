@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Role;
 use App\Entity\User;
 use App\Form\AdminRegistrationFormType;
 use App\Form\RegistrationFormType;
@@ -16,7 +17,7 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 class AdminRegistrationController extends AbstractController
 {
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/insciption", name="app_register")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
@@ -26,10 +27,20 @@ class AdminRegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppCustomAuthenticator $authenticator): Response
     {
         $user = new User();
+        $adminRole=new Role();
+
+
+        if ($this->getUser()) {
+            return $this->redirectToRoute('forum');
+        }
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $adminRole->setType('ROLE_ADMIN');
+            $adminRole->addUser($user);
+            $entityManager->persist($user);
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -39,7 +50,7 @@ class AdminRegistrationController extends AbstractController
             );
             $user->setCreatedAt(new \DateTime('now'));
 
-            $entityManager = $this->getDoctrine()->getManager();
+
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email

@@ -51,12 +51,13 @@
                                     </td>
                                 </tr>
                             {% else %}
-                                {% set topics= topics[0]%}
-                                {% for topic in topics %}
-                                    {% set topicId= topic.id %}
+
+                                {% for key, topic in topics %}
 
 
-                                    <tr class="forumpost" style="vertical-align: top;">
+
+
+                                  <tr class="forumpost" style="vertical-align: top;">
                                         <td class="column1">
                                             <div class="list_block">
                                                         <span class="poster_avatar">
@@ -69,7 +70,7 @@
 
                                                 <span class="poster_titre">
                                                                 {% set identifiant=topic.topic %}
-                                                        <a  href="../forum/discution?id=">
+                                                        <a  href=" {{ path('forum_discution',{slug:managers.slugify(topic.forum.nom),sujet:managers.slugify(topic.subject),id:identifiant})}} ">
                                                                         {{ topic.subject|e}}
 
                                                                     </a>
@@ -88,54 +89,45 @@
 
 
                                             <div class="last_post display-block" style="padding-top: 2rem">
-                                                {% set most=forumreponse.lastMessage(identifiant) %}
+                                               {% set most=forumreponse.lastMessage(identifiant) %}
                                                 <div class="last_post-auteur">
-                                                    Dernier message par: {{ dump(most) }}
+                                                    Dernier message par:  {{ most.pseudo }}
                                                 </div>
                                                 <div class="last_post-date" style="margin-bottom: 0.5rem">
-                                                   {# le,{%  set day=most.maxdate|date('d/m/Y à H:i') %}
+                                                    le,{%  set day=most.maxdate|date('d/m/Y à H:i') %}
 
-                                                    {{ day }}#}
+                                                    {{ day }}
                                                 </div>
-{#                                                {% set id=getId %}#}
-                                             {#   <span>Réponse :</span> {{ manager.countUniqMessage(identifiant) }}<br>
-                                                <span>Vues :</span>   {% if user_manager.uniqueVisitedTopic(id) is defined  %}
-                                                    {{ user_manager.uniqueVisitedTopic(topicId) }}#}
-                                              {#  {% else %}
-                                                    0
-                                                {% endif %}#}
+
+                                                <span>Réponse :</span> {{ forumreponse.forumPagination(identifiant)|length }}<br>
+                                                <span>Vues :</span>
+
 
                                             </div>
 
                                         </td>
-                                        {#<td class="column2 display-none" >
-                                            {% set id=getId %}
+                                        <td class="column2 display-none" >
 
-                                            {{ manager.countUniqMessage(identifiant) }}
+
+                                            {{ forumreponse.forumPagination(identifiant)|length }}
 
                                         </td>
                                         <td class="column2 display-none" >
-                                            {% if user_manager.uniqueVisitedTopic(id) is defined  %}
+                                           {# {% if user_manager.uniqueVisitedTopic(id) is defined  %}
                                                 {{ user_manager.uniqueVisitedTopic(topicId) }}
                                             {% else %}
                                                 0
-                                            {% endif %}
+                                            {% endif %}#}
                                         </td>
                                         <td class="column2 display-none" >
                                             <div class="last_post">
-                                                {% set most=manager.lastMessage(identifiant) %}
+                                                {% set most=forumreponse.lastMessage(identifiant) %}
                                                 <div class="last_post-auteur">
                                                     {{ most.pseudo }}
                                                 </div>
                                                 <div class="last_post-date">
                                                     {%  set day=most.maxdate|date('d/m/Y à H:m') %}
-                                                    {{ jours }}
-                                                    {% for keys,value in jours %}
-                                                        {% set j=keys %}
-                                                        {{ keys }}
 
-                                                    {% endfor %}
-                                                    {{ j }}
                                                     le {{ day }}
                                                 </div>
                                             </div>
@@ -143,8 +135,7 @@
                                         </td>
 
 
-                                    </tr>#}
-
+                                    </tr>
                                 {% endfor %}
 
 
@@ -153,6 +144,7 @@
 
 
                             </tbody>
+                        </div>
                     </table>
 
 

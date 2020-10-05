@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\ForumTopicsRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ForumTopicsRepository::class)
+ * @UniqueEntity(fields={"subject"}, message="Vous avez déjà un article avec ce titre")
  */
 class ForumTopics
 {
@@ -32,12 +35,12 @@ class ForumTopics
         return $this->id;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 

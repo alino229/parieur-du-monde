@@ -89,7 +89,7 @@ $_mCartID has no value set */
      * @param string $url
      * @return array
      */
-    public  function pagination($query, $get_page, $page = 1, $per_page = 1, $url = ''): array
+    public  function pagination($query, $get_page, $url, $page = 1, $per_page = 1): array
     {
 
 
@@ -110,10 +110,11 @@ $_mCartID has no value set */
 
         $lastpage = ceil($total / $per_page);
 
+
         $lpm1 = $lastpage - 1;
         return array('lastpage'=>$lastpage,'url'=>$url,'prev'=>$prev,'next'=>$next,'prevlabel'=>$prevlabel,
             'nextlabel'=>$nextlabel,'lastlabel'=>$lastlabel,'start'=>$start,'lpm1'=>$lpm1,'adjacents'=>$adjacents,'page'=>$page,
-            'get_page'=>$get_page);
+            'get_page'=>$get_page,'total'=>$total);
 
 
     }

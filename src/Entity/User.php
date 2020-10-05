@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
@@ -12,6 +15,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @ORM\HasLifecycleCallbacks
  */
 class User implements UserInterface
 {
@@ -63,13 +67,23 @@ class User implements UserInterface
      */
     private $created_at;
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
     /**
      * @ORM\OneToOne(targetEntity=Vip::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $vip;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Role::class, mappedBy="users")
+     */
+    private $userRole;
+
+    public function __construct()
+    {
+        $this->userRole = new ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -109,7 +123,10 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
+
+        $roles = $this->userRole->map(function ($role){
+            return $role->getType();
+        })->toArray();
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
@@ -175,8 +192,9 @@ class User implements UserInterface
     public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
-
         return $this;
+
+
     }
     public function setImageFile(File $image = null): void
     {
@@ -208,12 +226,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
@@ -248,5 +266,33 @@ class User implements UserInterface
     {
 
         return $this->getUser()->getActive($activation);
+    }
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getUserRole(): Collection
+    {
+        return $this->userRole;
+    }
+
+    public function addUserRole(Role $userRole): self
+    {
+        if (!$this->userRole->contains($userRole)) {
+            $this->userRole[] = $userRole;
+            $userRole->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserRole(Role $userRole): self
+    {
+        if ($this->userRole->contains($userRole)) {
+            $this->userRole->removeElement($userRole);
+            $userRole->removeUser($this);
+        }
+
+        return $this;
     }
 }
