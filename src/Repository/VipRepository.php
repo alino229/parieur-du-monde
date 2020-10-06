@@ -38,15 +38,15 @@ class VipRepository extends ServiceEntityRepository
         ;
     }
 
-    /*
+
     public function findOneBySomeField($value): ?Vip
     {
         return $this->createQueryBuilder('v')
             ->andWhere('v.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getSingleScalarResult()
         ;
     }
-    */
+
 }

@@ -58,12 +58,13 @@ class ArticleController extends AbstractController
 //
 //    }
     /**
-     * @Route("/{id<\d>?1}", name="home")
+     * @Route("/", name="home")
      * @param Managers $managers
-     * @param $id
+     * @param Request $request
+
      * @return Response
      */
-    public function index(Managers $managers,$id): Response
+    public function index(Managers $managers,Request $request ): Response
     {
         $faker = Factory::create('fr_FR');
 
@@ -86,15 +87,17 @@ class ArticleController extends AbstractController
 //            $entityManager->persist(  $article);
 //        }
 //        $entityManager->flush();*/
-        $page =  $id;
-        $per_page = 6; // Set how many records do you want to display per page.
+        $page = $request->query->get('page', 1);
+        $per_page = 1; // Set how many records do you want to display per page.
         $startpoint = ($page * $per_page) - $per_page;
         $article =$this->getDoctrine()
             ->getRepository(Article::class);
         $findPublishedArticle =$article ->findPublishedArticle($startpoint,$per_page);
 
         $ArticlePagination =$article->ArticlePagination();
-        $pagination=$managers->Pagination($ArticlePagination,'page',$page,$per_page);
+        $url = $this->generateUrl('home');
+
+        $pagination=$managers->Pagination($ArticlePagination,'?page=',$url ,$page,$per_page);
 
 
         return $this->render('article/index.html.twig', [

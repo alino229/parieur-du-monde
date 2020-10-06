@@ -1,20 +1,43 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
 
-{% block title %}Hello PlanController!{% endblock %}
-
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <section class="plan-site">
+        <div class="row about">
+            <article class="article ">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                <div class="conseils_header">
+                    <h2 class="s-h2">Plan du site
+                    </h2>
+                    <div class="about_content mb-4">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/xampp/htdocs/parieurs/src/Controller/PlanController.php'|file_link(0) }}">src/Controller/PlanController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/xampp/htdocs/parieurs/templates/plan/index.html.twig'|file_link(0) }}">templates/plan/index.html.twig</a></code></li>
-    </ul>
-</div>
+                        <p class="s-p mb-2">
+                            Nous traitons  de divers sujets et contenus liés aux paris sportifs.
+
+                            Notre site est entièrement consacré aux paris sportifs en ligne et aux besoins des parieurs. Mais pour que vous compreniez mieux, consultez les sections disponibles sur le site:</p>
+
+                        <strong><a href="/" style="color:black;"> Acceuil:</a></strong> <p class="s-p">Les parieurs débutants, intermédiaires et avancés trouveront tout ce dont ils ont besoin de savoir dans cette section. De ceux qui veulent commencer à parier, à ceux qui recherchent des stratégies plus développées. Tout ce que vous avez à faire est de vous améliorer en tant que parieur! Comment créer votre compte, comment placer des fonds, comment choisir le meilleur bookmaker, comment utiliser les astuces sur le site, tout ce que vous devez savoir!</p>
+                        <strong><a href="{{ path('pronostics') }}" style="color: black;"> Pronostics:</a></strong> <p class="s-p">Cette section est l'âme de parieur-du-monde.000wehostapp.com Ce sont les pronostics et les sujets qui intéressent le plus les visiteurs qui arrivent sur notre site. Vous y trouverez les pronostics de nos experts et des meilleurs pronostiqueurs du marché dans les sports les plus divers tels que le football, le tennis, le basketball, la NBA, la NFL et la MLB. Et aussi les ligues principales comme la Ligue 1, la Bundesliga, la Liga, la Serie A et la Première League.</p>
+
+                        <strong><a href="{{ path('strategie') }}" style="color: black;"> Stractégies:</a></strong>  <p class="s-p">Si vous recherchez du contenu et des informations exclusifs sur les paris sportifs, c'est l'endroit. Dans la section des articles, nous proposons au parieur toutes sortes d'informations pertinentes sur cet univers et les innovations des meilleurs bookmakers.</p>
+
+                        <strong><a href="{{ path('forum') }}" style="color: black;"> Forum:</a></strong>  <p>parieur-du-monde.000wehostapp.com dispose également d'un forum où vous pouvez participer, rédiger vos pronostics ,aider et discuter avec d'autres parieurs.</p>
+
+                        <strong><a href="https://youtube.com/channel/UCh_lXkkwejV4M1sa3NX2NyA" style="color: black;"> Vidéos:</a></strong>  <p class="mb-4 s-p">Dans cette section, nous proposons des vidéos que vous pouvez regarder sur YouTube avec plus de détail sur nos astuces et pronostics que ce soit sur le football, le tennis ou le basketball, vous trouverez toujours les vidéos les plus intéressantes .Nos vidéos sont animés par des experts en pari sportif avec plusieurs années d'expérience .</p>
+
+                    </div>
+
+                </div>
+            </article>
+
+
+
+
+        </div>
+    </section>
+
+
 {% endblock %}

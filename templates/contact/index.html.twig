@@ -7,29 +7,34 @@
 {% block body %}
     <section id="contact">
         <div class="" style="margin: 0 auto;">
-            {% if msg_succes %}
-                <span class="msg-succes">{{ msg_succes }}</span>
-            {% endif %}
+
 
             <div class="forum_cont signin-container">
                 <div class="sign_body">
                     <div class="form-header" style="margin-bottom: 3rem">
                         <h2>Contact</h2>
                     </div>
-                    <form class="contact-form" method="post"  style="padding-top: 3rem">
+                    {{ form_start(ContactForm,{'attr':{'class':'contact-form','style':'padding-top: 3rem'}}) }}
+
 
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-1-of-2 mb0 i-mb0">
                                     <div class="form-label-group">
-                                        <input type="text" name="name" class="Inputname form-control" placeholder="votre nom" required >
-                                        <span><?php if(isset($erreur_name)) echo $erreur_name;?></span>
+                                        {{ form_row(ContactForm.nom
+                                            ,{label:' ','attr':{'class':'form-control Inputname','placeholder':'votre nom'}
+
+                                            }) }}
+
                                     </div>
                                 </div>
                                 <div class="col-1-of-2">
                                     <div class="form-label-group">
-                                        <input type="email" name="email" class="Inputname form-control" placeholder="votre email" required>
-                                        <span><?php if(isset($erreur_email)) echo $erreur_email;?></span>
+                                        {{ form_row(ContactForm.email
+                                            ,{label:' ','attr':{'class':'form-control Inputname','placeholder':'votre email'}
+
+                                            }) }}
+
 
                                     </div>
                                 </div>
@@ -38,8 +43,11 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="form-label-group">
-                                    <input type="text" name="webSite" placeholder="votre site web" class="form-control">
-                                    <span style="color: red;font-size: 1.3rem"><?php if(isset($erreur_sujet)) echo $erreur_sujet;?></span>
+                                    {{ form_row(ContactForm.site
+                                        ,{label:' ','attr':{'class':'form-control Inputname','placeholder':'votre email'}
+
+                                        }) }}
+
 
                                 </div>
 
@@ -49,9 +57,10 @@
                             <div class="row">
 
                                 <div class="form-group">
-                                    <textarea name="message" class="form-control" id="message"  placeholder="Votre  message" required></textarea>
-                                    <span style="color: red;font-size: 1.3rem"><?php if(isset($erreur_message)) echo $erreur_message;?></span>
+                                    {{ form_row(ContactForm.message
+                                        ,{label:' ','attr':{'class':'form-control Inputname','placeholder':'Votre  message'}
 
+                                        }) }}
                                 </div>
                             </div>
                         </div>
@@ -60,7 +69,7 @@
                                 <input type="submit" name="contact" value="envoyer" class="btn signin-btn btn-lg">
                             </div>
                         </div>
-                    </form>
+                    {{ form_end(ContactForm) }}
 
                 </div>
             </div>

@@ -6,7 +6,7 @@
     {% if pagination.page>1 %}
         {% if precedent is defined%}
 
-        <a href='{{ pagination.url }}{{ pagination.prev }}' class='page-numbers prev' rel="prev">{{ pagination.prevlabel }}</a>
+        <a href='{{ pagination.url }}{{ pagination.get_page }}{{ pagination.get_page }}{{ pagination.prev }}' class='page-numbers prev' rel="prev">{{ pagination.prevlabel }}</a>
     {% endif %}
     {% endif %}
 
@@ -17,7 +17,7 @@
              {% if counter==pagination.page %}
               <span aria-current="page" class="page-numbers current">{{ counter }}</span>
               {% else %}
-                  <a href='{{ pagination.url }}/{{ counter }}' class='page-numbers'>{{ counter }}</a>
+                  <a href='{{ pagination.url }}{{ pagination.get_page }}{{ counter }}' class='page-numbers'>{{ counter }}</a>
               {% endif %}
 
              {% endfor %}
@@ -29,18 +29,18 @@
                   {% if counter==pagination.page %}
                       <span class='current page-numbers'>{{ counter }}</span>
                       {% else %}
-                          <a href='{{ pagination.url }}/{{ counter }}' class='page-numbers' >{{ counter }}</a>
+                          <a href='{{ pagination.url }}{{ pagination.get_page }}{{ counter }}' class='page-numbers' >{{ counter }}</a>
                   {% endif %}
 
               {% endfor %}
              <span class='dot'>...</span>
-             <a href='{{ pagination.url }}/{{ pagination.lpm1 }}' class='page-numbers'>{{ pagination.lpm1 }}</a>
-             <a href='{{ pagination.url }}/{{ pagination.lastpage }}' class='page-numbers' >{{ pagination.lastpage }}</a>
+             <a href='{{ pagination.url }}{{ pagination.get_page }}{{ pagination.lpm1 }}' class='page-numbers'>{{ pagination.lpm1 }}</a>
+             <a href='{{ pagination.url }}{{ pagination.get_page }}{{ pagination.lastpage }}' class='page-numbers' >{{ pagination.lastpage }}</a>
 
 
     {% elseif  (pagination.lastpage -pagination.adjacents*2> pagination.page) and (pagination.page>pagination.adjacents*2) %}
-        <a href='{{ pagination.url }}/1' class='page-numbers'>1</a>
-        <a href='{{ pagination.url }}/2' class='page-numbers'>2</a>
+        <a href='{{ pagination.url }}{{ pagination.get_page }}1' class='page-numbers'>1</a>
+        <a href='{{ pagination.url }}{{ pagination.get_page }}2' class='page-numbers'>2</a>
         <span class='dot'>...</span>
         {% set counter=pagination.page-pagination.adjacents %}
         {% for counter in counter..(pagination.page+pagination.adjacents) %}
@@ -48,17 +48,17 @@
             {% if counter==pagination.page %}
                 <span aria-current="page" class='current page-numbers' >{{ counter }}</span>
                 {% else %}
-                    <a href='{{ pagination.url }}/{{ counter }}' class='page-numbers'>{{ counter }}</a>
+                    <a href='{{ pagination.url }}{{ pagination.get_page }}{{ counter }}' class='page-numbers'>{{ counter }}</a>
             {% endif %}
         {% endfor %}
 
         <span aria-current="page" class='dot'>..</span>
-        <a href='{{ pagination.url }}/{{ pagination.lpm1 }}' class='page-numbers'>{{ pagination.lpm1 }}</a>
-        <a href='{{ pagination.url }}/{{ pagination.lastpage }}' class='page-numbers'>{{ pagination.lastpage }}</a>";
+        <a href='{{ pagination.url }}{{ pagination.get_page }}{{ pagination.lpm1 }}' class='page-numbers'>{{ pagination.lpm1 }}</a>
+        <a href='{{ pagination.url }}{{ pagination.get_page }}{{ pagination.lastpage }}' class='page-numbers'>{{ pagination.lastpage }}</a>";
         {% else %}
 
-        <a href='{{ pagination.url }}/1' class='page-numbers' >1</a>
-        <a href='{{ pagination.url }}/2' class='page-numbers' >2</a>
+        <a href='{{ pagination.url }}{{ pagination.get_page }}1' class='page-numbers' >1</a>
+        <a href='{{ pagination.url }}{{ pagination.get_page }}2' class='page-numbers' >2</a>
         <span class='dot'>..</span>
         {% set counter=pagination.lastpage - (2 + (pagination.adjacents*2)) %}
         {% for counter in counter..pagination.lastpage %}
@@ -66,7 +66,7 @@
             {% if counter==pagination.page %}
                 <a aria-current="page" class='current page-numbers' >{{ counter }}</a>
             {% else %}
-                <a href='{{ pagination.url }}/{{ counter }}' class='page-numbers'>{{ counter }}</a>
+                <a href='{{ pagination.url }}{{ pagination.get_page }}{{ counter }}' class='page-numbers'>{{ counter }}</a>
             {% endif %}
         {% endfor %}
 
@@ -80,10 +80,10 @@
     {% endif %}
     {% if pagination.page<pagination.lastpage -1 %}
         {% if suivent is defined %}
-        <a href='{{ pagination.url }}/{{ pagination.next }}' class='page-numbers' rel="next">{{ pagination.nextlabel }}</a>
+        <a href='{{ pagination.url }}{{ pagination.get_page }}{{ pagination.next }}' class='page-numbers' rel="next">{{ pagination.nextlabel }}</a>
             {% endif %}
         {% if dernier is defined %}
-        <a href='{{ pagination.url }}/{{ pagination.lastpage }}' class='page-numbers' >{{ pagination.lastlabel }}</a>
+        <a href='{{ pagination.url }}{{ pagination.get_page }}{{ pagination.lastpage }}' class='page-numbers' >{{ pagination.lastlabel }}</a>
         {% endif %}
         {% endif %}
 </div>

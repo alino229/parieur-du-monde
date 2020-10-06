@@ -1,0 +1,83 @@
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body %}
+    <section class="contact connect">
+        <div class="" style="margin: 0 auto;">
+            <div class="forum_cont signin-container sign-container">
+                <div class="sign_body body-connect">
+                    <div class="form-header" style="margin-bottom: 3rem">
+                        <h2>Connexion</h2>
+                    </div>
+                    <form class="sigin-form" method="post" >
+                        {% if error %}
+                            ²                            <div class="erreur_container">
+                            <span class="erreur" style="margin-bottom: .5rem;padding: .5rem">
+                            <em>identifiants incorrects</em><br/>
+                            <em>Nom d’utilisateur ou mot de passe incorrect.Merci de vérifier à nouveau</em>
+                            </span>
+                        </div>
+                        {% endif %}
+
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="form-label-group">
+                                    <input type="email" class="form-control"  value="{{ last_username }}" name="email" id="inputEmail" placeholder="Adresse email" required>
+                                    <label for="login-emailInput">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <span class="erreur" id="js-email_erreur" style="display: none"></span>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password" required>
+                                    <label for="login-passwordInput">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+                                    <span class="erreur" id="js-password_erreur" style="display: none"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="_remember_me" ></label>
+                                    <span class="check_span">Se souvenir</span>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
+                        <div class="form-group">
+                            <div class="row botton ">
+                                <input type="submit" class="btn signin-btn btn-lg" name="connexion_submit" value="Se connecter" id="login-valiodate">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="text_center">
+                        <a href="{{ path('home') }}" class="create-new-account more_link btn" style="color:white;">retour au site</a>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </section>
+{% endblock %}
+
+

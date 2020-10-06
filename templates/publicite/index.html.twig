@@ -1,20 +1,57 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig"%}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ parent() }}
 
-{% block title %}Hello PubliciteController!{% endblock %}
-
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <section class="publicite">
+        <div class="row about">
+            <article class="article ">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                <div class="conseils_header">
+                    <h2 class="s-h2">Publicité
+                    </h2>
+                    <div class="about_content mb-4">
+                        <p class="s-p">  2001 Audiences mensuelles . </p>
+                        <p class="s-p mb-2">
+                            700 ce mois-ci
+                        </p>
+                        <p class="s-p mb-2">
+                            &#192; ce jour, le site compte d&#233;j&#224;
+                            un public stable d'utilisateurs qui aiment communiquer avec
+                            les m&#234;mes fans de paris sportifs, toujours au courant des
+                            dernières astuces et de l'actualit&#233; sportive.
+                        </p>
+                        <p class="s-p mb-2">
+                            Avec 66 utilisateurs inscrits, le site est marqu&#233; par des signets.
+                            De plus, il est consult&#233; par les moteurs de recherche les
+                            plus c&#233;l&#232;bres du monde - Yandex, Google, Rambler
+                            et bien d'autres.
+                            En outre, le site suit les liens d'amis et de connaissances ou de sites de même th&#233;matiques.
+                        </p>
+                        <p class="s-p mb-2">
+                            Le site surveille en permanence la qualit&#233; de son trafic
+                            et essaie de tout faire pour que les utilisateurs
+                            se sentent &#224; l'aise ici.
+                            parieur du monde est protégé contre les visiteurs «indésirables», le trafic bot, le spam et autre moment désagréable.
+                        </p>
+                        <p class="s-p mb-2">
+{#                            Les principaux utilisateurs sont les jeunes de 25 à 35 ans qui mènent une vie active et ont un bon revenu.<br/>#}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/xampp/htdocs/parieurs/src/Controller/PubliciteController.php'|file_link(0) }}">src/Controller/PubliciteController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/xampp/htdocs/parieurs/templates/publicite/index.html.twig'|file_link(0) }}">templates/publicite/index.html.twig</a></code></li>
-    </ul>
-</div>
+                        </p>
+
+
+                    </div>
+
+                </div>
+            </article>
+
+
+
+
+        </div>
+    </section>
+
+
 {% endblock %}
