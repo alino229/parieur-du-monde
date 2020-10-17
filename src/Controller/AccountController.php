@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AccountController extends AbstractController
@@ -20,7 +22,7 @@ class AccountController extends AbstractController
     }
     /**
      * @Route("/profil/utilisateur", name="user_profil")
-     * @Security("is_granted('ROLE_USER')", statusCode=404, message="Resource not found.")
+     * @Security("is_granted('ROLE_USER') ", statusCode=404, message="Resource not found.")
      */
     public function profil()
     {
@@ -28,11 +30,14 @@ class AccountController extends AbstractController
             'controller_name' => 'AccountController',
         ]);
     }
+
     /**
      * @Route("/parrainage/utilisateur", name="user_parrainage")
-     * @Security("is_granted('ROLE_USER')", statusCode=404, message="Resource not found.")
+     * @Security("is_granted('ROLE_USER' and user=user.email)", statusCode=404, message="Resource not found.")
+     * @param User $user
+     * @return Response
      */
-    public function parrainage()
+    public function parrainage(User $user)
     {
         return $this->render('account/parrainage.html.twig', [
             'controller_name' => 'AccountController',

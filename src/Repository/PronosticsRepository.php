@@ -30,11 +30,14 @@ class PronosticsRepository extends ServiceEntityRepository
 
 
              ':publie'=>true,
+            ':val'=>5
         );
 
         return $this->createQueryBuilder('p')
-//            ->innerJoin(CategoriePronostics::class,'pc')
-            ->andWhere('p.published = :publie')
+
+            ->innerJoin(CategoriePronostics::class,'pc')
+            ->Where('p.resultat is NULL')
+            ->andWhere('p.published = :publie','pc.id= :val')
             ->setParameters($params)
             ->orderBy('p.id', 'DESC')
             ->setFirstResult(0)
@@ -51,11 +54,16 @@ class PronosticsRepository extends ServiceEntityRepository
     {
         $params = array (
 
-            ':val'=>'null',
-            ':publie'=>true);
+
+            ':publie'=>true,
+            ':val'=>5
+        );
 
         return $this->createQueryBuilder('p')
-            ->andWhere('p.resultat = :val','p.published = :publie')
+
+            ->innerJoin(CategoriePronostics::class,'pc')
+            ->Where('p.resultat is NULL')
+            ->andWhere('p.published = :publie','pc.id= :val')
             ->setParameters($params)
             ->orderBy('p.id', 'DESC')
             ->setFirstResult(2)
@@ -72,11 +80,16 @@ class PronosticsRepository extends ServiceEntityRepository
     {
         $params = array (
 
-            ':val'=>'null',
-            ':publie'=>true);
+
+            ':publie'=>true,
+            ':val'=>5
+        );
 
         return $this->createQueryBuilder('p')
-            ->andWhere('p.resultat = :val','p.published = :publie')
+
+            ->innerJoin(CategoriePronostics::class,'pc')
+            ->Where('p.resultat is NULL')
+            ->andWhere('p.published = :publie','pc.id= :val')
             ->setParameters($params)
             ->orderBy('p.id', 'DESC')
             ->setFirstResult(4)
@@ -89,11 +102,16 @@ class PronosticsRepository extends ServiceEntityRepository
     {
         $params = array (
 
-            ':val'=>'null',
-            ':publie'=>true);
+
+            ':publie'=>true,
+            ':val'=>5
+        );
 
         return $this->createQueryBuilder('p')
-            ->andWhere('p.resultat = :val','p.published = :publie')
+
+            ->innerJoin(CategoriePronostics::class,'pc')
+            ->Where('p.resultat is NULL')
+            ->andWhere('p.published = :publie','pc.id= :val')
             ->setParameters($params)
             ->orderBy('p.id', 'DESC')
             ->setFirstResult(6)
@@ -107,11 +125,16 @@ class PronosticsRepository extends ServiceEntityRepository
     {
         $params = array (
 
-            ':val'=>'null',
-            ':publie'=>true);
+
+            ':publie'=>true,
+            ':val'=>5
+        );
 
         return $this->createQueryBuilder('p')
-            ->andWhere('p.resultat = :val','p.published = :publie')
+
+            ->innerJoin(CategoriePronostics::class,'pc')
+            ->Where('p.resultat is NULL')
+            ->andWhere('p.published = :publie','pc.id= :val')
             ->setParameters($params)
             ->orderBy('p.id', 'DESC')
             ->setFirstResult(8)
@@ -124,11 +147,13 @@ class PronosticsRepository extends ServiceEntityRepository
     {
         $params = array (
 
-            ':val'=>'null',
+            ':val'=>5,
             ':publie'=>true);
 
         return $this->createQueryBuilder('p')
-            ->andWhere('p.resultat != :val','p.published = :publie')
+            ->innerJoin(CategoriePronostics::class,'pc')
+            ->Where('p.resultat is NOT NULL')
+            ->andWhere('p.published = :publie','pc.id= :val')
             ->setParameters($params)
             ->getQuery()
             ->getResult()

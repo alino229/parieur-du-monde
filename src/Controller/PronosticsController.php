@@ -26,6 +26,7 @@ class PronosticsController extends AbstractController
 
         $newProno= $pronostics->newPronosticsField();
 
+
         $newProno2= $pronostics->newPronostics2Field();
         $newProno4= $pronostics->newPronostics3Field();
         $newProno3= $pronostics->newPronostics4Field();
