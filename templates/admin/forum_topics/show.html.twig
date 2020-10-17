@@ -1,0 +1,30 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>ForumTopics</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ forum_topic.id }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ forum_topic.createdAt ? forum_topic.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <td>{{ forum_topic.subject }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('forum_topics_index') }}">back to list</a>
+
+    <a href="{{ path('forum_topics_edit', {'id': forum_topic.id}) }}">edit</a>
+
+    {{ include('forum_topics/_delete_form.html.twig') }}
+{% endblock %}

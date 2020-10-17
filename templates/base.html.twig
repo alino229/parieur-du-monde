@@ -1,8 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156916452-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-156916452-1');
+        </script>
+        <link rel="canonical
+" href="https://parieurdumonde.com"/>
+        <title>Paris Sportif: Comment gagner aux paris sportifs avec la martingale ? </title>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+        <meta name="author" content="alino"/>
+
+        <meta name="keywords" content="pronostics de paris, pronostics de football, pronostics, pronostics sportifs, conseils de paris"/>
+        <meta name="description" content="Une martingale est une technique dont le but (illusoire) est d’augmenter les chances de gagner aux jeux de hasard tout en respectant des règles fixes. Cela consiste à toujours miser sur la même équipe ou la même stratégie"/>
+        <meta name="robots" content="follow"/>
+        <meta name="robots" content="noodp, noydir"/>
+        <meta name="revisit-after" content="7 days"/>
+
 
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -18,22 +38,28 @@
                             <div class="left_topbar" style="position: relative">
                                 <a href="{{ path('contact') }}" class="left_topbar-item">contact</a>
                                 {% if is_granted('IS_AUTHENTICATED_FULLY')  or is_granted('IS_AUTHENTICATED_REMEMBERED')%}
-
-                                    <a class="left_topbar-item" id="js-profil" href="#">{{ app.user.pseudo }}</a>
+{{ dump(app.user) }}
+                                    {#<a class="left_topbar-item" id="js-profil" href="#">{{ app.user.pseudo }}</a>
                                     <div class="profil_user profil_acceuil" style="display: none">
                                         <nav class="profil_nav">
                                             <div class="row" style="margin-bottom: 0!important;">
                                                 <div class="col-1-of-3" style="margin-right: 0!important;">
                                                     <div class="profil_avatar">
-                                                        <img src="../resources/images/avatar/{{ app.user.avatar }}" alt="avatar">
+                                                        <img src="{{ asset('images/avatar/' ~ app.user.avatar) }}" alt="avatar">
                                                     </div>
                                                 </div>
                                                 <div class="col-3-of-4" style="margin-right: 0!important;">
                                                     <div class="profil_data">
                                                         <ul>
                                                         <li style="">{{ app.user.pseudo }}</li>
-                                                            <li>Date inscription:{{ app.user.createdAt|date('d/m/Y à H:i')}}</li>
-                                                            {#{%  set user= manager.userData(user_row.id) %}
+                                                            <hr>
+                                                            <li><a href="{{ path('account') }}" style=" color: #2c2c2b!important;">Mon compte</a> </li>
+                                                            <li><a href="{{ path('user_payement') }}" style=" color: #2c2c2b!important;">Mon Abonnement VIP</a> </li>
+                                                            <li><a href="{{ path('user_forum') }}" style=" color: #2c2c2b!important;">Message:</a> <span>0</span></li>
+                                                            <li><a href="{{ path('user_reaction') }}" style=" color: #2c2c2b!important;">Réaction reçues: </a><span>0</span> </li>
+
+                                                           #}{# <li>Date inscription:{{ app.user.createdAt|date('d/m/Y à H:i')}}</li>
+                                                            {%  set user= manager.userData(user_row.id) %}
                                                             <li>Sujet poster:
                                                                 {{ manager.nombre_sujet }}
                                                             </li>
@@ -41,7 +67,7 @@
                                                             {% set user_topic_id=manager.topic_id %}
                                                             <li>Dernier sujet:{% if user_topic_id !=0 %}<a href="/forum/discution?id={{ user_topic_id}}" style="color: #2b6dad" >{% set titre=manager.subject %}{{ manager.LimitContenu(titre,60) }}{% else %}0{% endif %}</a></li>
                                                             <li>Dernière réponse reçue:{% if manager.lastReponse !=0 %}<span>le {{ manager.lastReponse|date("d/m/Y à H:i") }}</span>{% else %}0{% endif %}
-                                                            </li>#}
+                                                            </li>#}{#
 
 
 
@@ -56,7 +82,7 @@
                                             </div>
 
                                         </nav>
-                                    </div>
+                                    </div>#}
                                 {% else %}
                                     <a class="left_topbar-item "  href="{{ path('app_use_login') }}">connecter</a>
                                     <a class="left_topbar-item" href="{{ path('app_register') }}">s'inscrire</a>
@@ -84,7 +110,7 @@
                         <div class="logo_mobile">
                             <div class="logo">
                                 <a href="#">
-                                    <img src="../resources/images/logo-parieur-du-monde-mob.png" alt="logo parieur du monde ">
+                                    <img src="{{ asset('images/logo-parieur-du-monde-mob.png') }}" alt="logo parieur du monde ">
                                 </a>
                             </div>
 
@@ -108,29 +134,35 @@
 
                                     {% if is_granted('IS_AUTHENTICATED_FULLY')  or is_granted('IS_AUTHENTICATED_REMEMBERED')%}
 
-                                        <a class="left_topbar-item" id="js-profil" href="#">{{ app.user.pseudo }}</a>
+                                       {# <a class="left_topbar-item" id="js-profil" href="#">{{ app.user.pseudo }}</a>
                                         <div class="profil_user profil_acceuil" style="display: none" id="mobile-profil_user">
                                             <nav class="profil_nav">
                                                 <div class="row" style="margin-bottom: 0!important;">
                                                     <div class="col-1-of-3" style="margin-right: 0!important;margin-bottom: 0!important;">
                                                         <div class="profil_avatar">
-                                                            <img src="../resources/images/avatar/{{ app.user.avatar }}" alt="avatar">
+                                                            <img src="{{ asset('images/avatar/' ~ app.user.avatar) }}" alt="avatar">
                                                         </div>
                                                     </div>
                                                     <div class="col-3-of-4" style="margin-right: 0!important;">
                                                         <div class="profil_data">
                                                             <ul>
-                                                              {#  <li style="">{{ user_row.pseudo }}</li>
-                                                                <li>Date inscription:{{ user_row.joining_date|date('d/m/Y à H:i')}}</li>
-                                                                {%  set user= manager.userData(user_row.id) %}
-                                                                <li>Sujet poster:
-                                                                    {{ manager.nombre_sujet }}
-                                                                </li>
+                                                                <li style="">{{ app.user.pseudo }}</li>
+                                                                <hr>
+                                                                <li><a href="{{ path('account') }}" style=" color: #2c2c2b!important;">Mon compte</a> </li>
+                                                                <li><a href="{{ path('user_payement') }}" style=" color: #2c2c2b!important;">Mon Abonnement VIP</a> </li>
+                                                                <li><a href="{{ path('user_forum') }}" style=" color: #2c2c2b!important;">Message:</a> <span>0</span></li>
+                                                                <li><a href="{{ path('user_reaction') }}" style=" color: #2c2c2b!important;">Réaction reçues: </a><span>0</span> </li>
 
-                                                                {% set user_topic_id=manager.topic_id %}
-                                                                <li>Dernier sujet:{% if user_topic_id !=0 %}<a href="/forum/discution?id={{ user_topic_id}}" style="color: #2b6dad" >{% set titre=manager.subject %}{{ manager.LimitContenu(titre,60) }}{% else %}0{% endif %}</a></li>
-                                                                <li>Dernière réponse reçue:{% if manager.lastReponse !=0 %}<span>le {{ manager.lastReponse|date("d/m/Y à H:i") }}</span>{% else %}0{% endif %}
-                                                                </li>#}
+                                                                #}{# <li>Date inscription:{{ app.user.createdAt|date('d/m/Y à H:i')}}</li>
+                                                                 {%  set user= manager.userData(user_row.id) %}
+                                                                 <li>Sujet poster:
+                                                                     {{ manager.nombre_sujet }}
+                                                                 </li>
+
+                                                                 {% set user_topic_id=manager.topic_id %}
+                                                                 <li>Dernier sujet:{% if user_topic_id !=0 %}<a href="/forum/discution?id={{ user_topic_id}}" style="color: #2b6dad" >{% set titre=manager.subject %}{{ manager.LimitContenu(titre,60) }}{% else %}0{% endif %}</a></li>
+                                                                 <li>Dernière réponse reçue:{% if manager.lastReponse !=0 %}<span>le {{ manager.lastReponse|date("d/m/Y à H:i") }}</span>{% else %}0{% endif %}
+                                                                 </li>#}{#
 
 
 
@@ -145,7 +177,7 @@
                                                 </div>
 
                                             </nav>
-                                        </div>
+                                        </div>#}
                                     {% else %}
                                         <a class="left_topbar-item "  href="{{ path('app_use_login') }}">connecter</a>
                                         <a class="left_topbar-item" href="{{ path('app_register') }}">s'inscrire</a>
@@ -185,7 +217,7 @@
                         <div class="wrapp_logo-container">
                             <div class="logo">
                                 <a href="#">
-                                    <img src="../resources/images/logo-parieur-du-monde.png" alt="logo parieur du monde ">
+                                    <img src="{{ asset('images/logo-parieur-du-monde.png') }}" alt="logo parieur du monde ">
                                 </a>
                             </div>
                             <div class="banner_header">
@@ -295,14 +327,8 @@
 
 
         {% block javascripts %}
-{#            {{ encore_entry_script_tags('app') }}#}
-            <script src="{{ preload(asset('bundles/jquery-3.3.1.min.js')) }}"></script>
-            <script src="{{ preload(asset('bundles/comment.js')) }}"></script>
-            <script src="{{ preload(asset('bundles/discution.js')) }}"></script>
-            <script src="{{ preload(asset('bundles/publish.js')) }}"></script>
-            <script src="{{ preload(asset('bundles/social.js')) }}"></script>
-            <script src="{{ preload(asset('bundles/testimonial.js')) }}"></script>
-            <script src="{{ preload(asset('bundles/validateur.js')) }}"></script>
+            {{ encore_entry_script_tags('app') }}
+
         {% endblock %}
     </body>
 </html>

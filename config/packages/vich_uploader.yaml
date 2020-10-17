@@ -6,7 +6,7 @@ vich_uploader:
           uri_prefix: /images/article
           upload_destination: '%kernel.project_dir%/public/images/article'
         pronostics_images:
-          uri_prefix: /images/article
+          uri_prefix: /images/pronostics
           upload_destination: '%kernel.project_dir%/public/images/pronostics'
         forum_images:
           uri_prefix: /images/forum
@@ -14,4 +14,7 @@ vich_uploader:
         user_images:
           uri_prefix: /images/users
           upload_destination: '%kernel.project_dir%/public/images/users'
+          inject_on_load: faux
+          delete_on_update: vrai
+          delete_on_remove: faux
 

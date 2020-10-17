@@ -78,4 +78,15 @@ class AccountController extends AbstractController
             'controller_name' => 'AccountController',
         ]);
     }
+
+    /**
+     * @Route("/alert/utilisateur", name="user_forum")
+     * @Security("is_granted('ROLE_USER')", statusCode=404, message="Resource not found.")
+     */
+    public function message()
+    {
+        return $this->render('account/message.html.twig', [
+            'controller_name' => 'AccountController',
+        ]);
+    }
 }

@@ -1,0 +1,39 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>ForumReponse index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Reponse</th>
+                <th>Created_at</th>
+                <th>Topic</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for forum_reponse in forum_reponses %}
+            <tr>
+                <td>{{ forum_reponse.id }}</td>
+                <td>{{ forum_reponse.reponse }}</td>
+                <td>{{ forum_reponse.createdAt ? forum_reponse.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ forum_reponse.topic }}</td>
+                <td>
+                    <a href="{{ path('forum_reponse_show', {'id': forum_reponse.id}) }}">show</a>
+                    <a href="{{ path('forum_reponse_edit', {'id': forum_reponse.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('forum_reponse_new') }}">Create new</a>
+{% endblock %}

@@ -28,10 +28,11 @@ class HomePageMostVisited
     private $timestamp;
 
     /**
-     * @ORM\Column(type="integer")
-     *
+     * @ORM\OneToOne(targetEntity=Article::class, inversedBy="homePageMostVisited", cascade={"persist", "remove"})
      */
     private $article;
+
+
     public function __toString()
     {
         // TODO: Implement __toString() method.
@@ -66,15 +67,17 @@ class HomePageMostVisited
         return $this;
     }
 
-    public function getArticle(): ?int
+    public function getArticle(): ?Article
     {
         return $this->article;
     }
 
-    public function setArticle(int $article): self
+    public function setArticle(?Article $article): self
     {
         $this->article = $article;
 
         return $this;
     }
+
+
 }

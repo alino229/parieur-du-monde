@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello newsController!{% endblock %}
+
 
 {% block body %}
 
@@ -16,13 +16,13 @@
                                           {{ news.titre }}
                                 </h1>
                                 <div class="post_comment-box">
-                                     <span class="infopost">Publier  <span class="date">le {{ news.createdAt|date('d/m/Y') }}</span> par <a
-                                                 href="#">{{ news.auteur }}</a></span>
+                                     <span class="infopost">Publier  le {{ news.createdAt|date('d/m/Y') }} par
+                                               {{ news.auteur }}</span>
                                     <span class="comment">&nbsp;</span>
 
                                 </div>
                                 <div class="clr"></div>
-                                <div class="news__img mb-1 mb-0-1"><img src="{{ asset('images/article') }}/{{ news.images }}"
+                                <div class="news__img mb-1 mb-0-1"><img src="{{ vich_uploader_asset(news,'imageFile') }}"
                                                                            width="990" height="557"  class="fl" alt="{{ news.imageAlt }}" title="{{ news.imageTitre }}"/></div>
                                 <div class="home__article--text">
                                     {% autoescape %}
@@ -37,7 +37,7 @@
                                         <li class="social-item">
                                             <a title="partager sur facebook" class="facebook share_facebook" href="https://parieurdumonde.com" data-url="https://parieurdumonde.com?titre={{managers.slugify(news.slug) }}">
                                                 <span class="ion"><i class="fa fa-facebook"></i> </span>
-                                                {#<span class="text">facebook</span>#}
+
                                             </a>
                                         </li>
                                         <li class="social-item">
@@ -54,7 +54,7 @@
                                         </li>
                                         <div class="right-block" style="float: right">
                                             <li>
-                                                <span style="display: inline-block;padding-top: 10px"> Vues <i class="fa fa-eye">&nbsp;&nbsp;&nbsp;{{ findPage.NbVisite }}</i></span>
+                                                <span style="display: inline-block;padding-top: 10px"> {% if findPage is null %}vous êtes le premier à visualiser cet article{% else %}Vues <i class="fa fa-eye">&nbsp;&nbsp;&nbsp;{{ findPage.NbVisite }}{% endif %}</i></span>
 
                                             </li>
                                         </div>

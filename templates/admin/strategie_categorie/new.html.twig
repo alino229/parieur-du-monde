@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New StrategieCategorie{% endblock %}
+
+{% block body %}
+    <h1>Create new StrategieCategorie</h1>
+
+    {{ include('admin/strategie_categorie/_form.html.twig') }}
+
+    <a href="{{ path('strategie_categorie_index') }}">back to list</a>
+{% endblock %}

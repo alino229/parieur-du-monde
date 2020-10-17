@@ -1,0 +1,2 @@
+$(function(){var e=$(".sign-fade");$(".close").on("click",function(){e.css({display:"none"})});$(".left_topbar-item").click(function(){$("#mobile-profil_user").slideToggle(300)});$("#js-profil").click(function(){$(".profil_user").slideToggle(300)});var b=$("#menuButton");var h=$("#js-mobile");b.click(function(i){b.toggleClass("is-active");i.preventDefault();h.slideToggle(300);$("#mobile-profil_user").css({display:"none"})});var a=$("#js--nav");b.on("click",function(i){});$(".js-reponse").click(function(i){i.preventDefault();$("#form_reponse").css("display","block")});});
+

@@ -47,6 +47,11 @@ class Commentaire
      */
     private $depth;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $active;
+
 
     public function __toString()
     {
@@ -127,6 +132,18 @@ class Commentaire
     public function setDepth(?int $depth): self
     {
         $this->depth = $depth;
+
+        return $this;
+    }
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(?bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

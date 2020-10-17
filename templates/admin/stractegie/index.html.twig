@@ -1,0 +1,113 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Article index</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a class="btn btn-success float-right" href="{{ path('stractegie_new') }}">Créer un nouveau article</a></li>
+
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">DataTable with minimal features &amp; hover style</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+
+
+                                    <table class="table"  id="example2">
+                                        <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Titre</th>
+                                            <th>Contenu</th>
+                                            <th>Slug</th>
+                                            <th>Auteur</th>
+                                            <th>Créé le</th>
+                                            <th>publié</th>
+                                            <th>actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for stractegie in stractegies %}
+                                            <tr>
+                                                <td>{{ stractegie.id }}</td>
+                                                <td>{{ stractegie.titre }}</td>
+                                                <td>
+                                                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{ stractegie.id }}">
+                                                        <i class="fa fa-file-alt"></i>Voir le contenu
+                                                    </a>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal{{ stractegie.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog"  role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">{{ stractegie.titre }}</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    {{ stractegie.contenu | raw}}
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                  </td>
+                                                <td>{{ stractegie.slug }}</td>
+                                                <td>{{ stractegie.auteur }}</td>
+                                                <td>{{ stractegie.createdAt ? stractegie.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                                <td>
+
+                                                    <label class="custom-control-label" for="customSwitch1"></label>
+                                                    {{ stractegie.published ? 'Yes' : 'No' }}</td>
+                                                <td class="project-actions text-right py-0 align-middle">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a class="btn btn-primary btn-sm" href="{{ path('stractegie_show', {'id': stractegie.id}) }}"><i class="fa fa-folder">
+                                                            </i></a>
+                                                        <a class="btn btn-info btn-sm" href="{{ path('stractegie_edit', {'id': stractegie.id}) }}"><i class="fa fa-pencil">
+                                                            </i></a>
+                                                        <a href="{{ path('stractegie_delete',{id:stractegie.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="7">no records found</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
+                        </div>
+
+
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+    </section>
+
+{% endblock %}

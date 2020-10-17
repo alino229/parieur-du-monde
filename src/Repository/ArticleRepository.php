@@ -39,8 +39,8 @@ class ArticleRepository extends ServiceEntityRepository
     public function findPublishedArticle($startpoint,$per_page)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.published = :val')
-            ->setParameter('val', true)
+            ->andWhere('a.published = :isPublished')
+            ->setParameter('isPublished', true)
             ->orderBy('a.created_at', 'DESC')
             ->setFirstResult($startpoint)
             ->setMaxResults($per_page)
@@ -52,8 +52,8 @@ class ArticleRepository extends ServiceEntityRepository
     public function ArticlePagination()
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.published = :val')
-            ->setParameter('val', true)
+            ->andWhere('a.published = :isPublished')
+            ->setParameter('isPublished', true)
             ->orderBy('a.created_at', 'DESC')
             ->getQuery()
             ->getResult()
@@ -78,23 +78,16 @@ class ArticleRepository extends ServiceEntityRepository
         }
 
     }
-    /**
-     * @return
-     */
-    public function findAllGreaterThanPrice($price): array
+    /*public function  articleMost(): ?array
     {
-        $entityManager = $this->getEntityManager();
+        return $this->createQueryBuilder('a.article')
+            ->orderBy('a.article.id', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+            ;
+    }*/
 
-        $query = $entityManager->createQuery(
-            'SELECT p
-            FROM App\Entity\Product p
-            WHERE p.price > :price
-            ORDER BY p.price ASC'
-        )->setParameter('price', $price);
-
-        // returns an array of Product objects
-        return $query->getResult();
-    }
 
 
 }

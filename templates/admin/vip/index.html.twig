@@ -1,0 +1,41 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>Vip index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Abonnement</th>
+                <th>Active</th>
+                <th>Date</th>
+                <th>ExpireDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vip in vips %}
+            <tr>
+                <td>{{ vip.id }}</td>
+                <td>{{ vip.abonnement }}</td>
+                <td>{{ vip.active ? 'Yes' : 'No' }}</td>
+                <td>{{ vip.date ? vip.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ vip.expireDate ? vip.expireDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('vip_show', {'id': vip.id}) }}">show</a>
+                    <a href="{{ path('vip_edit', {'id': vip.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('vip_new') }}">Create new</a>
+{% endblock %}

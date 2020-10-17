@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/*@import "~bootstrap";*/
+@import "./font-awesome.min.css";
 
 /*
 0-600 : Téléphones
@@ -138,9 +138,9 @@ hr {
 /**
  * Contain overflow in all browsers.
  */
+
 pre {
     overflow: auto; }
-
 /* Forms
    ========================================================================== */
 /**
@@ -1125,21 +1125,21 @@ input[type=submit]:hover {
     -moz-osx-font-smoothing: grayscale;
     -o-osx-font-smoothing: grayscale; }
 
-figure.table {
+figure.table,.publish_table {
     margin-bottom: 0;
     border-collapse: separate !important;
     border-radius: 0 !important; }
-figure.table thead {
+figure.table thead ,.publish_table thead{
     color: #fff;
     border-radius: 0 !important;
     background: #006793 !important; }
-figure.table thead th {
+figure.table thead th ,.publish_table thead th{
     text-align: center; }
-figure.table thead tr {
+figure.table thead tr,.publish_table thead tr{
     background: #006793 !important; }
-figure.table tbody tr:nth-child(even) {
+figure.table tbody tr:nth-child(even),.publish_table tbody tr:nth-child(even) {
     background-color: #dedede !important; }
-figure.table tbody td {
+figure.table tbody td,.publish_table tbody td {
     text-align: center;
     padding: 0.8rem !important; }
 
@@ -1344,6 +1344,12 @@ blockquote.publish_blockquote {
 .profil_user nav .profil_data {
     padding: 1.5rem;
     color: #134C85; }
+.profil_data li a{
+    color: #2c2c2b!important;
+}
+.profil_data li a:hover{
+    color: red!important;
+}
 .profil_user nav .profil_btn {
     text-align: center; }
 
@@ -3650,7 +3656,7 @@ tbody tr:hover {
 .premium-benefits {
     padding: 40px 5%;
     text-align: center;
-    /*background-image:url("../../resources/images/b.jpeg");*/
+   background-image:url("./img/banner.png");
     background-color: rgb(174,175,179);
     background-size: cover;
     min-height: 28rem;

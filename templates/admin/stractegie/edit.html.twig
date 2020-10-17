@@ -1,0 +1,110 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Projet Ajouter</h1>
+                </div>
+                <div class="col-sm-6">
+                    <div class="breadcrumb float-sm-right">
+                        {{ form_widget(form.Sauvegarder,{
+                            'attr':{'class':'btn btn-success float-right'}
+                        }) }}
+                        {#<button type="submit" class="btn btn-success float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i>Créer un nouvel article
+                        </button>#}
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    {# <div class="card-header">
+                         <h3 class="card-title"></h3>
+
+                         <div class="card-tools">
+                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                 <i class="fa fa-minus">Create new Article</i></button>
+                         </div>
+                     </div>#}
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputName">{{ form_label(form.titre) }}</label>
+                            {{ form_widget(form.titre,{
+                                'attr':{'class':'form-control'}
+                            }) }}
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">{{ form_label(form.contenu) }}</label>
+                            {{ form_widget(form.contenu,{
+                                'attr':{'class':'form-control','rows':'12'}
+                            }) }}
+
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="col-md-6">
+                <div class="card card-secondary">
+
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputEstimatedBudget">{{ form_label(form.slug) }}</label>
+                            {{ form_widget(form.slug,{
+                                'attr':{'class':'form-control'}
+                            }) }}
+
+                        </div>
+                        <div class="form-group mb-4 clearfix" >
+                            <label for="inputSpentBudget">{{ form_label(form.auteur) }}</label>
+                            {{ form_widget(form.auteur,{
+                                'attr':{'class':'form-control'}
+                            }) }}
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="custom-control custom-switch">
+                                {{ form_widget(form.published,{
+                                    'attr':{'class':'custom-control-input'}
+                                }) }}
+                                {#                                <input type="checkbox" class="custom-control-input" id="customSwitch1" name="article[published]">#}
+                                <label class="custom-control-label" for="article_published">{{ form_label(form.published) }}</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4 clearfix" >
+                            <label for="inputSpentBudget">Catégorie </label>
+                            {{ form_widget(form.category,{
+                                'attr':{'class':'form-control select'}
+                            }) }}
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+
+
+
+    </section>
+    {{ form_end(form) }}
+
+
+
+{% endblock %}

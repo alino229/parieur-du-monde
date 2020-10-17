@@ -22,7 +22,7 @@ class StrategieController extends AbstractController
             ->findAll();
         $allStractegie = $this->getDoctrine()
             ->getRepository(Stractegie::class);
-        $allStractegieresent=$allStractegie->resentStractegie();
+        $allStractegieresent=$allStractegie->findAllPublishedOrderByRecentlyActive();
 
         return $this->render('strategie/index.html.twig', [
             'controller_name' => 'StrategieController','allCategorie'=>$allCategorie,

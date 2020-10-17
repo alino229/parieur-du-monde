@@ -1,0 +1,40 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var paginator \EasyCorp\Bundle\EasyAdminBundle\Orm\EntityPaginator #}
+{% trans_default_domain 'EasyAdminBundle' %}
+{#
+<div class="row">
+    <div class="col-sm-12 col-md-5">
+        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+
+            {{ 'paginator.results'|transchoice(paginator.numResults)|raw }}
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-7">
+        <div class="dataTables_paginate paging_simple_numbers {{ not paginator.hasPreviousPage ? 'first-page' }} {{ not paginator.hasNextPage ? 'last-page' }}" id="example2_paginate">
+            <ul class="pagination">
+                <li class="paginate_button page-item  {{ not paginator.hasPreviousPage ? 'disabled' }} previous" id="example2_previous">
+                    <a href="{{ not paginator.hasPreviousPage ? '#' : paginator.generateUrlForPage(paginator.previousPage) }}" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">
+                        {{ 'paginator.previous'|trans }}
+                    </a>
+                </li>
+                #}
+{#<li class="paginate_button page-item active">
+                    <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">1</font></font>
+                    </a>
+                </li>#}{#
+
+
+                <li class="paginate_button page-item {{ not paginator.hasNextPage ? 'disabled' }} next" id="example2_next">
+                    <a href="{{ not paginator.hasNextPage ? '#' : paginator.generateUrlForPage(paginator.nextPage) }}" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">
+
+                        {{ 'paginator.next'|trans }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+#}

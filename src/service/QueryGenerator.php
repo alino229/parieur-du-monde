@@ -33,7 +33,7 @@ class QueryGenerator
     public function articleMost()
     {
 
-        return  $this->em ->getRepository(HomePageMostVisited::class)
+        return  $this->em->getRepository(HomePageMostVisited::class)
             ->articleMost();
 
     }

@@ -18,7 +18,7 @@
     <div class="card-block">
     <div class="connexion_header" style="text-align: center">
         <div class="connxion_title" >
-            <h2>Récupérer votre mot de passe</h2>
+            <h2>Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.</h2>
         </div>
 
     </div>
@@ -27,15 +27,15 @@
     {% endfor %}
 
 
-    {{ form_start(requestForm) }}
+    {{ form_start(requestForm,{
+        'attr':{'class':'forget-form','placeholder':'Entrer votre adresse email'} }) }}
     <div class="form-group ">
         {{ form_row(requestForm.email,{
             label: ' ','attr':{'class':'form-control','placeholder':'Entrer votre adresse email'} }) }}
         </div>
         <div >
             <small>
-                Enter your email address and we we will send you a
-                link to reset your password.
+
             </small>
         </div>
 

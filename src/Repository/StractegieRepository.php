@@ -23,7 +23,7 @@ class StractegieRepository extends ServiceEntityRepository
      * @return Stractegie[] Returns an array of Stractegie objects
      */
 
-    public function resentStractegie():array
+    public function findAllPublishedOrderByRecentlyActive():array
     {
         return $this->createQueryBuilder('s')
             ->orderBy('s.created_at', 'DESC')

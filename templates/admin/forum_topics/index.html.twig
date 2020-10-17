@@ -1,0 +1,37 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>ForumTopics index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Created_at</th>
+                <th>Subject</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for forum_topic in forum_topics %}
+            <tr>
+                <td>{{ forum_topic.id }}</td>
+                <td>{{ forum_topic.createdAt ? forum_topic.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ forum_topic.subject }}</td>
+                <td>
+                    <a href="{{ path('forum_topics_show', {'id': forum_topic.id}) }}">show</a>
+                    <a href="{{ path('forum_topics_edit', {'id': forum_topic.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('forum_topics_new') }}">Create new</a>
+{% endblock %}

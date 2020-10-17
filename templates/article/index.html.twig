@@ -22,7 +22,7 @@
 
                                     <div class="clr"></div>
                                     <div class="article__img mb1-mt1"><img
-                                                src="{{ asset('images/article') }}/{{ article.images }}"
+                                                src="{{ vich_uploader_asset(article,'imageFile') }}"
                                               alt="{{ article.imageAlt }}" title="{{ article.imageTitre }}"
                                                 width="990" height="557"  class="fl"/></div>
                                     <div class="home__article--text" id="all-text">

@@ -1,0 +1,38 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>ForumMessage</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ forum_message.id }}</td>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <td>{{ forum_message.subject }}</td>
+            </tr>
+            <tr>
+                <th>Body</th>
+                <td>{{ forum_message.body }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ forum_message.date ? forum_message.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Topic</th>
+                <td>{{ forum_message.topic }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('forum_message_index') }}">back to list</a>
+
+    <a href="{{ path('forum_message_edit', {'id': forum_message.id}) }}">edit</a>
+
+    {{ include('forum_message/_delete_form.html.twig') }}
+{% endblock %}

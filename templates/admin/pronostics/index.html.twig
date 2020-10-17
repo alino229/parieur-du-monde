@@ -1,0 +1,98 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Article index</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a class="btn btn-success float-right" href="{{ path('pronostics_new') }}">Créer un nouveau pronostics </a></li>
+
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">DataTable with minimal features &amp; hover style</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+
+
+                                    <table class="table"  id="example2">
+                                        <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Domicile</th>
+                                            <th>Extérieur</th>
+                                            <th>Competition</th>
+                                            <th>Pronostics</th>
+                                            <th>Resultat</th>
+                                            <th>Jour</th>
+                                            <th>Logo domicile </th>
+                                            <th>Logo extérieur </th>
+                                            <th>Publié</th>
+                                            <th>actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for pronostic in pronostics %}
+                                            <tr>
+                                                <td>{{ pronostic.id }}</td>
+                                                <td>{{ pronostic.home }}</td>
+                                                <td>{{ pronostic.away }}</td>
+                                                <td>{{ pronostic.competition }}</td>
+
+                                                <td>{{ pronostic.pronostics }}</td>
+
+                                                <td>{{ pronostic.resultat }}</td>
+
+                                                <td>{{ pronostic.day ? pronostic.day|date('Y-m-d') : '' }}</td>
+                                                <td><img src="{{ vich_uploader_asset(pronostic,'homeFlagFile') }}" width="40" height="40"></td>
+                                                <td><img src="{{ vich_uploader_asset(pronostic,'awayFlagFile') }}" width="40" height="40"></td>
+
+                                                <td>{{ pronostic.published ? 'Yes' : 'No' }}</td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a class="btn btn-primary btn-sm" href="{{ path('pronostics_show', {'id': pronostic.id}) }}"><i class="fa fa-folder">
+                                                            </i></a>
+                                                        <a class="btn btn-info btn-sm" href="{{ path('pronostics_edit', {'id': pronostic.id}) }}"><i class="fa fa-pencil">
+                                                            </i></a>
+                                                        <a href="{{ path('pronostics_delete',{id:pronostic.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="17">Aucun résultat  trouvé</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
+                        </div>
+
+
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+    </section>
+
+
+{% endblock %}

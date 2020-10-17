@@ -29,6 +29,7 @@ class CommentaireType extends AbstractType
                 ->add('pseudo')
                 ->add('email')
                 ->add('contenu')
+                ->add('active')
 
             ;
         }

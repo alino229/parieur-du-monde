@@ -9,6 +9,7 @@ parameters:
     bundle: EasyAdminBundle
     # This parameter defines the codes of the locales (languages) enabled in the application
     app_locales: fr
+    avatar_directory: '%kernel.project_dir%/public/images/avatar'
 
 services:
     # default configuration for services in *this* file

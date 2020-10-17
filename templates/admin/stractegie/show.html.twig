@@ -1,0 +1,109 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}stractegie index{% endblock %}
+
+{% block body %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Project Add</h1>
+                </div>
+                <div class="col-sm-6">
+                    <div class="breadcrumb float-sm-right">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus">Create new stractegie</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputName">Identifient de l'stractegie </label>
+                            <input class="form-control" type="text" placeholder="{{ stractegie.id }}" readonly>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Titre</label>
+                            <input class="form-control" type="text" placeholder="{{ stractegie.titre }}" readonly>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">Contenu</label>
+                            <textarea class="form-control"   readonly rows="20" disabled>
+                                {{ stractegie.contenu|raw }}
+                            </textarea>
+
+
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="col-md-6">
+                <div class="card card-secondary">
+
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputEstimatedBudget">Slug</label>
+                            <input class="form-control" type="text" placeholder="{{ stractegie.slug }}" readonly>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Auteur</label>
+
+                            <input class="form-control" type="text" placeholder="{{ stractegie.auteur }}" readonly>
+
+                        </div>
+
+
+                        <div class="form-group date" data-provide="datepicker">
+                            <label>Date de publication </label>
+                            {#                            <input class="form-control" type="date" placeholder="" readonly value="{{ stractegie.createdAt }}">#}
+
+
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1" value="1">
+                                <label class="custom-control-label" for="customSwitch1">Etat de la publication {{ stractegie.published }}</label>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+
+
+        <div class="card-footer">
+            <a class="btn btn-info btn-sm" href="{{ path('stractegie_index') }}">retour à la liste</a>
+
+            <a class=" btn btn-info btn-sm " href="{{ path('stractegie_edit', {'id': stractegie.id}) }}">éditer</a>
+
+            {{ include('admin/stractegie/_delete_form.html.twig') }}
+        </div>
+    </section>
+
+
+{% endblock %}

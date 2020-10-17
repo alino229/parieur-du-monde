@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\CategoriePronostics;
 use App\Entity\Pronostics;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -27,13 +28,15 @@ class PronosticsRepository extends ServiceEntityRepository
     {
         $params = array (
 
-                ':val'=>'null',
-             ':publie'=>true);
+
+             ':publie'=>true,
+        );
 
         return $this->createQueryBuilder('p')
-            ->andWhere('p.resultat = :val','p.published = :publie')
+//            ->innerJoin(CategoriePronostics::class,'pc')
+            ->andWhere('p.published = :publie')
             ->setParameters($params)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.id', 'DESC')
             ->setFirstResult(0)
             ->setMaxResults(2)
             ->getQuery()
@@ -54,7 +57,7 @@ class PronosticsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.resultat = :val','p.published = :publie')
             ->setParameters($params)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.id', 'DESC')
             ->setFirstResult(2)
             ->setMaxResults(2)
             ->getQuery()
@@ -75,7 +78,7 @@ class PronosticsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.resultat = :val','p.published = :publie')
             ->setParameters($params)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.id', 'DESC')
             ->setFirstResult(4)
             ->setMaxResults(2)
             ->getQuery()
@@ -92,7 +95,7 @@ class PronosticsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.resultat = :val','p.published = :publie')
             ->setParameters($params)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.id', 'DESC')
             ->setFirstResult(6)
             ->setMaxResults(2)
             ->getQuery()
@@ -110,7 +113,7 @@ class PronosticsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.resultat = :val','p.published = :publie')
             ->setParameters($params)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.id', 'DESC')
             ->setFirstResult(8)
             ->setMaxResults(2)
             ->getQuery()
@@ -158,7 +161,7 @@ class PronosticsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.resultat != :val','p.published = :publie')
             ->setParameters($params)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.id', 'DESC')
             ->setFirstResult(2)
             ->setMaxResults(2)
             ->getQuery()
@@ -175,7 +178,7 @@ class PronosticsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.resultat != :val','p.published = :publie')
             ->setParameters($params)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.id', 'DESC')
             ->setFirstResult(4)
             ->setMaxResults(2)
             ->getQuery()
@@ -192,7 +195,7 @@ class PronosticsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.resultat != :val','p.published = :publie')
             ->setParameters($params)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.id', 'DESC')
             ->setFirstResult(6)
             ->setMaxResults(2)
             ->getQuery()
@@ -209,7 +212,7 @@ class PronosticsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.resultat != :val','p.published = :publie')
             ->setParameters($params)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.id', 'DESC')
             ->setFirstResult(8)
             ->setMaxResults(2)
             ->getQuery()

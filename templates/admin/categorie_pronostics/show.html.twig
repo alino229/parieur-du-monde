@@ -1,0 +1,26 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>CategoriePronostics</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorie_pronostic.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ categorie_pronostic.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('categorie_pronostics_index') }}">back to list</a>
+
+    <a href="{{ path('categorie_pronostics_edit', {'id': categorie_pronostic.id}) }}">edit</a>
+
+    {{ include('categorie_pronostics/_delete_form.html.twig') }}
+{% endblock %}

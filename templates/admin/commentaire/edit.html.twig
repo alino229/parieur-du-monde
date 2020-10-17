@@ -1,0 +1,13 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>Edit Commentaire</h1>
+
+    {{ include('admin/commentaire/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('commentaire_index') }}">back to list</a>
+
+    {{ include('admin/commentaire/_delete_form.html.twig') }}
+{% endblock %}

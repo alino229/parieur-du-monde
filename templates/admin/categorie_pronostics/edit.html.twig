@@ -1,0 +1,13 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>Edit CategoriePronostics</h1>
+
+    {{ include('categorie_pronostics/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('categorie_pronostics_index') }}">back to list</a>
+
+    {{ include('categorie_pronostics/_delete_form.html.twig') }}
+{% endblock %}

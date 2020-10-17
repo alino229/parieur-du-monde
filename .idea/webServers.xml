@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9dd0fb49-f822-4885-952e-f462c9a3bccc" name="parieur" url="http://parieurdumonde.com">
+        <fileTransfer rootFolder="/home/u175645817/domains/parieurdumonde.com/" host="parieurdumonde.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

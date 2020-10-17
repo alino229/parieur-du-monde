@@ -48,6 +48,11 @@ class Stractegie
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $published;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +126,18 @@ class Stractegie
     public function setCategory(?StrategieCategorie $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(?bool $published): self
+    {
+        $this->published = $published;
 
         return $this;
     }

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit Vip</title>
+
+{% block body %}
+    <h1>Edit Vip</h1>
+
+    {{ include('vip/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('vip_index') }}">back to list</a>
+
+    {{ include('vip/_delete_form.html.twig') }}
+{% endblock %}

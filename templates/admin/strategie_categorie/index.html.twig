@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StrategieCategorie index{% endblock %}
+
+{% block body %}
+    <h1>StrategieCategorie index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Categorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for strategie_categorie in strategie_categories %}
+            <tr>
+                <td>{{ strategie_categorie.id }}</td>
+                <td>{{ strategie_categorie.categorie }}</td>
+                <td>
+                    <a href="{{ path('strategie_categorie_show', {'id': strategie_categorie.id}) }}">show</a>
+                    <a href="{{ path('strategie_categorie_edit', {'id': strategie_categorie.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('strategie_categorie_new') }}">Create new</a>
+{% endblock %}

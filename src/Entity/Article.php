@@ -94,6 +94,11 @@ class Article
      */
     private $commentaires;
 
+    /**
+     * @ORM\OneToOne(targetEntity=HomePageMostVisited::class, mappedBy="article", cascade={"persist", "remove"})
+     */
+    private $homePageMostVisited;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -199,11 +204,11 @@ class Article
         return $this->images;
     }
 
-    public function setImages(string $images): self
+    public function setImages(?string $images): void
     {
         $this->images = $images;
 
-        return $this;
+
     }
 
     public function getImageAlt(): ?string
@@ -293,5 +298,23 @@ class Article
     public function getComment(): array
     {
         return $this->commentaires->toArray();
+    }
+
+    public function getHomePageMostVisited(): ?HomePageMostVisited
+    {
+        return $this->homePageMostVisited;
+    }
+
+    public function setHomePageMostVisited(?HomePageMostVisited $homePageMostVisited): self
+    {
+        $this->homePageMostVisited = $homePageMostVisited;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newArticle = null === $homePageMostVisited ? null : $this;
+        if ($homePageMostVisited->getArticle() !== $newArticle) {
+            $homePageMostVisited->setArticle($newArticle);
+        }
+
+        return $this;
     }
 }

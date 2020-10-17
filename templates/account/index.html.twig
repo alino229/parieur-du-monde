@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin_base.html.twig' %}
 {% block head %}
     {{ parent() }}
 {% endblock %}
@@ -24,7 +24,7 @@
                 </div>
                 <nav class="nav flex-column">
                     <a class="nav-link active" href="{{path('user_profil')}}">Information personnelle</a>
-                    <a class="nav-link" href="{{path('user_follower')}}">Mes suiveurs  </a>
+
                     <a class="nav-link" href="{{path('user_reaction')}}">Réaction </a>
                     <a class="nav-link" href="{{path('user_favorie')}}">Favorie </a>
                     <a class="nav-link" href="{{path('user_alert')}}">Alert </a>

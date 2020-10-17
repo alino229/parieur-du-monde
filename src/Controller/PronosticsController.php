@@ -23,7 +23,9 @@ class PronosticsController extends AbstractController
     {
         $pronostics = $this->getDoctrine()
             ->getRepository(Pronostics::class);
+
         $newProno= $pronostics->newPronosticsField();
+
         $newProno2= $pronostics->newPronostics2Field();
         $newProno4= $pronostics->newPronostics3Field();
         $newProno3= $pronostics->newPronostics4Field();
@@ -84,7 +86,10 @@ class PronosticsController extends AbstractController
 
     if(!$user){
         return $this->redirectToRoute('app_use_login');
-    }elseif (!$user->getVip()->getActive()){
+    }elseif($user->getVip()===null){
+        return $this->redirectToRoute('pronostics_premiums');
+    }
+    elseif (!$user->getVip()->getActive()){
         return $this->redirectToRoute('pronostics_premiums');
     }
     $pronostics = $this->getDoctrine()

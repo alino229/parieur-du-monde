@@ -3,33 +3,92 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Vip;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Symfony\Component\Validator\Constraints\Date;
+use App\Form\VipType;
+use App\Repository\VipRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-class VipCrudController extends AbstractCrudController
+/**
+ * @Route("admin/vip")
+ */
+class VipCrudController extends AbstractController
 {
-    public static function getEntityFqcn(): string
+    /**
+     * @Route("/", name="vip_index", methods={"GET"})
+     */
+    public function index(VipRepository $vipRepository): Response
     {
-        return Vip::class;
+        return $this->render('admin/vip/index.html.twig', [
+            'vips' => $vipRepository->findAll(),
+        ]);
     }
 
-
-    public function configureFields(string $pageName): iterable
+    /**
+     * @Route("/new", name="vip_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
     {
-        return [
-            IdField::new('id')->hideOnForm(),
-            IntegerField::new('week')->setLabel('hebdomadaire '),
-            IntegerField::new('month')->setLabel('mensuelle '),
-            IntegerField::new('annuel')->setLabel('annuel '),
-            AssociationField::new('user')->setLabel('utilisateur '),
-            DateTimeField::new('date')->setLabel('date d\'abonnement ')->setTimezone('Europe/Paris')->setFormat('dd/MM/yy à H:mm'),
-        ];
+        $vip = new Vip();
+        $form = $this->createForm(VipType::class, $vip);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($vip);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('vip_index');
+        }
+
+        return $this->render('admin/vip/new.html.twig', [
+            'vip' => $vip,
+            'form' => $form->createView(),
+        ]);
     }
 
+    /**
+     * @Route("/{id}", name="vip_show", methods={"GET"})
+     */
+    public function show(Vip $vip): Response
+    {
+        return $this->render('admin/vip/show.html.twig', [
+            'vip' => $vip,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="vip_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Vip $vip): Response
+    {
+        $form = $this->createForm(VipType::class, $vip);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('vip_index');
+        }
+
+        return $this->render('vip/edit.html.twig', [
+            'vip' => $vip,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="vip_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Vip $vip): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$vip->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($vip);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('vip_index');
+    }
 }

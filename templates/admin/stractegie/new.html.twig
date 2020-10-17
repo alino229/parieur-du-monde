@@ -1,0 +1,11 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>Create new Stractegie</h1>
+
+    {{ include('stractegie/_form.html.twig') }}
+
+    <a href="{{ path('stractegie_index') }}">back to list</a>
+{% endblock %}

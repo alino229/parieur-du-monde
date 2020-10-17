@@ -35,10 +35,19 @@ class HomePageMostVisitedRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    /**
+    public function  articleMost(): ?array
+    {
+        return $this->createQueryBuilder('h')
+            ->orderBy('h.id', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+  /*  /**
      * @return array
      */
-    public function articleMost(): array
+    /*public function articleMost(): ?array
     {
         $entityManager = $this->getEntityManager();
 
@@ -51,7 +60,7 @@ class HomePageMostVisitedRepository extends ServiceEntityRepository
 
         // returns an array of Product objects
         return $query->getResult();
-    }
+    }*/
 
 
     /*

@@ -1,0 +1,39 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>ForumSujet index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Categorie</th>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for forum_sujet in forum_sujets %}
+            <tr>
+                <td>{{ forum_sujet.id }}</td>
+                <td>{{ forum_sujet.categorie }}</td>
+                <td>{{ forum_sujet.titre }}</td>
+                <td>{{ forum_sujet.contenu }}</td>
+                <td>
+                    <a href="{{ path('forum_sujet_show', {'id': forum_sujet.id}) }}">show</a>
+                    <a href="{{ path('forum_sujet_edit', {'id': forum_sujet.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('forum_sujet_new') }}">Create new</a>
+{% endblock %}

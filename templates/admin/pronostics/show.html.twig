@@ -1,0 +1,155 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+
+    <section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Pronostics </h1>
+            </div>
+            <div class="col-sm-6">
+                <div class="breadcrumb float-sm-right">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus">Create new Article</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputName">Identifient du pronostic  </label>
+                            <input class="form-control" type="text" placeholder="{{ pronostic.id }}" readonly>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Equipe à domicile </label>
+                            <input class="form-control" type="text" placeholder="{{ pronostic.home }}" readonly>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">Equipe à l'extérieur </label>
+                            <input class="form-control" type="text" placeholder="  {{ pronostic.away }}" readonly>
+
+
+
+
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="col-md-6">
+                <div class="card card-secondary">
+
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputEstimatedBudget">Compétition </label>
+                            <input class="form-control" type="text" placeholder="{{ pronostic.competition }}" readonly>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Pays</label>
+
+                            <input class="form-control" type="text" placeholder="{{ pronostic.pays }}" readonly>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Pronostic</label>
+
+                            <input class="form-control" type="text" placeholder="{{ pronostic.pronostics }}" readonly>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Cote </label>
+
+                            <input class="form-control" type="text" placeholder="{{ pronostic.cote }}" readonly>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Résultat </label>
+
+                            <input class="form-control" type="text" placeholder="{{ pronostic.resultat }}" readonly>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Etat du résultat</label>
+
+                            <input class="form-control" type="text" placeholder="{{ pronostic.resultValue ? 'Yes' : 'No' }}" readonly>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Jour du match</label>
+
+                            <input class="form-control" type="date" value="{{ pronostic.day ? pronostic.day|date('Y-m-d') : '' }}" placeholder="{{ pronostic.day ? pronostic.day|date('Y-m-d') : '' }}" readonly>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Heure du match</label>
+
+                            <input class="form-control" type="time" value="{{ pronostic.time ? pronostic.time|date('H:i:s') : '' }}" placeholder="{{ pronostic.time ? pronostic.time|date('H:i:s') : '' }}" readonly>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEstimatedBudget" class="clearfix">Logo de l'équipe à domicile  </label>
+                            <img class="rounded" src="{{ vich_uploader_asset(pronostic,'homeFlagFile') }} " width="100px" height="80px">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEstimatedBudget" class="clearfix">Logo de l'équipe à l'extérieur  </label>
+                            <img class="rounded" src="{{ vich_uploader_asset(pronostic,'awayFlagFile') }} " width="100px" height="80px">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSpentBudget">Date de publication </label>
+
+                            <input class="form-control" value="{{ pronostic.addDate ? pronostic.addDate|date('d-m-Y H:i:s') : '' }}" type="datetime" placeholder="{{ pronostic.addDate ? pronostic.addDate|date('Y-m-d H:i:s') : '' }}" readonly>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1" value="1">
+                                <label class="custom-control-label" for="customSwitch1">Etat de la publication {{ pronostic.published ? 'Yes' : 'No' }}</label>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+
+
+        <div class="card-footer">
+
+            <a class="btn btn-info btn-sm" href="{{ path('pronostics_index') }}">retour à la liste</a>
+
+            <a class=" btn btn-info btn-sm " href="{{ path('pronostics_edit', {'id': pronostic.id}) }}">éditer</a>
+
+            {{ include('admin/pronostics/_delete_form.html.twig') }}
+        </div>
+    </section>
+
+
+{% endblock %}

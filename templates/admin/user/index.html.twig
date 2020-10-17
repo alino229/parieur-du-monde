@@ -1,0 +1,150 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}pseudo index{% endblock %}
+
+{% block body %}
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Liste des utilisateurs </h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">DataTable with minimal features &amp; hover style</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+
+
+                                    <table class="table"  id="example2">
+                                        <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Email</th>
+                                            <th>Roles</th>
+
+                                            <th>Pseudo</th>
+
+
+                                            <th>Date d'inscription </th>
+
+                                            <th>actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for user in users %}
+                                            <tr>
+                                                <td>{{ user.id }}</td>
+                                                <td>{{ user.email }}</td>
+                                                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                                                <td>
+                                                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{ user.id }}">
+                                                        <i class="fa fa-file-alt"></i> {{ user.pseudo }}
+                                                    </a>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog"  role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">{{ user.pseudo }}</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="card card-solid">
+                                                                        <div class="card-body pb-0">
+                                                                            <div class="row d-flex align-items-stretch">
+                                                                                <div class="col-12 d-flex align-items-stretch">
+                                                                                    <div class="card bg-light" style="width: 100%!important;">
+                                                                                        <div class="card-header text-muted border-bottom-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                                                                                    Stratège numérique
+                                                                                                </font></font></div>
+                                                                                        <div class="card-body pt-0">
+                                                                                            <div class="row">
+                                                                                                <div class="col-7">
+                                                                                                    <h2 class="lead"><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nicole Pearson</font></font></b></h2>
+                                                                                                    <p class="text-muted text-sm"><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">À propos:</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Web Designer / UX / Graphic Artist / Coffee Lover</font></font></p>
+                                                                                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                                                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Adresse: Demo Street 123, Demo City 04312, NJ</font></font></li>
+                                                                                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> N de téléphone: + 800-12 12 23 52</font></font></li>
+                                                                                                    </ul>
+                                                                                                </div>
+                                                                                                <div class="col-5 text-center">
+                                                                                                    <img src="{{ vich_uploader_asset(user,'imageFile') }}" alt="" class="img-circle img-fluid">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="card-footer">
+                                                                                            <div class="text-right">
+                                                                                                <a href="#" class="btn btn-sm bg-teal">
+                                                                                                    <i class="fa fa-comments"></i>
+                                                                                                </a>
+                                                                                                <a href="#" class="btn btn-sm btn-primary">
+                                                                                                    <i class="fa fa-user"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Voir le profil
+                                                                                                        </font></font></a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   </td>
+
+                                                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a class="btn btn-primary btn-sm" href="{{ path('user_show', {'id': user.id}) }}"><i class="fa fa-folder">
+                                                            </i></a>
+                                                        <a class="btn btn-info btn-sm" href="{{ path('user_edit', {'id': user.id}) }}"><i class="fa fa-pencil">
+                                                            </i></a>
+                                                        <a href="{{ path('user_delete',{id:user.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="10">no records found</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
+                        </div>
+
+
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+    </section>
+
+
+
+
+{% endblock %}

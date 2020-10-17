@@ -20,7 +20,8 @@
                                         </div>
 
                                     </div>
-                                    {{ form_start(resetForm) }}
+                                    {{ form_start(resetForm,{
+                                        'attr':{'class':'forget-form'} }) }}
                                     <div class="form-group ">
                                     {{ form_row(resetForm.plainPassword,{
                                         label: ' ','attr':{'class':'form-control','placeholder':'Entrer votre nouveau mot de passe'} }) }}
@@ -53,7 +54,7 @@
 
 
 
-{#{% extends 'base.html.twig' %}
+{#{% extends 'admin_base.html.twig' %}
 
 {% block title %}Reset your password{% endblock %}
 

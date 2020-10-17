@@ -22,41 +22,38 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class ArticleController extends AbstractController
 {
-//    /**
-//     * @return string
-//     */
-//    private function _GetPageTitle()
-//    {
-//        $page_title = 'Afrique-shopping: ' .
-//            ' Informatique, Smartphones, livres, jeux vidéo, photos, jouets, électroménager neuf et occasion';
-//        if (isset ($_GET['DepartmentId']) && isset ($_GET['CategoryId']))
-//        {
-//            $page_title = 'TShirtShop: ' .
-//                Manager::GetDepartmentName($_GET['DepartmentId']) . ' - ' .
-//                Manager::GetCategoryName($_GET['CategoryId']);
-//            if (isset ($_GET['Page']) && ((int)$_GET['Page']) > 1)
-//                $page_title .= ' - Page ' . ((int)$_GET['Page']);
-//        }
-//        elseif (isset ($_GET['DepartmentId']))
-//        {
-//            $page_title = 'TShirtShop: ' .
-//                Manager::GetDepartmentName($_GET['DepartmentId']);
-//            if (isset ($_GET['Page']) && ((int)$_GET['Page']) > 1)
-//                $page_title .= ' - Page ' . ((int)$_GET['Page']);
-//        }
-//        elseif (isset ($_GET['ProductId']))
-//        {
-//            $page_title = 'TShirtShop: ' .
-//                Manager::GetProductName($_GET['ProductId']);
-//        }
-//        else
-//        {
-//            if (isset ($_GET['Page']) && ((int)$_GET['Page']) > 1)
-//                $page_title .= ' - Page ' . ((int)$_GET['Page']);
-//        }
-//        return $page_title;
-//
-//    }
+    private function _GetPageTitle()
+    {
+        $page_title = 'Afrique-shopping: ' .
+            ' Informatique, Smartphones, livres, jeux vidéo, photos, jouets, électroménager neuf et occasion';
+        if (isset ($_GET['DepartmentId']) && isset ($_GET['CategoryId']))
+        {
+            $page_title = 'TShirtShop: ' .
+                Manager::GetDepartmentName($_GET['DepartmentId']) . ' - ' .
+                Manager::GetCategoryName($_GET['CategoryId']);
+            if (isset ($_GET['Page']) && ((int)$_GET['Page']) > 1)
+                $page_title .= ' - Page ' . ((int)$_GET['Page']);
+        }
+        elseif (isset ($_GET['DepartmentId']))
+        {
+            $page_title = 'TShirtShop: ' .
+                Manager::GetDepartmentName($_GET['DepartmentId']);
+            if (isset ($_GET['Page']) && ((int)$_GET['Page']) > 1)
+                $page_title .= ' - Page ' . ((int)$_GET['Page']);
+        }
+        elseif (isset ($_GET['ProductId']))
+        {
+            $page_title = 'TShirtShop: ' .
+                Manager::GetProductName($_GET['ProductId']);
+        }
+        else
+        {
+            if (isset ($_GET['Page']) && ((int)$_GET['Page']) > 1)
+                $page_title .= ' - Page ' . ((int)$_GET['Page']);
+        }
+        return $page_title;
+
+    }
     /**
      * @Route("/", name="home")
      * @param Managers $managers
@@ -88,11 +85,12 @@ class ArticleController extends AbstractController
 //        }
 //        $entityManager->flush();*/
         $page = $request->query->get('page', 1);
-        $per_page = 1; // Set how many records do you want to display per page.
+        $per_page = 4; // Set how many records do you want to display per page.
         $startpoint = ($page * $per_page) - $per_page;
         $article =$this->getDoctrine()
             ->getRepository(Article::class);
         $findPublishedArticle =$article ->findPublishedArticle($startpoint,$per_page);
+
 
         $ArticlePagination =$article->ArticlePagination();
         $url = $this->generateUrl('home');
@@ -116,7 +114,7 @@ class ArticleController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         $articles = $this->getDoctrine()
-            ->getRepository(Article::class);
+            ->getRepository(Article::class)->find($id);
 
 
 
@@ -133,10 +131,13 @@ class ArticleController extends AbstractController
 
    if($findPage===null){
             $nb_visite=1;
-            $pagemostvisited->setArticle($id);
+            $pagemostvisited->setArticle($articles);
             $pagemostvisited->setNbVisite($nb_visite);
             $pagemostvisited->setTimestamp(new \DateTime('now'));
        $entityManager->persist($pagemostvisited);
+       $findPage = $this->getDoctrine()
+           ->getRepository(HomePageMostVisited::class)
+           ->findPageMostVisited($id);
 
    }else{
 
@@ -176,6 +177,7 @@ class ArticleController extends AbstractController
         $articles = $this->getDoctrine()
             ->getRepository(Article::class);
         $article=$articles->find($id);
+
         return $this->render('article/show.html.twig', [
             'news' => $article,'CommentaireForm' => $form->createView(),
             'findPage'=>$findPage

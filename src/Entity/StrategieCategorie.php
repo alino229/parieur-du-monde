@@ -24,7 +24,7 @@ class StrategieCategorie
     public function __toString()
     {
         // TODO: Implement __toString() method.
-        return $this->getId().'';
+        return $this->getId().'-'.$this->getCategorie();
     }
 
     public function getId(): ?int

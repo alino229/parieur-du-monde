@@ -9,24 +9,24 @@
         <div class="article">
             <article class="home__article">
                 <div class="row">
-                    <section class="premium-benefits">
+                    <section class="premium-benefits" >
                         <h1 class="premium-page__section-header">Qu'allez vous gagner avec parieurdumonde?</h1>
                         <div class="premium-benefits__boxes">
                             <div class="col-1-of-4 premium-benefits__box">
-                                <h2 class="premium-benefits__box-header titre">Pronostics de bonne qualité de notre équipe </h2>
+                                <h2 class="premium-benefits__box-header titre" style="color:#feb43b!important">Pronostics de bonne qualité de notre équipe </h2>
                                 <span class="premium-benefits__box-description">L'équipe professionnelle de parieurdumonde partage avec vous des pronostics sure.</span>
                             </div>
                             <div class="col-1-of-4 premium-benefits__box">
-                                <h2 class="premium-benefits__box-header titre">Pronostics à votre adresse e-mail</h2>
+                                <h2 class="premium-benefits__box-header titre" style="color:#feb43b!important">Pronostics à votre adresse e-mail</h2>
                                 <span class="premium-benefits__box-description">Nous vous informons par email afin que vous ne manquiez aucun pronostics</span>
                             </div>
                             <div class="col-1-of-4 premium-benefits__box">
-                                <h2 class="premium-benefits__box-header titre" style="margin-bottom: 2.2rem">Analyse détaillé</h2>
+                                <h2 class="premium-benefits__box-header titre" style="margin-bottom: 2.2rem;color:#feb43b!important">Analyse détaillé</h2>
                                 <span class="premium-benefits__box-description">Nous vous aidons dans l'analyse de vos propres pronostics
                         </span>
                             </div>
                             <div class="col-1-of-4 premium-benefits__box">
-                                <h2 class="premium-benefits__box-header titre" style="margin-bottom: 2rem">Haut rendement</h2>
+                                <h2 class="premium-benefits__box-header titre" style="margin-bottom: 2rem;color:#feb43b!important">Haut rendement</h2>
                                 <span class="premium-benefits__box-description">Nos pronostics sont rentables.Vous avez droit à un coupon cotes 3-5 par jour et une cotes 20-30 par semaine. </span>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
 
                         <div class="premium-page__info">
                             <h1 class="premium-page__info-header">Qu'es-ce que parieurdumonde VIP ?</h1>
-                            <p class="premium-page__info-description"> parieurdumonde VIP vous aide à trouver les meilleures cotes pour vos paris. Alors, comment faisons-nous cela?
+                            <p class="premium-page__info-description"> parieurdumonde VIP vous aide à trouver les meilleures cotes pour vos paris.
                                                         </p>
                         </div>
 
@@ -86,20 +86,20 @@
 
                         <div class="row">
                             <div class="col-1-of-4 col1">
-                                <img src="../../resources/images/mtn-mobile_money.jpg" alt="">
+                                <img src="{{ asset('images/mtn-mobile_money.jpg') }}" alt="">
 
 
                             </div>
                             <div class="col-1-of-4 col2">
-                                <img src="../../resources/images/flooz.png" alt="">
+                                <img src="{{ asset('images/flooz.png') }}" alt="">
 
                             </div>
                             <div class="col-1-of-4 col3">
-                                <img src="../../resources/images/paypal.png" alt="" width="250px">
+                                <img src="{{ asset('images/paypal.png') }}" alt="" width="250px">
 
                             </div>
                             <div class="col-1-of-4 col4">
-                                <img src="../../resources/images/perfectmoney.jpg" alt="" width="250px">
+                                <img src="{{ asset('images/perfectmoney.jpg') }}" alt="" width="250px">
 
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                 <div class="row">
                     <p style="text-align: center;font-size:16px; ">
                         Nous répondons aux questions les plus courantes.
-                        Si vous avez d'autres questions, remplissez le <a href="/contact" style="color:#2b6dad;">formulaire de contact ici</a> .
+                        Si vous avez d'autres questions, remplissez le <a href="{{ path('contact') }}" style="color:#2b6dad;">formulaire de contact ici</a> .
                     </p>
                 </div>
 
@@ -118,6 +118,11 @@
 
     </section>
 {% endblock%}
+{% block javascripts %}
+    <script src="https://www.paypal.com/sdk/js?client-id=AVsCy_UG1_ESjIFJ5B_1uCA6QPN6P1cbshB7da2bL3UyQB0GMijltWeYTd3zSwGThSxaROKkOSRgKXOR"></script>
+    <script>paypal.Buttons().render('.value-cote');</script>
+{% endblock %}
+
 
 
 

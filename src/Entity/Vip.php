@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\VipRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,19 +19,11 @@ class Vip
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $week;
+    private $abonnement;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $month;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $annuel;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
@@ -47,6 +40,10 @@ class Vip
      * @ORM\Column(type="datetime")
      */
     private $date;
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $expireDate;
     public function __toString()
     {
         return $this->getUser()->getPseudo().'';
@@ -57,34 +54,18 @@ class Vip
         return $this->id;
     }
 
-    public function getWeek(): ?int
+    public function getAbonnement(): ?int
     {
-        return $this->week;
+        return $this->abonnement ;
     }
 
-    public function setWeek(?int $week): self
+    public function setAbonnement(?int $abonnement): self
     {
-        $this->week = $week;
+        $this->abonnement = $abonnement;
 
         return $this;
     }
 
-    public function getMonth(): ?int
-    {
-        return $this->month;
-    }
-
-    public function setMonth(?int $month): self
-    {
-        $this->month = $month;
-
-        return $this;
-    }
-
-    public function getAnnuel(): ?int
-    {
-        return $this->annuel;
-    }
 
     public function setAnnuel(?int $annuel): self
     {
@@ -127,5 +108,36 @@ class Vip
         $this->date = $date;
 
         return $this;
+    }
+    public function setExpireDate(): self
+    {
+        $date=new dateTime();
+        if($this->getAbonnement()==="MOIS"){
+            $this->expireDate=strtotime($this->getDate())+24*3600*30;
+
+            $date->setTimestamp($this->expireDate);
+            $this->expireDate=$date->format('Y-m-d H:i:s');
+
+
+        }elseif ($this->getAbonnement()==="SEMAINE "){
+            $this->expireDate=strtotime($this->getDate())+24*3600*7;
+
+            $date->setTimestamp($this->expireDate);
+            $this->expireDate=$date->format('Y-m-d H:i:s');
+        }
+        elseif ($this->getAbonnement()==="ANNUEL "){
+            $this->expireDate=strtotime($this->getDate())+24*3600*30*12;
+
+            $date->setTimestamp($this->expireDate);
+            $this->expireDate=$date->format('Y-m-d H:i:s');
+        }
+
+
+        return $this;
+    }
+    public function getExpireDate(): ?\DateTimeInterface
+    {
+        return $this->expireDate;
+
     }
 }

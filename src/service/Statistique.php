@@ -4,6 +4,11 @@
 namespace App\Service;
 
 
+use App\Entity\CounterValue;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
+
 class Statistique
 {
     /***************************************************************************************/
@@ -12,7 +17,20 @@ class Statistique
     private $db;
     private $file_content;
 
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+    /**
+     * @var Security
+     */
+    private $security;
 
+    public function __construct(EntityManagerInterface $em,Security $security)
+    {
+        $this->em = $em;
+        $this->security=$security;
+    }
 
     /****************************************************************************************/
     /**
@@ -227,24 +245,34 @@ class Statistique
         $counter_ignore_ips = array('127.0.0.2', '127.0.0.3');
 
 // get basic information
+        $request = Request::createFromGlobals();
         $counter_agent = $_SERVER['HTTP_USER_AGENT'];
         $counter_ip = ($_SERVER['REMOTE_ADDR']);
         $counter_time = time();
         $ignore = false;
-        $sql = "SELECT * FROM counter_values LIMIT 1";
-        $this->db->query($sql);
-        $this->db->execute();
-        // fill when empty
-        if ($this->db->rowCount() == 0) {
-            $sql = "INSERT INTO `counter_values` (`id`, `day_id`, `day_value`, `yesterday_id`, `yesterday_value`, `week_id`, `week_value`, `month_id`, `month_value`, `year_id`, `year_value`, `all_value`, `record_date`, `record_value`) VALUES ('1', '" . date("z") . "',  '1', '" . (date("z") - 1) . "',  '0', '" . date("W") . "', '1', '" . date("n") . "', '1', '" . date("Y") . "',  '1',  '1',  NOW(),  '1')";
-            $this->db->query($sql);
-            $this->db->execute();
-            $this->db->close();
+        $sql = $this->em->getRepository(CounterValue::class)
+            ->findOne();
+        $CounterValue=new CounterValue();
 
-            // reload with settings
-            $sql = "SELECT * FROM counter_values LIMIT 1";
-            $this->db->query($sql);
-            $this->db->execute();
+        // fill when empty
+        if ($sql==null) {
+            $CounterValue->setDayId(date("z") );
+            $CounterValue->setDayValue(1 );
+            $CounterValue->setYesterdayId((date("z") - 1));
+            $CounterValue->setYesterdayValue(date("z") );
+            $CounterValue->setWeekId(date("z") );
+            $CounterValue->setWeekValue(date("z") );
+            $CounterValue->setYearId(date("z") );
+            $CounterValue->setYearValue(date("z") );
+            $CounterValue->setYearValue(date("Y") );
+            $CounterValue->setRecordValue(1 );
+            $CounterValue->setRecordDate(NOW());
+            $CounterValue->setAllValue(date("z") );
+            $sql = "INSERT INTO `counter_values` (`id`, `day_id`, `day_value`, `yesterday_id`, `yesterday_value`, `week_id`, `week_value`, `month_id`, `month_value`, `year_id`, `year_value`, `all_value`, `record_date`, `record_value`) VALUES ('1', '" . date("z") . "',  '1', '" . (date("z") - 1) . "',  '0', '" . date("W") . "', '1', '" . date("n") . "', '1', '" . date("Y") . "',  '1',  '1',  NOW(),  '1')";
+
+
+            $this->em->getRepository(CounterValue::class)
+                ->findOne();
             $ignore = true;
         }
 

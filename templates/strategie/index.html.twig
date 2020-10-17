@@ -108,49 +108,7 @@
                             </div>
 
                         </div>
-                        <div class="aside_popu">
-                            <div class="aside_header">
-                                <h3 class="h2_heading">Mes vidéos</h3>
-                            </div>
-                            <div class="content">
-                                <ul>
-                                    {#<li class="video-li">
-                                        <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;
-    line-height: 1.5em;"> <span></span> <a href="/?titre={% set titre1=most1.titre %}{%   set stripsl=manager.stripslashes(titre1) %}{{ manager.urlEncode(stripsl) }}&id={{ id_parent1 }}">{{ manager.stripslashes(most1.titre) }}</a>
-                                            <span>Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
-                                        </div>
-                                        <div class="video-rig" style="background: #0b95de;height:100%;min-height:120px;position:relative;float: right;width: 40%;margin-top: 13px ">hhh</div>
-                                    </li>
-                                    <li class="video-li">
-                                        <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;
-    line-height: 1.5em;"> <span></span> <a href="/?titre={% set titre1=most1.titre %}{%   set stripsl=manager.stripslashes(titre1) %}{{ manager.urlEncode(stripsl) }}&id={{ id_parent1 }}">{{ manager.stripslashes(most1.titre) }}</a>
-                                            <span>Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
-                                        </div>
-                                        <div class="video-rig" style="background: #0b95de;height:100%;min-height:120px;position:relative;float: right;width: 40%;margin-top: 13px ">hhh</div>
-                                    </li>
-                                    <li class="video-li">
-                                        <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;
-    line-height: 1.5em;"> <span></span> <a href="/?titre={% set titre1=most1.titre %}{%   set stripsl=manager.stripslashes(titre1) %}{{ manager.urlEncode(stripsl) }}&id={{ id_parent1 }}">{{ manager.stripslashes(most1.titre) }}</a>
-                                            <span>Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
-                                        </div>
-                                        <div class="video-rig" style="background: #0b95de;height:100%;min-height:120px;position:relative;float: right;width: 40%;margin-top: 13px ">hhh</div>
-                                    </li>#}
-
-                                  {#  <li class="video-li" >
-                                        <div class="video-lef" style="width: 60%;font-size: 12px !important;float: left;
-    line-height: 1.5em;"> <span></span> <a href="/?titre={% set titre1=most1.titre %}{%   set stripsl=manager.stripslashes(titre1) %}{{ manager.urlEncode(stripsl) }}&id={{ id_parent1 }}">{{ manager.stripslashes(most1.titre) }}</a>
-                                            <span>Si vous voulez savoir comment gagner de l'argent avec des paris sportifs sûrs, regardez attentivement cette vidéo et…</span>
-                                        </div>
-                                        <div class="video-rig" style="background: #0b95de;height:100%;min-height:120px;position:relative;float: right;width: 40%;margin-top: 13px ;margin-bottom: 2rem">hhh</div>
-                                    </li>#}
-
-
-
-                                </ul>
-                            </div>
-
-
-                        </div>
+                        {{ include('_mesVideo.html.twig') }}
 
 
                     </div>

@@ -1,0 +1,302 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}New Article{% endblock %}
+ {% block head_stylesheets %}
+     {{ parent() }}
+     <link rel="stylesheet" href="{{ asset('admin/bootstrap-colorpicker.min.css') }}">
+     <link rel="stylesheet" href="{{ asset('admin/select2-bootstrap4.min.css') }}">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+     <link rel="stylesheet" href="{{ asset('admin/select2.min.css') }}">
+ {% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Create new Pronostics</h1>
+                </div>
+                <div class="col-sm-6">
+                    <div class="breadcrumb float-sm-right">
+                        {{ form_widget(form.save,{
+                            'attr':{'class':'btn btn-success float-right'}
+                        }) }}
+                        {#<button type="submit" class="btn btn-success float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i>Créer un nouvel article
+                        </button>#}
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    {# <div class="card-header">
+                         <h3 class="card-title"></h3>
+
+                         <div class="card-tools">
+                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                 <i class="fa fa-minus">Create new Article</i></button>
+                         </div>
+                     </div>#}
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputName">{{ form_label(form.home) }}</label>
+                            {{ form_widget(form.home,{
+                                'attr':{'class':'form-control'}
+                            }) }}
+                            <div class="invalid-feedback">{{ form_errors(form.home) }}</div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">{{ form_label(form.away) }}</label>
+                            {{ form_widget(form.away,{
+                                'attr':{'class':'form-control'}
+                            }) }}
+                            <div class="invalid-feedback">{{ form_errors(form.away) }}</div>
+
+
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="col-md-6">
+                <div class="card card-secondary">
+
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputEstimatedBudget">{{ form_label(form.competition) }}</label>
+                            {{ form_widget(form.competition,{
+                                'attr':{'class':'form-control'}
+                            }) }}
+                            <div class="invalid-feedback">{{ form_errors(form.competition) }}</div>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">{{ form_label(form.pays) }}</label>
+                            {{ form_widget(form.pays,{
+                                'attr':{'class':'form-control '}
+                            }) }}
+                            <div class="invalid-feedback">{{ form_errors(form.pays) }}</div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">{{ form_label(form.pronostics) }}</label>
+                            <div class="input-group">
+
+                                    {{ form_widget(form.pronostics,{
+                                        'attr':{'class':'form-control'}
+                                    }) }}
+                                <div class="invalid-feedback">{{ form_errors(form.pronostics) }}</div>
+
+
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputStatus">{{ form_label(form.cote) }}</label>
+                            {{ form_widget(form.cote ,{
+                                'attr':{'class':'form-control'}
+                            }) }}
+                            <div class="invalid-feedback">{{ form_errors(form.cote) }}</div>
+
+                        </div>
+
+
+
+
+
+                        <div class="form-group " >
+                            <label>{{ form_label(form.day) }}:</label>
+                            <div class="input-group " data-target-input="nearest">
+                                {{ form_widget(form.day,{
+                                    'attr':{'class':'form-control '}
+                                }) }}
+
+                            </div>
+                            <div class="invalid-feedback">{{ form_errors(form.day) }}</div>
+
+
+
+                        </div>
+                        <div class="form-group " >
+                            <label>{{ form_label(form.time) }}:</label>
+                            <div class="input-group "  data-target-input="nearest">
+                                {{ form_widget(form.time,{
+                                    'attr':{'class':'form-control '}
+                                }) }}
+
+                            </div>
+                            <div class="invalid-feedback">{{ form_errors(form.time) }}</div>
+
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="">{{ form_label(form.homeFlagFile) }}</label>
+                            <div class="input-group">
+
+                                    {{ form_widget(form.homeFlagFile,{
+                                        'attr':{'class':''}
+                                    }) }}
+
+
+                            </div>
+                            <div class="invalid-feedback">{{ form_errors(form.homeFlagFile) }}</div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="">{{ form_label(form.awayFlagFile) }}</label>
+                            <div class="input-group">
+
+                                    {{ form_widget(form.awayFlagFile,{
+                                        'attr':{'class':''}
+                                    }) }}
+
+
+                            </div>
+                            <div class="invalid-feedback">{{ form_errors(form.awayFlagFile) }}</div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                {{ form_widget(form.published,{
+                                    'attr':{'class':'custom-control-input'}
+                                }) }}
+                                {#                                <input type="checkbox" class="custom-control-input" id="customSwitch1" name="article[published]">#}
+                                <label class="custom-control-label" for="pronostics_published">{{ form_label(form.published) }}</label>
+                                <div class="invalid-feedback">{{ form_errors(form.published) }}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">{{ form_label(form.category) }}</label>
+                            <div class="input-group">
+
+                                    {{ form_widget(form.category,{
+                                        'attr':{'class':'form-control'}
+                                    }) }}
+
+                                </div>
+                            <div class="invalid-feedback">{{ form_errors(form.category) }}</div>
+
+                            </div>
+
+
+                    </div>
+                    <!-- /.card-body -->
+                    <a href="{{ path('pronostics_index') }}">back to list</a>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+
+
+
+    </section>
+    {{ form_end(form) }}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('admin/jquery.inputmask.bundle.min.js') }}"></script>
+    <script src="{{ asset('admin/select2.full.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(function () {
+            /*//Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            //Money Euro
+            $('[data-mask]').inputmask()
+*/
+            //Date range picker
+
+            $('.datepicker').datepicker({
+                format: 'dd/mm/yy hh:mm'
+            });
+          /*  //Date range picker
+            $('#article_created_at').daterangepicker()*/
+            //Date range picker with time picker
+            $('#time').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'hh:mm'
+                }
+            })
+            $('#date').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'dd/mm/yy'
+                }
+            })
+            //Date range as a button
+            /*$('#daterange-btn').daterangepicker(
+                {
+                    ranges   : {
+                        'Today'       : [moment(), moment()],
+                        'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate  : moment()
+                },
+                function (start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                }
+            )*/
+
+            //Timepicker
+           /* $('#timepicker').datetimepicker({
+                format: 'LT'
+            })
+
+            //Bootstrap Duallistbox
+            $('.duallistbox').bootstrapDualListbox()
+
+            //Colorpicker
+            $('.my-colorpicker1').colorpicker()
+            //color picker with addon
+            $('.my-colorpicker2').colorpicker()
+
+            $('.my-colorpicker2').on('colorpickerChange', function(event) {
+                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+            });
+
+            $("input[data-bootstrap-switch]").each(function(){
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            });*/
+
+        })
+    </script>
+
+
+{% endblock %}
+
+
+
+

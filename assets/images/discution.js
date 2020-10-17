@@ -1,0 +1,1 @@
+$(document).ready(function(d){var b=$("#textarea");var c=$.data(b,"auteur",{test:val});var a=$.data(b,"auteur").test;$(".js-reponse").on("click",function(){var e=$("#js-reponse").attr("titre");$("#form_reponse").css({display:"block"})});$("#js-submit_reponse").click(function(f){$.removeData(b,"auteur")})});

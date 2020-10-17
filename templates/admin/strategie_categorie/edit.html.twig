@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit StrategieCategorie{% endblock %}
+
+{% block body %}
+    <h1>Edit StrategieCategorie</h1>
+
+    {{ include('admin/strategie_categorie/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('strategie_categorie_index') }}">back to list</a>
+
+    {{ include('admin/strategie_categorie/_delete_form.html.twig') }}
+{% endblock %}

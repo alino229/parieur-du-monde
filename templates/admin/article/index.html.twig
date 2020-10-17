@@ -1,0 +1,122 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Article index</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a class="btn btn-success float-right" href="{{ path('admin_article_new') }}">Créer un nouveau article</a></li>
+
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">DataTable with minimal features &amp; hover style</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+
+
+
+    <table class="table"  id="example2">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>Slug</th>
+                <th>Auteur</th>
+                <th>Created_at</th>
+                <th>Images</th>
+                {#<th>UpdatedAt</th>
+                <th>ImageAlt</th>
+                <th>ImageTitre</th>
+                <th>MetaDesciption</th>#}
+                <th>Published</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.titre }}</td>
+                <td>
+
+                    <!-- Button trigger modal -->
+                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{ article.id }}">
+                        <i class="fa fa-file-alt"></i>Voir le contenu
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog"  role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ article.titre }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{ article.contenu | raw}}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>{{ article.slug }}</td>
+                <td>{{ article.auteur }}</td>
+                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td><img  src =" {{vich_uploader_asset ( article , 'imageFile' )}} "  alt = " {{ article.images }} " width="60px" height="60px"/></td>
+                {#<td>{{ article.imageAlt }}</td>
+                <td>{{ article.imageTitre }}</td>
+                <td>{{ article.metaDesciption }}</td>#}
+                <td>
+
+                            <label class="custom-control-label" for="customSwitch1"></label>
+                        {{ article.published ? 'Yes' : 'No' }}</td>
+                <td class="project-actions text-right py-0 align-middle">
+                    <div class="btn-group btn-group-sm">
+                    <a class="btn btn-primary btn-sm" href="{{ path('admin_article_show', {'id': article.id}) }}"><i class="fa fa-folder">
+                        </i></a>
+                    <a class="btn btn-info btn-sm" href="{{ path('admin_article_edit', {'id': article.id}) }}"><i class="fa fa-pencil">
+                        </i></a>
+                    <a href="{{ path('admin_article_delete',{id:article.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div>
+
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    </section>
+{% endblock %}

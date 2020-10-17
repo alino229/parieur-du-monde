@@ -3,47 +3,105 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Pronostics;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+use App\Form\PronosticsType;
+use App\Repository\PronosticsRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-class PronosticsCrudController extends AbstractCrudController
+/**
+ * @Route("admin/pronostics")
+ */
+class PronosticsCrudController extends AbstractController
 {
-    public static function getEntityFqcn(): string
+    /**
+     * @Route("/", name="pronostics_index", methods={"GET"})
+     * @param PronosticsRepository $pronosticsRepository
+     * @return Response
+     */
+    public function index(PronosticsRepository $pronosticsRepository): Response
     {
-        return Pronostics::class;
+        return $this->render('admin/pronostics/index.html.twig', [
+            'pronostics' => $pronosticsRepository->findAll(),
+        ]);
     }
 
-
-    public function configureFields(string $pageName): iterable
+    /**
+     * @Route("/new", name="pronostics_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function new(Request $request): Response
     {
-        return [
-            IdField::new('id')->hideOnForm(),
-            BooleanField::new('published')->setLabel('Publier'),
-            TextField::new('home')->setLabel('Domicile'),
-            TextField::new('away')->setLabel('Extérieur'),
-            TextField::new('competition')->setLabel('Compétition'),
-            TextField::new('pays')->hideOnIndex()->setLabel('Pays'),
-            TextField::new('pronostics')->setLabel('Pronostics '),
-            TextField::new('cote')->setLabel('Cote'),
-            TextField::new('resultat')->setLabel('Resultat'),
-            BooleanField::new('resultValue')->setLabel('succès /échèc')->hideOnIndex(),
-            DateField::new('day')->setLabel('Jour du match'),
-            TimeField::new('time')->setLabel('Heure du match')->hideOnIndex(),
-            ImageField::new('homeFlagFile')->setLabel('Logo équipe domicile ')->setFormType(VichFileType::class)->hideOnIndex(),
-            ImageField::new('awayFlagFile')->setLabel('Logo équipe extérieure')->setFormType(VichFileType::class)->hideOnIndex(),
-            DateTimeField::new('addDate')->setLabel('Date actuelle')->hideOnIndex()->setTimezone('Europe/Paris')->setFormat('dd/MM/yy H:mm'),
-            AssociationField::new('category')->setLabel('Catégorie ')
+        $pronostic = new Pronostics();
+        $form = $this->createForm(PronosticsType::class, $pronostic);
+        $form->handleRequest($request);
 
-        ];
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $pronostic->setAddDate(new \DateTime('now'));
+            $entityManager->persist($pronostic);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('pronostics_index');
+        }
+
+        return $this->render('admin/pronostics/new.html.twig', [
+            'pronostic' => $pronostic,
+            'form' => $form->createView(),
+        ]);
     }
 
+    /**
+     * @Route("/{id}/afficher", name="pronostics_show", methods={"GET"})
+     * @param Pronostics $pronostic
+     * @return Response
+     */
+    public function show(Pronostics $pronostic): Response
+    {
+        return $this->render('admin/pronostics/show.html.twig', [
+            'pronostic' => $pronostic,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/modifier", name="pronostics_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Pronostics $pronostic
+     * @return Response
+     */
+    public function edit(Request $request, Pronostics $pronostic): Response
+    {
+        $form = $this->createForm(PronosticsType::class, $pronostic);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('pronostics_index');
+        }
+
+        return $this->render('admin/pronostics/edit.html.twig', [
+            'pronostic' => $pronostic,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/effacer", name="pronostics_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Pronostics $pronostic
+     * @return Response
+     */
+    public function delete(Request $request, Pronostics $pronostic): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$pronostic->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($pronostic);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('pronostics_index');
+    }
 }

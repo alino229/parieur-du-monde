@@ -7,17 +7,20 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
  */
-class User implements UserInterface
+class User implements UserInterface , Serializable
 {
     /**
      * @ORM\Id
@@ -52,6 +55,11 @@ class User implements UserInterface
      */
     private $avatar;
     /**
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"image/png", "image/jpeg", "image/jpg"},
+     *     mimeTypesMessage = "Please upload a valid PDF or valid IMAGE"
+     * )
      * @Vich\UploadableField(mapping="user_images", fileNameProperty="avatar")
      * @var File
      */
@@ -89,6 +97,16 @@ class User implements UserInterface
     {
         return $this->getPseudo().'';
         // TODO: Implement __toString() method.
+    }
+    public function serialize()
+    {
+        $this->avatar = base64_encode($this->avatar);
+    }
+
+    public function unserialize($serialized)
+    {
+        $this->avatar = base64_decode($this->avatar);
+
     }
 
     public function getId(): ?int

@@ -1,0 +1,41 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>ForumMessage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Subject</th>
+                <th>Body</th>
+                <th>Date</th>
+                <th>Topic</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for forum_message in forum_messages %}
+            <tr>
+                <td>{{ forum_message.id }}</td>
+                <td>{{ forum_message.subject }}</td>
+                <td>{{ forum_message.body }}</td>
+                <td>{{ forum_message.date ? forum_message.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ forum_message.topic }}</td>
+                <td>
+                    <a href="{{ path('forum_message_show', {'id': forum_message.id}) }}">show</a>
+                    <a href="{{ path('forum_message_edit', {'id': forum_message.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('forum_message_new') }}">Create new</a>
+{% endblock %}
