@@ -3,39 +3,85 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <h1>Vip index</h1>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Abonnement Vip</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a class="btn btn-success float-right" href="{{ path('vip_new') }}">Créer un nouveau abonnement</a></li>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Abonnement</th>
-                <th>Active</th>
-                <th>Date</th>
-                <th>ExpireDate</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for vip in vips %}
-            <tr>
-                <td>{{ vip.id }}</td>
-                <td>{{ vip.abonnement }}</td>
-                <td>{{ vip.active ? 'Yes' : 'No' }}</td>
-                <td>{{ vip.date ? vip.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ vip.expireDate ? vip.expireDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('vip_show', {'id': vip.id}) }}">show</a>
-                    <a href="{{ path('vip_edit', {'id': vip.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">DataTable with minimal features &amp; hover style</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
 
-    <a href="{{ path('vip_new') }}">Create new</a>
+
+
+                                    <table class="table"  id="example2">
+                                        <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Abonné</th>
+                                            <th>Abonnement</th>
+                                            <th>Active</th>
+                                            <th>Date d'abonnement</th>
+                                            <th>Date d'expiration  </th>
+                                            <th>actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for vip in vips %}
+                                            <tr>
+                                                <td>{{ vip.id }}</td>
+                                                <td>{{ vip.user.pseudo }}</td>
+                                                <td>{{ vip.abonnement }}</td>
+                                                <td>{{ vip.active ? 'Yes' : 'No' }}</td>
+                                                <td>{{ vip.date ? vip.date|date('d-m-Y H:i:s') : '' }}</td>
+                                                <td>{{ vip.expireDate ? vip.expireDate|date('d-m-Y H:i:s') : '' }}</td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a class="btn btn-primary btn-sm" href="{{ path('vip_show', {'id': vip.id}) }}"><i class="fa fa-folder">
+                                                            </i></a>
+                                                        <a class="btn btn-info btn-sm" href="{{ path('vip_edit', {'id': vip.id}) }}"><i class="fa fa-pencil">
+                                                            </i></a>
+                                                        <a href="{{ path('vip_delete',{id:vip.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="6">no records found</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
+                        </div>
+
+
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+    </section>
+
+
+
 {% endblock %}

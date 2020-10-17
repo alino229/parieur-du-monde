@@ -17,6 +17,8 @@ class ContactCrudController extends AbstractController
 {
     /**
      * @Route("/", name="contact_index", methods={"GET"})
+     * @param ContactRepository $contactRepository
+     * @return Response
      */
     public function index(ContactRepository $contactRepository): Response
     {
@@ -27,6 +29,8 @@ class ContactCrudController extends AbstractController
 
     /**
      * @Route("/new", name="contact_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {

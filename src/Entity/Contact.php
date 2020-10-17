@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ContactRepository::class)
@@ -29,6 +30,9 @@ class Contact
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(
+     *    message = "Votre '{{ value }}' est invalide ",
+     * )
      */
     private $site;
 

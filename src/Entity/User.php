@@ -16,9 +16,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte avec cet email")
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
+ * @UniqueEntity(fields={"pseudo"}, message="Il existe déjà un compte avec ce pseudo")
  */
 class User implements UserInterface , Serializable
 {
@@ -31,6 +32,8 @@ class User implements UserInterface , Serializable
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *     message = "Votre adresse email '{{ value }}' est invalide.")
      */
     private $email;
 
@@ -103,6 +106,9 @@ class User implements UserInterface , Serializable
         $this->avatar = base64_encode($this->avatar);
     }
 
+    /**
+     * @param string $serialized
+     */
     public function unserialize($serialized)
     {
         $this->avatar = base64_decode($this->avatar);
@@ -148,7 +154,7 @@ class User implements UserInterface , Serializable
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return $roles;
     }
 
     public function setRoles(array $roles): self
@@ -271,20 +277,7 @@ class User implements UserInterface , Serializable
 
         return $this;
     }
-    public function getVipActivation()
-    {
-        if ($this->getVip()!==null){
-            return $this->getVip()->getActive();
-        }else{
-            return false;
-        }
 
-    }
-    public function setVipActivation(bool $activation )
-    {
-
-        return $this->getUser()->getActive($activation);
-    }
 
     /**
      * @return Collection|Role[]

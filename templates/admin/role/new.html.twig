@@ -3,9 +3,75 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <h1>Create new Role</h1>
+    {{ form_start(form) }}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1> Affecter un role à un utilisateur </h1>
+                </div>
+                <div class="col-sm-6">
+                    <div class="breadcrumb float-sm-right">
+                        {{ form_widget(form.sauvegarder,{
+                            'attr':{'class':'btn btn-success float-right'}
+                        }) }}
+                        {#<button type="submit" class="btn btn-success float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i>Créer un nouvel article
+                        </button>#}
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
 
-    {{ include('role/_form.html.twig') }}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    {# <div class="card-header">
+                         <h3 class="card-title"></h3>
 
-    <a href="{{ path('role_index') }}">back to list</a>
+                         <div class="card-tools">
+                             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                 <i class="fa fa-minus">Create new Article</i></button>
+                         </div>
+                     </div>#}
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputName">{{ form_label(form.type) }}</label>
+                            {{ form_widget(form.type,{
+                                'attr':{'class':'form-control'}
+                            }) }}
+
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">{{ form_label(form.users) }}</label>
+                            {{ form_widget(form.users,{
+                                'attr':{'class':'form-control select'}
+                            }) }}
+
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-info btn-sm" href="{{ path('role_index') }}">retour à la liste</a>
+
+
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+
+
+
+
+    </section>
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
 {% endblock %}

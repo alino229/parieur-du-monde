@@ -17,6 +17,8 @@ class RoleCrudController extends AbstractController
 {
     /**
      * @Route("/", name="role_index", methods={"GET"})
+     * @param RoleRepository $roleRepository
+     * @return Response
      */
     public function index(RoleRepository $roleRepository): Response
     {
@@ -27,12 +29,17 @@ class RoleCrudController extends AbstractController
 
     /**
      * @Route("/new", name="role_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
         $role = new Role();
         $form = $this->createForm(RoleType::class, $role);
         $form->handleRequest($request);
+        if($form->isSubmitted()){
+            dump($form->isValid());
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -50,6 +57,8 @@ class RoleCrudController extends AbstractController
 
     /**
      * @Route("/{id}", name="role_show", methods={"GET"})
+     * @param Role $role
+     * @return Response
      */
     public function show(Role $role): Response
     {
@@ -60,6 +69,9 @@ class RoleCrudController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="role_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Role $role
+     * @return Response
      */
     public function edit(Request $request, Role $role): Response
     {

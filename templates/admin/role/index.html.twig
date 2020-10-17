@@ -3,33 +3,77 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <h1>Role index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Type</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for role in roles %}
-            <tr>
-                <td>{{ role.id }}</td>
-                <td>{{ role.type }}</td>
-                <td>
-                    <a href="{{ path('role_show', {'id': role.id}) }}">show</a>
-                    <a href="{{ path('role_edit', {'id': role.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('role_new') }}">Create new</a>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Role des utilisateurs </h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a class="btn btn-success float-right" href="{{ path('role_new') }}">Créer un nouveau role</a></li>
+
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+
+
+                                    <table class="table"  id="example2">
+                                        <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Role</th>
+                                            <th>Utilisateur </th>
+                                            <th>actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for role in roles %}
+                                            <tr>
+                                                <td>{{ role.id }}</td>
+                                                <td>{{ role.type }}</td>
+                                                <td>{{ role.UserPseudo[0] }}</td>
+                                                <td>
+                                                    <a class="btn btn-primary btn-sm" href="{{ path('role_show', {'id': role.id}) }}"><i class="fa fa-folder">
+                                                        </i></a>
+                                                    <a class="btn btn-info btn-sm" href="{{ path('role_edit', {'id': role.id}) }}"><i class="fa fa-pencil">
+                                                        </i></a>
+                                                    <a href="{{ path('role_delete',{id:role.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="3">Aucun résultat trouvé </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
+                        </div>
+
+
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+    </section>
+
 {% endblock %}

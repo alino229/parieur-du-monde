@@ -56,8 +56,17 @@ class Role
      */
     public function getUsers(): Collection
     {
+
         return $this->users;
     }
+    public function getUserPseudo(): array
+    {
+        $role=$this->users->map(function ($user){
+            return $user->getPseudo();
+        })->toArray();
+        return $role;
+    }
+
 
     public function addUser(User $user): self
     {

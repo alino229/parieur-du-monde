@@ -17,6 +17,8 @@ class VipCrudController extends AbstractController
 {
     /**
      * @Route("/", name="vip_index", methods={"GET"})
+     * @param VipRepository $vipRepository
+     * @return Response
      */
     public function index(VipRepository $vipRepository): Response
     {
@@ -27,6 +29,8 @@ class VipCrudController extends AbstractController
 
     /**
      * @Route("/new", name="vip_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -34,7 +38,8 @@ class VipCrudController extends AbstractController
         $form = $this->createForm(VipType::class, $vip);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
+            $vip->setDate(new \DateTime('now'));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($vip);
             $entityManager->flush();
@@ -50,6 +55,8 @@ class VipCrudController extends AbstractController
 
     /**
      * @Route("/{id}", name="vip_show", methods={"GET"})
+     * @param Vip $vip
+     * @return Response
      */
     public function show(Vip $vip): Response
     {
@@ -60,19 +67,22 @@ class VipCrudController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="vip_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Vip $vip
+     * @return Response
      */
     public function edit(Request $request, Vip $vip): Response
     {
         $form = $this->createForm(VipType::class, $vip);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()  && $form->isValid()) {
+            $vip->setDate(new \DateTime('now'));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('vip_index');
         }
 
-        return $this->render('vip/edit.html.twig', [
+        return $this->render('admin/vip/edit.html.twig', [
             'vip' => $vip,
             'form' => $form->createView(),
         ]);
@@ -80,6 +90,9 @@ class VipCrudController extends AbstractController
 
     /**
      * @Route("/{id}", name="vip_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Vip $vip
+     * @return Response
      */
     public function delete(Request $request, Vip $vip): Response
     {

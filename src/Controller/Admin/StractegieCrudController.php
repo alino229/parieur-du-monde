@@ -17,6 +17,8 @@ class StractegieCrudController extends AbstractController
 {
     /**
      * @Route("/", name="stractegie_index", methods={"GET"})
+     * @param StractegieRepository $stractegieRepository
+     * @return Response
      */
     public function index(StractegieRepository $stractegieRepository): Response
     {
@@ -27,6 +29,8 @@ class StractegieCrudController extends AbstractController
 
     /**
      * @Route("/new", name="stractegie_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -42,7 +46,7 @@ class StractegieCrudController extends AbstractController
             return $this->redirectToRoute('stractegie_index');
         }
 
-        return $this->render('stractegie/new.html.twig', [
+        return $this->render('admin/stractegie/new.html.twig', [
             'stractegie' => $stractegie,
             'form' => $form->createView(),
         ]);
@@ -50,6 +54,8 @@ class StractegieCrudController extends AbstractController
 
     /**
      * @Route("/{id}", name="stractegie_show", methods={"GET"})
+     * @param Stractegie $stractegie
+     * @return Response
      */
     public function show(Stractegie $stractegie): Response
     {
@@ -60,6 +66,9 @@ class StractegieCrudController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="stractegie_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Stractegie $stractegie
+     * @return Response
      */
     public function edit(Request $request, Stractegie $stractegie): Response
     {
@@ -80,6 +89,9 @@ class StractegieCrudController extends AbstractController
 
     /**
      * @Route("/{id}", name="stractegie_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Stractegie $stractegie
+     * @return Response
      */
     public function delete(Request $request, Stractegie $stractegie): Response
     {
