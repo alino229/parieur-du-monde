@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="breadcrumb float-sm-right">
-                        {{ form_widget(form.save,{
+                        {{ form_widget(form.sauvegarder,{
                             'attr':{'class':'btn btn-success float-right'}
                         }) }}
                         {#<button type="submit" class="btn btn-success float-right" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -43,6 +43,13 @@
                                 <i class="fa fa-minus">Create new Article</i></button>
                         </div>
                     </div>#}
+                    <div class="form-group">
+                        <label for="inputName">{{ form_label(form.titre) }}</label>
+                        {{ form_widget(form.titre,{
+                            'attr':{'class':'form-control','placeholder':'ma valeur'}
+                        }) }}
+
+                    </div>
                     <div class="card-body">
                         <div class="form-group">
                             <label for="inputName">{{ form_label(form.titre) }}</label>
@@ -127,6 +134,13 @@
 
                     </div>
                     <!-- /.card-body -->
+                    <div class="card-footer">
+
+                        <a class="btn btn-info btn-sm" href="{{ path('admin_article_index') }}">retour à la liste</a>
+
+
+
+                    </div>
                 </div>
                 <!-- /.card -->
             </div>
@@ -201,20 +215,7 @@
             })
 
             //Bootstrap Duallistbox
-            $('.duallistbox').bootstrapDualListbox()
 
-            //Colorpicker
-            $('.my-colorpicker1').colorpicker()
-            //color picker with addon
-            $('.my-colorpicker2').colorpicker()
-
-            $('.my-colorpicker2').on('colorpickerChange', function(event) {
-                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-            });
-
-            $("input[data-bootstrap-switch]").each(function(){
-                $(this).bootstrapSwitch('state', $(this).prop('checked'));
-            });
 
         })
     </script>

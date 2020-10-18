@@ -17,6 +17,7 @@ class Commentaire1Type extends AbstractType
             ->add('contenu')
             ->add('created_at')
             ->add('depth')
+            ->add('active')
             ->add('article')
         ;
     }

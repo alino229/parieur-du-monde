@@ -5,10 +5,7 @@ namespace App\Form;
 use App\Entity\Article;
 
 use App\Form\Datatransformer\FrenshToDateTimeTransformer;
-use Faker\Provider\Text;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -39,7 +36,7 @@ class ArticleType extends AbstractType
             ->add('imageTitre')
             ->add('metaDesciption')
             ->add('published')
-            ->add('save',SubmitType::class)
+            ->add('sauvegarder',SubmitType::class)
 
         ;
 

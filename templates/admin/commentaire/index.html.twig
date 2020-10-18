@@ -36,9 +36,11 @@
                                             <th>Pseudo</th>
                                             <th>Email</th>
                                             <th>Contenu</th>
+                                            <th>Article</th>
+                                            <th>Afficher</th>
                                             <th>Publié</th>
                                             <th>Profondeur</th>
-                                            <th>Article</th>
+
                                             <th>actions</th>
                                         </tr>
                                         </thead>
@@ -72,18 +74,22 @@
                                                     </div>
 
                                                   </td>
-                                                <td>{{ commentaire.createdAt ? commentaire.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                                                <td>{{ commentaire.depth }}</td>
                                                 <td>{{ commentaire.article.titre}}</td>
+                                                <td>
+                                                    <label class="custom-control-label" for="customSwitch1"></label>
+                                                    {{ commentaire.active ? 'Yes' : 'No' }}</td>
+
+
+                                                <td>{{ commentaire.createdAt ? commentaire.createdAt|date('d-m-Y H:i:s') : '' }}</td>
+                                                <td>{{ commentaire.depth }}</td>
 
                                                 <td class="project-actions text-right py-0 align-middle">
-                                                    <div class="btn-group btn-group-sm">
-                                                        <a class="btn btn-primary btn-sm" href="">
-                                                            {{ commentaire.active}}<i class="fa fa-folder">
-                                                            </i></a>
+                                                    <a class="btn btn-primary btn-sm" href="{{ path('commentaire_show', {'id': commentaire.id}) }}"><i class="fa fa-folder"></i></a>
 
-                                                        <a href="{{ path('commentaire_delete',{id:commentaire.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                                    </div>
+                                                    <a class="btn btn-info btn-sm" href="{{ path('commentaire_edit', {'id': commentaire.id}) }}"><i class="fa fa-pencil"></i></a>
+
+                                                            <a href="{{ path('commentaire_delete',{id:commentaire.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+
                                                 </td>
 
 
@@ -91,7 +97,7 @@
                                             </tr>
                                         {% else %}
                                             <tr>
-                                                <td colspan="7">no records found</td>
+                                                <td colspan="7">Aucun résultat trouvé </td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>
